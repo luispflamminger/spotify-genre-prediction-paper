@@ -35,6 +35,8 @@
 \usepackage{fancybox}
 \usepackage[a4paper, left=4cm, right=2cm, top=4cm, bottom=2cm]{geometry}
 \usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{wrapfig}
 \usepackage{colortbl}
 \usepackage[capposition=top]{floatrow}
 \usepackage{array}
@@ -117,7 +119,7 @@
 	numbersep=5pt,
 	breaklines=true,
 	showstringspaces=false,
-	frame=l ,
+	frame=single ,
 	xleftmargin=5pt,
 	xrightmargin=5pt,
 	basicstyle=\ttfamily\scriptsize,
@@ -269,9 +271,11 @@ mincrossrefs = 1
 }
 
 %-----------------------------------
-% PlantUML
+% Technical packages
 %-----------------------------------
 %\usepackage{plantuml}
+\usepackage{rest-api}
+\breakRoute %enables pagebreaks during api call diagrams
 
 %-----------------------------------
 % Umlaute in Code korrekt darstellen
