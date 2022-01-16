@@ -212,7 +212,7 @@
   urldate = {2022-01-13},
 }
 
-@Article{,
+@Article{McLaughlin1996,
   author  = {McLaughlin, Stefano},
   date    = {1996-12-20},
   title   = {What You Should Know About Standards, APIs, Interfaces and Bindings},
@@ -221,7 +221,7 @@
   groups  = {2.4 API},
 }
 
-@PhdThesis{,
+@PhdThesis{Fielding2000,
   author      = {Roy Thomas Fielding},
   date        = {2000},
   institution = {UNIVERSITY OF CALIFORNIA, IRVINE},
@@ -241,21 +241,28 @@
   year      = {2018},
 }
 
-@WWW{,
+@WWW{WikiWebApi,
   title  = {Wikipedia: Web API},
   url    = {https://en.wikipedia.org/wiki/Web_API},
   groups = {2.4 API},
 }
 
-@WWW{,
+@WWW{WikiApi,
   title   = {Wikipedia: API},
   url     = {https://en.wikipedia.org/wiki/API},
   urldate = {2022-01-13},
   groups  = {2.4 API},
 }
 
-@WWW{,
+@WWW{JsonOrgIntroduction,
   title   = {Introducing JSON},
   url     = {https://www.json.org/json-en.html},
   urldate = {2022-01-13},
-  groups  
+  groups  = {2.4 API},
+}
+
+@Article{Jeliazkova_2011,
+  author       = {Nina Jeliazkova and Vedrin Jeliazkov},
+  date         = {2011-05},
+  journaltitle = {Journal of Cheminformatics},
+  title        = {{AMBIT
