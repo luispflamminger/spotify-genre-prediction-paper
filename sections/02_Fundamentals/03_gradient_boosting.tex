@@ -128,3 +128,169 @@ Classification Tree is shown in figure X. For the second iteration, only the lef
 further split. The result are two fully homogeneous sub-subgroups created from the data Nm of the 
 left subgroup. Because only two features were used, each split can be visualized using a 
 coordinate system (figure X2). the colored areas present the respective splits.
+
+\subsubsection{Evaluation of Decision Trees}
+
+In conclusion, Decision Trees can be assessed as follows. Starting with the advantages,
+the main benefit is the overall simplicity of Decision Trees, both from a technical and 
+business point of view. For researchers and developers, Trees are easy to construct, require little
+to no data preparation, are almost univerally applicable with a possibility of validation. 
+However, the simplicity for business should not be underestimated either. When comparing Machine
+Learning Algorithms, the main comparison is often the accuracy of a model. The areas in which 
+decision trees stand out include visualization and comprehensibility. The Decision Tree Algorithm 
+is a white box model that allows complete transparency and explainability. 
+
+The disadvantages of Decision Trees are again closely related to its simplicity. Overfitting and 
+the relative instability of Decision Trees are the main drawbacks and result in good momorization 
+but a comparatively weak generalization ability.
+
+\subsection{Gradient Boosting}
+
+The Gradient Boosting Algorithm is derived from Gradient Boosting Machines, which are a family of 
+powerful Machine Learning Algorithms with a certain procedure pattern for the creation of models. 
+In general, GBMs are very flexible in their characteristics with the possibility of utilizing 
+multiple different Machine Learning Algorithms as their foundation.
+
+Boosting differs from classical approaches as it does not consist out of a single predictive 
+model but an ensemble approach. Ensemble Algorithms contain multiple Weak Learners that form a 
+committee to create a strong prediction. Weak Learners are often very simple forms of traditional 
+Algorithms, like Decision Trees, and must just be able to predict parts of the dataset correctly. 
+Only the combination of many Weak Learners allows the model to perform overall accurate 
+predictions. The most common form of Ensemble Algorithms are Bagging Algorithms with Random 
+Forests as an example. Bagging, in essence, is the combination of multiple unique models. The 
+prediction is formed by aggregating the outputs from all models into a single representative 
+value. Typically, all models are derived from a single Algorithm, like Decision Trees for Random 
+Forests, but technically there is no limitation to aggregate outputs from different Algorithms. 
+This is also the case for Boosting. 
+
+Boosting, on the other hand, follows a different principle and does not rely on independent 
+models with an aggregation function. Boosting fits new models sequentially and can thereby use 
+earlier acquired knowledge for further iterations. This allows GBMs to train specific areas of 
+the dataset where it has previously performed poorly.  
+
+\subsubsection{Gradient Boosting Algorithm}
+
+(1) GRADIENT BOOSTING ALGORITHM 
+
+The generic gradient boosting algorithm is shown in Figure X. It follows a sequence of three 
+distinct steps, with step two being performed for each iteration. At the beginning, an 
+additional initiation of the dataset and a Loss Function is necessary. The mathematical 
+representation of the dataset is like the one used for Decision Tees. A summary: \(x_{i}\) present the 
+explanatory features while \(y_{i}\) represents the corresponding label for one data point of the input 
+dataset \(N\) with a total number of \(n\) samples. 
+
+The mathematical goal of the Algorithm is to reconstruct the unknown functional dependance \(f\) 
+between \(x_{i}\) and \(y_{i}\) with an estimate \(F(x)\) for every data point, such that the specific Loss 
+Function is minimized (1). 
+
+(1) GRADIENT BOOSTING OPTIMIZATION 
+
+The Loss Function is an indicator for the quality of the model. A small Loss for a data point 
+means that the prediction is close or identical to the observed Label and the model therefore 
+categorizes the sample correctly whereas a high Loss implies that the model could not predict 
+the sample well. Given a particular learning task and dataset, different Loss Functions must 
+be considered as Loss Functions are only suitable for specific constellations. The most common 
+Loss Function for Binary Classification is the so-called Bernoulli Loss (2). The Bernoulli Loss 
+can be transformed into a log(odds)-prediction (3) as it is better suited for further calculations. 
+Variations of (3) will be used in the following section to demonstrate the Gradient Boosting 
+Procedure. 
+
+(2) BERNOULLI LOSS 
+
+(3) BERNOULLI LOG(ODDS)-PREDICTION 
+
+Additionally, a Machine Learning Algorithm must be defined as a Weak Learner. For GMB there 
+are multiple Leaners to choose from, again the choice is mostly depending on the prediction 
+task and available data. A classical approach is the use of Decision Trees, which was also 
+chosen as the Weak Learner for this project. Decision Trees used for Gradient Boosting are 
+always Regression Trees, regardless of whether they are used for Regression or Classification 
+Problems. The optimization parameters are almost identical as for standalone Decision Trees, 
+but the Trees often look very different because they are specifically created as Weak Learners. 
+As a result, the Decision Trees often only consist out of very few levels with only 8-32 Leaves.
+
+\textbf{Algorithm Procedure}
+
+To showcase the Gradient Boosting Algorithm the same sample dataset is used as for Decision Trees. 
+It again consists out of 8 samples with two features with two categories as target Labels. 
+
+DATASET 
+
+The first step 1) is to set an initial prediction for all samples of the dataset. The initial 
+prediction is not unique for individual samples but a uniform value. The optimal initial 
+prediction can be calculated using the following equation (3). For Fo(X), representing the 
+initial prediction, a minimum of gamma is searched for. The right-hand side of the equation 
+only consists out of a sum for each sample i (of the total dataset n) of the known Loss Function 
+with the respective Label y1 and gamma as its input. To find the low point of the equation, 
+the derivate of the Loss Function is required. The final calculation of the overall log(odds) 
+that as song is classified as “hiphop” is the loge of the sum of songs of the category “hiphop” 
+divided by the sum of the songs of the category “jazz” (4). The result can be checked graphically 
+as is equal to the X1 value of the low point of the log(odds)-prediction (5). 
+
+(4) F0(X) = log(L = 1/L = 0) 
+
+(5) COORDINATE SYSTEM
+
+Finally, the log(odds)-prediction is converted back into a probability with the help of a 
+Logistic Function (6). The result is that all songs have the probability of X to belong to 
+the category “hiphop”.
+
+(6) LOGISTIC FUNCTION 
+
+With the completion of step 1), one can start with step 2) of the algorithm. 2) is a sequential 
+process of constructing the Regression Trees with a total of M iterations. The first iteration 
+starts with m = 1. 
+
+In a) the Pseudo Residuals rim for each sample i of the dataset are created. The equation (7) 
+for calculating the PR consists out of known fragments. For every sample i = 1, …, n a PR rim 
+is calculated using the derivative of the log(odds)-prediction with the Label yi and the 
+Prediction of the last iteration (f = fm – 1) as its input. Again, the equation can be 
+transformed into a very simple equation (8). For each sample the PR can be calculated by only 
+subtracting the previously calculated probability from the observed Label. Ideally, an additional 
+column is created in which the Pseudo Residuals are temporarily stored (figure 9). 
+
+(7)
+
+(8)
+
+FIGURE PSEUDO RESIDUALS 
+
+b) constructs the Regression Trees put of the features of the samples with the corresponding 
+PR as the label. For this example, only Tree Stumps are created to simplify the implementation. 
+The Regression Tree for the first iteration is shown in Figure 10. After the completion of the 
+Tree, Terminal Regions Rjm must be defined for every Leaf. J starts with 1 and is increased for 
+every Leaf. 
+
+FIGURE REGRESSON TREE 
+
+Following the completion of the Regression Tree, Output Values gammaj,m are calculated by using 
+the equation presented in (11). For each Leaf in the Tree gammaj,m is computed by finding 
+gammaj,m that minimizes the equation (11). Like for the initialization step, the derivative has 
+to be created and must set equal 0. And again, after a complicated transformation, a very simple 
+equation remains (12). The Output Value can be calculated using only the residuals and the most 
+recent predicted probabilities for all samples in the Leaf. 
+
+(10)
+
+(11)
+
+Part d) marks the end of the first iteration and creates a new prediction F1(X) for each sample 
+(13). The new prediction is based on the last prediction plus the Learning Rate V multiplied by 
+the Output Value(s) for the sample of the last Regression Tree (14). Normally, there is only one 
+Output Value for a sample which makes the summation sign obsolete. The Learning Rate is a 
+hyperparameter for Gradient Boosting. For this example, a high V is used to better visualize 
+the changes. In practice a V in the order of 0.1 is common. 
+
+(13)
+
+(14)
+
+Step 2 is repeated until M is reached. M marks the completion of the training of the Gradient 
+Boosting Model. The FM(X) is the final prediction for every sample. For the final predictions 
+thresholds are used to compute the category to which the samples belong. A typical threshold 
+for Binary Classification is 0.5 as it splits FM(X) into two equal classes. This process also 
+takes place for unknown samples. 
+
+Step 3) is the final step for Gradient Boosting and classifies unknown. An unknown sample gets 
+initialized by Fo(X) and is sequentially routed through every model. For each iteration the 
+Prediction is updated using the Output Value of the Regression Tree. Finally, the last FM(X) 
+is used to classify the sample using the predefined threshold. 
