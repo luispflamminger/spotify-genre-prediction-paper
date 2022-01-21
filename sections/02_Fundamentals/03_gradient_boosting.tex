@@ -1,1 +1,130 @@
-\subsection{Gradient Boosting}
+\subsection{Decision Trees}
+
+Decision Trees are one of the most widely used supervised Machine Learning Algorithms either 
+as standalone solutions or in combination with enhancement approaches like Boosting. They are 
+furthermore very flexible in their construction and can be used for various Machine Learning 
+Problems such as Classification and Regression. 
+
+Decision Trees “predict an unknown value of a target variable by learning decision rules from 
+data features” to reconstruct the dependence between the features and the respective labels for 
+each sample. To perform the Classification or Regression, Decision Trees rely on recursive 
+splitting of the dataset into multiple subgroups. As the number of iterations increases, the 
+subgroups become more and more homogeneous. The ideal result is that each subgroup is fully 
+homogeneous and therefore only represent a single category (in case of Classification). However, 
+this is often only a theoretical best condition, as multiple risks, such as overfitting, are 
+associated with the increasing depth of Decision Trees.
+
+Trees consist out of four main components. A Node is a discrete Decision Function that takes 
+samples as its input and splits them based on features into subgroups. The aim of each split, 
+as previously discussed, is to create a split that results in the overall most homogeneous 
+distribution for all subgroups. Nodes can be subclassified into three kinds. The Top-Node, 
+from which the classification starts, is called a Root Node. Nodes that are located at the 
+very end of a Decision Tree are referred to as Leaves. Leaves do not split data any further and 
+only mark the end of a Decision Tree. When reached, Leaves categorize or predict a final output 
+value depending on the prediction task. Nodes in-between the Root Node and Leaves are called 
+Internal Leaves. Like the Root, Internal Leaves are responsible for the recursive splitting of 
+the data. Branches connect Nodes with another. For classical Trees, information only flows from 
+the top to the bottom of the Tree. 
+
+\subsubsection{Decision Tree Algorithm}
+
+In practice, there exist various Algorithms for computing Decision Trees with the most common ones 
+being: ID3, C4.5, C5.0 and CART. Each algorithm follows the same principle of regressively finding 
+perfect splits to separate data but utilizes different methods to find the ideal splitting 
+criteria, which strongly influences the structure of the Tree, its accuracy and performance. 
+Additionally, each Algorithms has its benefits and constraints. Therefore, it is important to 
+determine the best Algorithm before implementing the Decision Tree based on the prediction task 
+and dataset. This project uses the Python library Sklearn to implement a Classification Tree. 
+Sklearn is based on the CART Algorithm.
+
+To better visualize the procedure of the Decision Tree Algorithm, a simplified dataset is used, 
+on which the individual steps are explained. For this example, a Classification Problem is chosen. 
+The dataset consists out of actual features and labels from the project implementation. The 
+features are “acousticness” and “danceability”. Both features are numerical with a value range 
+in-between 0 and 1. The Classification Problem is binary with "Hiphop" and "Jazz" representing 
+the classes k for which the samples of the dataset are classified. Mathematically, the dataset 
+is represented in the following form:  Xi present the explanatory features while Yi represents 
+the corresponding label for one data point of the input dataset N with a total number of i 
+samples.
+
+(TABLE WITH DATA)
+
+(COORDINATE SYSTEM WITH DATA)
+
+With the initialization of the dataset complete, the implementation of the Decision Tree 
+Algorithm can begin. The Decision Tree Algorithm splits a Node represented by \(Q_{m}\) with \(N_{m}\) samples 
+into multiple subgroups. The split can be binary, which means that \(Q_{m}\) is divided into two 
+subgroups \(Q^{left}_{m}\) and \(Q^{right}_{m}\), or multiway. While multiway splitting seems to be more advanced 
+with greater prediction potential, in practice and for CART binary splitting is used almost 
+exclusively. The split \(\theta = (j, t_{m})\) consists out of a feature \(j\) and a threshold \(t_{m}\) on which the 
+division takes place. The Output \(G(Q_{m},\theta)\) is mathematically defined as the following: 
+
+\(G(Q_{m},\theta) = \frac{N^{left}_{m}}{N_{m}} H(Q^{left}_{m}, \theta ) + \frac{N^{right}_{m}}{N_{m}} H(Q^{right}_{m}, \theta ) \)
+
+The quality of the split is defined using an Impurity Function \(H\). The Impurity Function has one 
+Leaf \(Q^{left}_{m}\) or \(Q^{right}_{m}\) and the spliting criteria \(\theta \) as its input. The 
+best overall Gain \(G(Q_{m},\theta)\) is reached, if \(G(Q_{m},\theta)\)is minimized (3). 
+
+\(\theta ^* = argmin_{\theta}  G(Q_{m}, \theta)\)
+
+The most common Impurity Function \(H\) for Classification is Gini Index (4) and also used for CART
+Decision Trees. Gini index measures the probability that a sample does not belong to the category
+that represents the majority of the subgroup. If both categories of a subgroup are identical in 
+size, the Gini Index reaches its maximum point at \(0,5\) (5). The maximum of the Gini index means 
+the worst possible data constellation for a subgroup. Gini index equal to \(0\) means on the other 
+hand the best possible result with the subgroup being fully homogenous. \(p_{i}\) represents that 
+probability that a sample belongs to the class \(j\) of \(k\) classes  in total.
+
+(4) GINI INDEX FORMULA 
+
+\(Gini = 1 - \sum ^k_{j = 1}(p_{j})^2\)
+
+(5) FORMULA AS A GRAPH
+
+For the example the splits look like the following. The split of numerical features is more 
+complicated as it is for categorical or binary features since can take it can take place at 
+any value within the value range. Therefore, each value of the sample could be a possible 
+threshold. To achieve the best overall Gini Index, it must be calculated for every possible 
+threshold of every feature. The calculation below only shows the best possible splits for 
+each feature according Gini Indexes. With \(G\) calculated for both features, the first split 
+can be determined. When comparing both features it is visible that Danceability minimizes \(G\)
+more than Acousticness does and therefore is according to (3) determined as the overall best possible split for 
+the Root Node. 
+
+\textbf{Acousticness:}
+
+\(Gini^{left} = 1 - ((\frac{2}{5})^2 + (\frac{3}{5})^2) = 0,48 \)
+
+\(Gini^{right}  = 1 - ((\frac{3}{3})^2 + (\frac{0}{3})^2) = 0 \)
+
+\(G(Q_{m},\theta) = \frac{5}{8} * 0,48 + \frac{3}{8} * 0 = 0,30 \)
+
+\textbf{Danceability:}
+
+\(Gini^{left}  = 1 - ((\frac{4}{4})^2 + (\frac{0}{4})^2) = 0 \)
+
+\(Gini^{right} = 1 - ((\frac{1}{4})^2 + (\frac{3}{4})^2) = 0,36 \)
+
+\(G(Q_{m},\theta) = \frac{4}{8} * 0 + \frac{4}{8} * 0,36 = 0,18 \)
+
+The splitting process is repeated for each subgroup until a stop-criteria is met. The natural 
+stop criterion is a completely homogeneous dataset for a node and can also be found in the 
+example for Leaf X. Such Internal Nodes automatically become Leaves and represent the category 
+of samples. Other stop criteria can be predefined depending on the Algorithm used for 
+implementation. The most relevant criterion is the definition of a maximum depth of the Decision 
+Tree. Other hyperparameters are discussed in the implementation chapter. 
+
+Tree optimization plays a very relevant role because Trees often overclassify training data 
+without countermeasures. Although the training data is well classified, overfitted Decision 
+Trees often produce very poor results for test data. Too accurate classification of training 
+data can negatively affect Decision Trees, as they are less able to generalize the learned 
+knowledge. Pruning is a technique used to overcome overfitting problems by reducing the size of 
+Decision Trees. Sections that provide little to no classification benefit are removed or not 
+constructed during the recursive splitting process. In essence, worse results for training data 
+are traded for better results for unknown data.
+
+The experimental dataset is not large enough to take appropriate countermeasures. The complete 
+Classification Tree is shown in figure X. For the second iteration, only the left subgroup was 
+further split. The result are two fully homogeneous sub-subgroups created from the data Nm of the 
+left subgroup. Because only two features were used, each split can be visualized using a 
+coordinate system (figure X2). the colored areas present the respective splits.
