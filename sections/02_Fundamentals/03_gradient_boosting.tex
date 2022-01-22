@@ -7,10 +7,10 @@ Problems such as Classification and Regression.
 
 Decision Trees “predict an unknown value of a target variable by learning decision rules from 
 data features” to reconstruct the dependence between the features and the respective labels for 
-each sample. To perform the Classification or Regression, Decision Trees rely on recursive 
+each sample. To perform Classification or Regression, Decision Trees rely on recursive 
 splitting of the dataset into multiple subgroups. As the number of iterations increases, the 
 subgroups become more and more homogeneous. The ideal result is that each subgroup is fully 
-homogeneous and therefore only represent a single category (in case of Classification). However, 
+homogeneous and therefore only represents a single category (in case of Classification). However, 
 this is often only a theoretical best condition, as multiple risks, such as overfitting, are 
 associated with the increasing depth of Decision Trees.
 
@@ -32,19 +32,19 @@ In practice, there exist various Algorithms for computing Decision Trees with th
 being: ID3, C4.5, C5.0 and CART. Each algorithm follows the same principle of regressively finding 
 perfect splits to separate data but utilizes different methods to find the ideal splitting 
 criteria, which strongly influences the structure of the Tree, its accuracy and performance. 
-Additionally, each Algorithms has its benefits and constraints. Therefore, it is important to 
-determine the best Algorithm before implementing the Decision Tree based on the prediction task 
+Additionally, each Algorithm has its benefits and constraints. Therefore, it is important to 
+determine the best Algorithm before implementing a Decision Tree based on the prediction task 
 and dataset. This project uses the Python library Sklearn to implement a Classification Tree. 
 Sklearn is based on the CART Algorithm.
 
 To better visualize the procedure of the Decision Tree Algorithm, a simplified dataset is used, 
 on which the individual steps are explained. For this example, a Classification Problem is chosen. 
-The dataset consists out of actual features and labels from the project implementation. The 
+The dataset consists out of actual features and labels from the project implementation phase. The 
 features are “acousticness” and “danceability”. Both features are numerical with a value range 
-in-between 0 and 1. The Classification Problem is binary with "Hiphop" and "Jazz" representing 
-the classes k for which the samples of the dataset are classified. Mathematically, the dataset 
-is represented in the following form:  Xi present the explanatory features while Yi represents 
-the corresponding label for one data point of the input dataset N with a total number of i 
+in-between \(0\) and \(0\). The Classification Problem is binary with "Hiphop" and "Jazz" representing 
+the classes \(k\) for which the samples of the dataset are classified. Mathematically, the dataset 
+is represented in the following form: \(x_{i}\) present the explanatory features while \(y_{i}\) represents 
+the corresponding label for one data point of the input dataset \(N\) with a total number of \(n\) 
 samples.
 
 (TABLE WITH DATA)
@@ -63,17 +63,17 @@ division takes place. The Output \(G(Q_{m},\theta)\) is mathematically defined a
 
 The quality of the split is defined using an Impurity Function \(H\). The Impurity Function has one 
 Leaf \(Q^{left}_{m}\) or \(Q^{right}_{m}\) and the spliting criteria \(\theta \) as its input. The 
-best overall Gain \(G(Q_{m},\theta)\) is reached, if \(G(Q_{m},\theta)\)is minimized (3). 
+best overall Gain \(G(Q_{m},\theta)\) is reached, if \(G(Q_{m},\theta)\) is minimized (3). 
 
 \(\theta ^* = argmin_{\theta}  G(Q_{m}, \theta)\)
 
-The most common Impurity Function \(H\) for Classification is Gini Index (4) and also used for CART
+The most common Impurity Function \(H\) for Classification is Gini Index (4) which is also used for CART
 Decision Trees. Gini index measures the probability that a sample does not belong to the category
 that represents the majority of the subgroup. If both categories of a subgroup are identical in 
 size, the Gini Index reaches its maximum point at \(0,5\) (5). The maximum of the Gini index means 
-the worst possible data constellation for a subgroup. Gini index equal to \(0\) means on the other 
-hand the best possible result with the subgroup being fully homogenous. \(p_{i}\) represents that 
-probability that a sample belongs to the class \(j\) of \(k\) classes  in total.
+the worst possible data constellation for a subgroup. Gini index equal to \(0\) on the other 
+hand represents the best possible result with the subgroup being fully homogenous. \(p_{i}\) represents that 
+probability that a sample belongs to the class \(j\).
 
 (4) GINI INDEX FORMULA 
 
@@ -82,7 +82,7 @@ probability that a sample belongs to the class \(j\) of \(k\) classes  in total.
 (5) FORMULA AS A GRAPH
 
 For the example the splits look like the following. The split of numerical features is more 
-complicated as it is for categorical or binary features since can take it can take place at 
+complicated as it is for categorical or binary features since it can take place at 
 any value within the value range. Therefore, each value of the sample could be a possible 
 threshold. To achieve the best overall Gini Index, it must be calculated for every possible 
 threshold of every feature. The calculation below only shows the best possible splits for 
@@ -137,7 +137,7 @@ business point of view. For researchers and developers, Trees are easy to constr
 to no data preparation, are almost univerally applicable with a possibility of validation. 
 However, the simplicity for business should not be underestimated either. When comparing Machine
 Learning Algorithms, the main comparison is often the accuracy of a model. The areas in which 
-decision trees stand out include visualization and comprehensibility. The Decision Tree Algorithm 
+Decision Trees stand out include visualization and comprehensibility. The Decision Tree Algorithm 
 is a white box model that allows complete transparency and explainability. 
 
 The disadvantages of Decision Trees are again closely related to its simplicity. Overfitting and 
@@ -180,16 +180,17 @@ explanatory features while \(y_{i}\) represents the corresponding label for one 
 dataset \(N\) with a total number of \(n\) samples. 
 
 The mathematical goal of the Algorithm is to reconstruct the unknown functional dependance \(f\) 
-between \(x_{i}\) and \(y_{i}\) with an estimate \(F(x)\) for every data point, such that the specific Loss 
-Function is minimized (1). 
+between \(x_{i}\) and \(y_{i}\) with an estimate \(\hat{f} (x)\) for every data point, such that the specific Loss 
+Function \(\Psi (y,\theta )\) is minimized (1). 
 
-(1) GRADIENT BOOSTING OPTIMIZATION 
+(1) \(\hat{f} (x) = \arg \min_{\theta } \Psi (y,\theta )\)
+
 
 The Loss Function is an indicator for the quality of the model. A small Loss for a data point 
 means that the prediction is close or identical to the observed Label and the model therefore 
 categorizes the sample correctly whereas a high Loss implies that the model could not predict 
 the sample well. Given a particular learning task and dataset, different Loss Functions must 
-be considered as Loss Functions are only suitable for specific constellations. The most common 
+be considered as Loss Functions are only suitable for specific data and task constellations. The most common 
 Loss Function for Binary Classification is the so-called Bernoulli Loss (2). The Bernoulli Loss 
 can be transformed into a log(odds)-prediction (3) as it is better suited for further calculations. 
 Variations of (3) will be used in the following section to demonstrate the Gradient Boosting 
@@ -206,7 +207,7 @@ chosen as the Weak Learner for this project. Decision Trees used for Gradient Bo
 always Regression Trees, regardless of whether they are used for Regression or Classification 
 Problems. The optimization parameters are almost identical as for standalone Decision Trees, 
 but the Trees often look very different because they are specifically created as Weak Learners. 
-As a result, the Decision Trees often only consist out of very few levels with only 8-32 Leaves.
+As a result, the Decision Trees often only consist out of very few layers with only 8-32 Leaves.
 
 \textbf{Algorithm Procedure}
 
@@ -290,7 +291,7 @@ thresholds are used to compute the category to which the samples belong. A typic
 for Binary Classification is 0.5 as it splits FM(X) into two equal classes. This process also 
 takes place for unknown samples. 
 
-Step 3) is the final step for Gradient Boosting and classifies unknown. An unknown sample gets 
+Step 3) is the final step for Gradient Boosting and classifies unknown datasets. An unknown sample gets 
 initialized by Fo(X) and is sequentially routed through every model. For each iteration the 
 Prediction is updated using the Output Value of the Regression Tree. Finally, the last FM(X) 
 is used to classify the sample using the predefined threshold. 
