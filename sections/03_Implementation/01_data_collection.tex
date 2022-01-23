@@ -94,7 +94,7 @@ libraries http, json and requests. The final result was saved as a CSV file to b
 and further processing.
 
 Many API endpoints give the option to specify a country and locale that the results should apply to.
-Whenever possible these values were specified to eliminate the risk of receiving data for multiple different
+Whenever possible these values were explicitly specified to eliminate the risk of receiving data for multiple different
 countries or languages, which would have made the dataset incoherent.
 For country, we used the country tag "US" which means that the API replies only with datapoints that are applicable
 to users in the United States of America.
@@ -840,4 +840,13 @@ transforms it into the following format.
 
 Notice, that the nested fields and arrays have been flattened to represent a two dimensional data structure,
 containing only one array to represent rows which contains json objects with 22 fields. Each field represents
-a column. This flattened JSON structure is then converted to a CSV file and saved for further processing.
+a column. In the original JSON data, "artists" is a list containing one or more entries. If the data was flattened
+in a way that groups the entries by each individual artist, there could be multiple rows for the same track.
+If for example track1 had two artists artist1 and artist2, there would be two datapoints, both containing the same
+song name, id and features, but different artists. As the dataset should be grouped by individual tracks,
+not by artists, which results in multiple entries per track, multiple artists are condensed into a comma-seperated
+list during flattening. This list is stored in the "categories.playlists.tracks.artists" field.
+This means, that the individual artist data is lost in favor of grouping the dataset by tracks.
+
+After this process, the resulting two-dimensional structure is converted to a CSV file and saved for
+further processing.
