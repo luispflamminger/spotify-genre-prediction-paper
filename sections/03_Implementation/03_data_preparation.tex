@@ -1,1 +1,171 @@
 \subsection{Data Preparation}
+
+In the following section the data collected during data collection is prepared and cleaned up for training 
+the model. At the end of data collection, the result was saved in a CSV file. This file is imported and converted
+into a Pandas Dataframe using the Pandas Python library and it's "read\_csv" method:
+
+\begin{lstlisting}[language=Python]
+    import os
+    import pandas as pd
+    
+    # reading data from csv
+    df = pd.read_csv(os.path.join('..', 'data_collection', 'final_result.csv'))
+\end{lstlisting}
+
+Next, duplicates are removed. If there are two or more datapoints, which have the same value in their artist
+and name column, only the first one is kept and all subsequent entries are removed.
+This deduplication could also be done by using track ids. The drawback of this method is, that many artists
+release their tracks multiple times, e.g. as a single and later in an album. These duplicates would not be
+caught using the id, as different releases have different id values. As the artist and title doesn't change, almost
+all duplicates are caught using artist and name.
+
+\begin{lstlisting}[language=Python]
+    df = df.drop_duplicates(subset=['categories.playlists.tracks.artists', 'categories.playlists.tracks.name'])
+\end{lstlisting}
+
+Next, all genres that are not to be used for training the model are filtered out.
+
+\begin{lstlisting}[language=Python]
+    genre_filter = ['hiphop', 'jazz', 'rock']
+    df = df[df['categories.id'].isin(genre_filter)]
+\end{lstlisting}
+
+Then columns that are not needed for training are removed, including category name, all playlist information and
+all track and album information. The category id is kept, as it will serve as the label.
+The remaining columns are renamed, as the long JSON tree names are no longer needed.
+The field "category.id" is renamed to "category" and each audio feature is renamed for example 
+the danceability column is now called "feature\_danceability".
+
+\begin{lstlisting}[language=Python]
+    columns_to_drop = [
+        "categories.name",
+        "categories.playlists.id",
+        "categories.playlists.name",
+        "categories.playlists.tracks.id",
+        "categories.playlists.tracks.name",
+        "categories.playlists.tracks.album.id",
+        "categories.playlists.tracks.album.name",
+        "categories.playlists.tracks.artists"
+        ]
+    df = df.drop(columns=columns_to_drop)
+    
+    df = df.rename(columns={
+        "categories.id": "category",
+        "categories.playlists.tracks.features.danceability": "feature_danceability",
+        "categories.playlists.tracks.features.energy": "feature_energy",
+        "categories.playlists.tracks.features.key": "feature_key",
+        "categories.playlists.tracks.features.loudness": "feature_loudness",
+        "categories.playlists.tracks.features.mode": "feature_mode",
+        "categories.playlists.tracks.features.speechiness": "feature_speechiness",
+        "categories.playlists.tracks.features.acousticness": "feature_acousticness",
+        "categories.playlists.tracks.features.instrumentalness": "feature_instrumentalness",
+        "categories.playlists.tracks.features.liveness": "feature_liveness",
+        "categories.playlists.tracks.features.valence": "feature_valence",
+        "categories.playlists.tracks.features.tempo": "feature_tempo",
+        "categories.playlists.tracks.features.duration_ms": "feature_duration_ms",
+        "categories.playlists.tracks.features.time_signature": "feature_time_signature"
+    })
+    df
+\end{lstlisting}
+
+With unnecessary columns removed, a check is done to show any remaining null values.
+
+\begin{lstlisting}[language=Python]
+    df.isnull().sum()
+\end{lstlisting}
+
+In this dataset, there are no null values present. As the dataset is now clean, it can now be prepared
+for input into sklearn's Gradient Boosting Classifier, which is used for training.
+The classifier only supports integer values as labels, which means that the category data needs to be encoded.
+This is done by defining a function "encode\_target", which takes the dataframe and the name of the column containing
+the target. It then maps an integer to each unique value in the target column, adds a new "target" column in the
+dataframe and stores the mapped integer in it.
+
+\begin{lstlisting}[language=Python]
+    # sklearn takes the features and labels as seperate lists
+    # df needs to be split
+    def encode_target(df, target_column):
+
+        df_mod = df.copy()
+        map_to_int = {name: n for n, name in enumerate(df_mod["category"].unique())}
+        df_mod["target"] = df_mod[target_column].replace(map_to_int)
+
+        return (df_mod)
+
+    df_target = encode_target(df, "category")
+\end{lstlisting}
+
+The head of the resulting dataframe is shown in table \ref{tbl:Dataframe after cleanup}. The category to target integer mapping is shown in table \ref{tbl:Category to target integer mapping}.
+\begin{scriptsize}
+\begin{table}[H]
+ \caption{Dataframe after cleanup}
+ \label{tbl:Dataframe after cleanup}
+\begin{tabular}{||c c c c c c c c c c c c c c||} 
+ \hline
+ category & feature\_danceability & feature\_energy & feature\_key & feature\_loudness & feature\_mode & feature\_speechiness & feature\_acousticness & feature\_instrumentalness & feature\_liveness & feature\_valence & feature\_tempo & feature\_duration\_ms & feature\_time\_signature \\ [0.5ex]
+ \hline\hline
+ hiphop & 0.649 & 0.508 & 8.0 & -10.232 & 1.0 & 0.0959 & 0.03450 & 0.000036 & 0.0736 & 0.405 & 157.975 & 194051.0 & 4 \\ [1ex]
+ \hline
+\end{tabular}
+\end{table}
+\end{scriptsize}
+
+\begin{scriptsize}
+\begin{table}[H]
+ \caption{Category to target integer mapping}
+ \label{tbl:Category to target integer mapping}
+\begin{tabular}{||c c||} 
+ \hline
+ target & category \\ [0.5ex]
+ \hline\hline
+ 0 & hiphop \\ [1ex]
+ \hline
+ 1 & rock \\ [1ex]
+ \hline
+ 2 & jazz \\ [1ex]
+ \hline
+\end{tabular}
+\end{table}
+\end{scriptsize}
+
+Now that all columns needed for training the model are prepared, the dataset needs to be split in 
+test and training data. This is necessary to be able to calculate an accuracy score for the model after training.
+In order to calculate this score, data is needed that the model has never seen before, which ensures that 
+the score is not just a result of overfitting, but the accuracy would be the same on real world data.
+For splitting the data, the function train\_test\_split from sklearn is used.
+First the dataset is shuffled so each set contains a near equal amount of entries for each genre.
+Then the shuffled dataset is split, with an 80\% of samples going into the training set and 20\% going 
+into the test set. This results in 10.701 rows of training data and 2.676 rows of test data.
+
+\begin{lstlisting}[language=Python]
+    from sklearn.model_selection import train_test_split
+    df_target_shuffled = df_target.sample(frac=1, random_state=45)
+    train, test = train_test_split(df_target_shuffled, test_size=0.2, random_state=45, shuffle=False)
+\end{lstlisting}
+
+Next, features and labels are split into seperate datasets. This is necessary, because the GradientBoostingClassifiers
+fit method takes features and labels as seperate arguments called X for input and y for label. Datapoints are matched by their row numbers.
+Labels are stored in a list containing all values from the target column like so.
+
+\begin{lstlisting}[language=Python]
+    # y contains list of target values
+    y_train = train["target"]
+    y_test = test["target"]
+    y_all = df_target_shuffled["target"]
+\end{lstlisting}
+
+The features are stored in dataframes. The columns are selected using a list of all column names which contain features
+and then creating a new dataset only containing those columns:
+
+\begin{lstlisting}[language=Python]
+    # columns 1 to 14 contain the features, column 0 is the category and 15 the target
+    features = list(train.columns[1:14])
+
+    # create datasets only containing feature columns
+    X_train = train[features]
+    X_test = test[features]
+    X_all = df_target_shuffled[features]
+\end{lstlisting}
+
+At this point, all data has been cleaned up, targets have been generated, it has been split into training and test data and
+features have been seperated from labels. The data is now ready for training the model.

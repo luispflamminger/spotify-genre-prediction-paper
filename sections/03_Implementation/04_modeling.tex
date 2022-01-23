@@ -1,1 +1,171 @@
 \subsection{Modeling}
+
+\subsubsection{The Classifier}
+
+For training the Gradient Boosting Algorithm, the GradientBoostingClassifier class from 
+scikit learn is used. It is part of a group of classes offering all sorts of ensemble methods.
+As explained in \{Grundlagenteil Schwabe\} ensemble methods combine the predictions of several
+weak learners to generate a more robust model and reduce overfitting issues.
+sklearn supports averaging methods like Bagging and Random Forests, which take the average of each learners prediction
+as their output. It also supports Boosting Methods like AdaBoost or Gradient Boosting, which
+build base estimators sequentially improving the output each time. Sklearn also provides 
+a classifier and regressor model for each method.
+
+The Gradient Boosting Classifier supports binary and multi-class classification and uses
+20 hyperparameters to control the size of each regression tree, the number of trees,
+the learning rate and many more. The most impactful of these parameters are explained here.
+
+\begin{itemize}
+    \item \textbf{learning\_rate}
+    
+    As explained in section \ref{sec:Gradient Boosting Algorithm}, the learning rate is used to control how
+    much each tree contributes to the result, by multiplying it with the output values of the previous 
+    tree. The default value here is 0.1
+    \item \textbf{n\_estimators}
+
+    The number of weak learners to be used while boosting. The default is 100.
+    \item \textbf{max\_depth}
+
+    The maximum depth of each regression tree. This also impacts its number of nodes.
+    The default value is 3.
+    \item \textbf{loss}
+
+    The type of loss function to be used. Possible values are deviance and exponential.
+    Deviance describes how well a logistic regression model, in our case the regression tree,
+    fits the data. A deviance of 0 would be a perfect fit, the higher the number, the worse the fit.
+
+
+    \item \textbf{criterion}
+    \item \textbf{min\_samples\_split}
+    \item \textbf{min\_samples\_leaf}
+    \item \textbf{max\_features}
+\end{itemize}
+
+\subsubsection{Cross Validation}
+\{explain cross validation here\}
+
+\subsubsection{Hyperparameter Tuning}
+
+Sklearn also provides methods for Hyperparameter tuning. In this project, Exhaustive Grid Search was used to 
+tune hyperparameters. To perform this search, the class GridSearchCV can be used. It takes an 
+estimator, in our case the Gradient Boosting Classifier, and a grid of parameters.
+In this case, the hyperparameters are the parameters of GradientBoostingClassifier as 
+explained above. This codeblock shows a parameter grid, as it is defined in this project.
+
+\begin{lstlisting}[language=Python]
+    param_grid = {
+        "loss": ["deviance", "exponential"],
+        "n_estimators": [97, 98, 99, 100, 101, 102, 103],
+        "learning_rate": [0.8, 0.9, 0.1, 0.11, 0.12],
+        "criterion": ['friedman_mse', 'squared_error'],
+        "min_samples_split": [1, 1.5, 2, 2.5, 3],
+        "min_samples_leaf": [1],
+        "max_depth": [1, 2, 3, 4, 5],
+        "random_state": [42],
+        "max_features": [None, 0.95, 0.90]
+}
+\end{lstlisting}
+
+The parameter grid is given as a Python dictionary containing the parameter name as keys and 
+an array of values for each key. Additionaly a GradientBoostingClassifier object is defined 
+and both are passed into the GridSearchObject.
+
+\begin{lstlisting}[language=Python]
+    gbc = GradientBoostingClassifier(random_state=45)    
+    search = GridSearchCV(gbc, param_grid)
+\end{lstlisting}
+
+The search object's fit method combines cross-validation, hyperparameter tuning and classifier
+fitting to find the best possible combination of hyperparameters to the estimator for the given dataset.
+This is done in the following way:
+
+\begin{enumerate}
+    \item An estimator is created using the first combination of hyperparameters. In the current
+    example, this is equivalent to creating the following estimator.
+    \begin{lstlisting}[language=Python]
+        estimator = GradientBosstingClassifier(loss="deviance", n_estimators=97, learning_rate=0.8, criterion='friedman_mse', min_samples_split=1, min_samples_leaf=1, max_depth=1, random_state=42, max_features=None)
+    \end{lstlisting}
+    \item The newly created classifier is fitted to the training data using this set of parameters using 5-fold cross validation.
+    When this is done, an average of the five scores resulting from cross-validation is built.
+    This average is now used as the score for this specific combination of parameters.
+    \item The score is saved together with the parameters
+    \item All of the above steps are repeated with every possible combination of parameters from the 
+    parameter grid. This results in a score for every set of parameters.
+    \item As every model was fitted using the same method, it is clear that the model with the highest
+    score is using the best hyperparameters. A new model is trained without cross-validation so using all
+    data, to create the final model using the best parameters.
+\end{enumerate}
+
+The model created by grid search can then be evaluated using test data that was not used in cross validation.
+Executing this GridSearch in Python is done be calling the fit method of the search object defined in the code above 
+using the train features and labels.
+
+\begin{lstlisting}[language=Python]
+    search.fit(X_train, y_train)
+\end{lstlisting}
+
+After fitting, the search object can be used as if it was a normal estimator built with the optimal 
+hyperparameters.
+To see, which hyperparameters were optimal, the get\_params can be used.
+It's output looks like this:
+
+\begin{lstlisting}[language=Python]
+    {'cv': 5,
+    'error_score': nan,
+    'estimator__ccp_alpha': 0.0,
+    'estimator__criterion': 'friedman_mse',
+    'estimator__init': None,
+    'estimator__learning_rate': 0.1,
+    'estimator__loss': 'deviance',
+    'estimator__max_depth': 3,
+    'estimator__max_features': None,
+    'estimator__max_leaf_nodes': None,
+    'estimator__min_impurity_decrease': 0.0,
+    'estimator__min_samples_leaf': 1,
+    'estimator__min_samples_split': 2,
+    'estimator__min_weight_fraction_leaf': 0.0,
+    'estimator__n_estimators': 100,
+    'estimator__n_iter_no_change': None,
+    'estimator__random_state': 45,
+    'estimator__subsample': 1.0,
+    'estimator__tol': 0.0001,
+    'estimator__validation_fraction': 0.1,
+    'estimator__verbose': 0,
+    'estimator__warm_start': False,
+    'estimator': GradientBoostingClassifier(random_state=45),
+    'n_jobs': -1,
+    'param_grid': {'loss': ['deviance', 'exponential'],
+        'n_estimators': [97, 98, 99, 100, 101, 102, 103],
+        'learning_rate': [0.8, 0.9, 0.1, 0.11, 0.12],
+        'criterion': ['friedman_mse', 'squared_error'],
+        'min_samples_split': [1, 1.5, 2, 2.5, 3],
+        'min_samples_leaf': [1],
+        'max_depth': [1, 2, 3, 4, 5],
+        'random_state': [42],
+        'max_features': [None, 0.95, 0.9]},
+    'pre_dispatch': '2*n_jobs',
+    'refit': True,
+    'return_train_score': False,
+    'scoring': None,
+    'verbose': 0}
+\end{lstlisting}
+
+All fields starting with "estimator\_\_" contain the optimal hyperparameters for the data.
+Even though a broad spectrum of values was given in the search grid, most of the optimal values 
+are equal to the default values given by sklearn. This might suggest, that the developers
+set the default values using a similar dataset to the one used in this project.
+
+Although many combinations were evaluated, there is still a possibility, that this is a local 
+maximum and a set of hyperparameters that is far different from the ones tested here are actually
+optimal. Trying out every possible combination of values would require a great amount of 
+computing resources, as the Grid Search shown above already took more than 1.5 hours on a 
+modern 16 core CPU.
+
+Finally the model can be evaluated using the test set defined previously. This set has never been 
+seen by the model even while doing cross validation.
+
+\begin{lstlisting}[language=Python]
+    search.score(X_test, y_test)
+\end{lstlisting}
+
+The estimators score function shows a 86.286\% accuracy for the final model using the test set.
