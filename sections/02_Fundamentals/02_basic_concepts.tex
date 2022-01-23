@@ -48,4 +48,83 @@ relevant information from the mass of data.
 
 \subsubsection{Reinforcement Learning}
 
-\subsubsection{Machine Learning Algorithms}
+\subsubsection{Categories of Machine Learning}
+
+Machine learning refers to the ability of a computer to learn on its own.
+The field of machine learning includes a wide range of algorithms that learn
+from data and make predictions with variable quality.
+These predictions are not made programmatically but by data-driven predictions
+that are "learned" by generating knowledge. Basically,
+Machine Learning can be divided into 3 different methods which are discussed below.\cite[4]{2018VDMAQuick}
+
+\textbf{Supervised Learning}
+In supervised learning, a function is determined by mapping input values to known target
+values using examples. Supervised learning is also called learning from examples for this reason.\cite[96]{schacht2019blockchain}
+The system learns based on a training data set that already contains the correct answers.
+Using the already given data sets, the algorithm learns to set up rules and patterns to
+reach the known target variable. The process is repeated until the prediction matches the desired quality.
+Experiences from each iteration are in turn included in the learning process.
+If the trained model fulfills the desired results, it can also be applied to unknown data.
+The goal of this learning method is therefore to make predictions and recommendations.\cite[96]{schacht2019blockchain}
+It is also important to mention that target values in machine learning are called labels.
+Here again, one must distinguish between two use cases. If the label is nominal, it is a so-called
+classification. So, the model should assign data to specific classes.
+A regression is present if the label has metric target values.\cite[46]{Paass2020}
+The aim regression is to use data to make forecasts of future values or to identify trends.
+Problems that can occur when using supervised learning and should be avoided if possible
+are either overfitting or underfitting.  Overfitting is when the algorithm is adapted too much
+to the training data.
+This means that it delivers better results when applied to training data than to unknown data.
+The opposite is called underfitting which means the models of the learning procedure are not complex
+enough.
+Therefore, the algorithm cannot deliver sufficient performance to make predictions.\cite{buxmann2018künstliche}
+
+\textbf{Unsupervised Learning}
+The opposite of supervised learning is unsupervised learning.
+Here, the algorithm itself acquires patterns and correlations without explicitly
+predefining target values.
+Which is why the algorithm is also called learning from observations.\cite[97]{schacht2019blockchain}
+This is also done using sample data, but without labeled output data as in supervised learning.
+The algorithm thus focuses on deriving or recognizing common structures and patterns in the sample data.\cite[7]{2018VDMAQuick}
+The search includes the complete training data and not only relations with concrete
+target values as in supervised learning.\cite[802]{ernst2016grundkurs}
+Unsupervised learning can again be divided into several types.
+Clustering, for example, deals with finding frequency structures, patterns and grouping the
+data into a few sets.\cite[260]{Ertel2021}
+Another type of learning are associations which search for rules that map connections between data points.
+Finally, there is also dimensionality reduction. This kind of learning tries to reduce
+all available variables to the most important ones.\cite[10]{FraunhoferMasch2018}
+The problem with unsupervised learning, however, is that no conclusions can be drawn about
+the quality of the algorithm due to the non-existence of target variables.
+Thus, there is no real right or wrong in the learning process and so the algorithm has the possibility
+to fail completely.\cite[97]{schacht2019blockchain}
+
+\textbf{Semi Supervised Learning}
+Semi-supervised learning is a learning method that includes elements of supervised
+and unsupervised learning.
+Because of this combination, it is often not considered a separate form of learning,
+but it is important to mention it. This method uses training data that are only partially labeled.\cite[98]{schacht2019blockchain}
+This training data serves as a representative label of discovered structures if unsupervised learning is used.
+If supervised methods are used, the unlabeled data serves to make statistical accumulations more estimable.
+The main advantage of semi-supervised learning is that
+training of algorithms is already possible with little data.
+This reduces the high costs and the effort that often have to be spent on target values.\cite{WuttkeDatasolutMachine}
+
+\textbf{Reinforcement Learning}
+Reinforcement learning is fundamentally different from the learning methods already mentioned.
+Unlike the learning methods already discussed, no training data is available at the beginning.\cite[351]{Ertel2021}
+The algorithm acquires data only by interacting with the environment,
+which is why this learning method can also be called learning by interaction.
+Due to the few Requirements, this learning method is optimally suited\cite[98]{schacht2019blockchain}
+Models train by tackling challenging problems and having their decisions immediately rewarded
+if successful or punished if unsuccessful through feedback signals.
+This reward or punishment occurs, for example, in chess when a game is won or lost.
+Moves that lead to victory are saved, as are moves that lead to a possible loss.\cite[98]{schacht2019blockchain}
+In contrast to other learning methods, the algorithm does not know whether a decision is right or
+wrong before it decides what to do next.
+In addition, it does not know whether the decision it is currently making is the best one for the situation at hand,
+since its wealth of experience only grows with increasing runtime. In order to cover all possible situations,
+the algorithm must initially also cover previously unknown possibilities and not only act on the basis of actions
+that have led to reward or punishment in the past.
+However, if the algorithm is trained well enough, it can solve problems very well on this basis.
+Overall goal is to develop a strategy to maximize rewards received and get better as fast as possible.\cite[351]{Ertel2021}

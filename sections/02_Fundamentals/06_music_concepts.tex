@@ -1,1 +1,264 @@
 \subsection{Basic Concepts of Music Theory}
+
+Since this paper aims to use Music streamed on Spotify to create a machine learning model
+it is also necessary to briefly discuss the Basics of Music.
+Therefore, first a definition for music is given and after that the basic characteristics
+of music are analyzed. Secondly methods are shown that help to classify music.
+
+Music itself is a form of art that combines either vocal or instrumental sounds,
+sometimes both to express an emotion or convey an idea.\cite{Becker2021WhatIsMusic}
+Music plays a key factor in many cultures of the world and is unique and different in each of them.
+But despite being able to define music it can be quite difficult even for artists itself to describe
+it and they struggle to put their perception into words. Famous Tenor and Saxophonist of
+the 1950s/1960s John Coltrane described Music as follows.
+"My music is the spiritual expression of what I am my faith, my knowledge, my being.
+When you begin to see the possibilities of music, your desire to do something really good for people,
+to help humanity free itself from its hang ups. I want to speak to their souls."\cite{Havers2021Sax}
+
+\subsubsection{Melodical Components of Music}
+Based on John Coltrane's quote, music could colloquially be described as something,
+“that is used to trigger human sense”.\cite{Havers2021Sax}
+To achieve this music consists of various elements that work together harmoniously to form
+a pleasant-sounding melody.
+In music theory there are different opinions about the number of elements,
+which again only illustrates how complicated grasping is from the point of view of analysis.
+Many factors are highly interdependent and correlate with each other. 
+\begin{itemize}
+    \item \textbf{Pitch and Melody}: Pitch is the word used to describe the highness or lowness of
+    a musical sound.
+    A series of Pitches, also described as scales, is used to create a Melody.
+    Melodies can be derived from various scales for e.g., the traditional major and minor scales
+    of music or even more unusual ones like the whole tone scale.\cite[86]{Hemming2015}
+    Furthermore melodies can be described in two ways.
+    Conjunct melodies are smooth and easy to sing or play.
+    Disjunct melodies however represent the opposite.
+    They are ragged or jumpy and difficult to sing or play.
+
+    \item \textbf{Harmony and Chords}: Harmony can be described as the sound created when two or more
+    Pitches are performed at the same time to form a chord.
+    Chord is simply the definition for three or more notes sounding at once.
+    Chords themselves are used to create a musical mood.
+    Harmony can be split up into two categories taking the sound of pitches into consideration.
+    Harmony can sound Consonant, which means the pitches sound pleasant together or Dissonant,
+    meaning the pitches sound unpleasant together.\cite[94]{Hemming2015}
+
+    \item \textbf{Rhythm}: Rhythm refers to the recurrence of notes and silences in time.
+    A rhythmic pattern is formed by a series of notes and silence repeats.
+    In addition to signify when notes are played, rhythm also defines how long notes are played and
+    with what intensity.
+    The difference in time creates varying note durations as well as different type of accents.\cite{MilneMusicFundamentals}
+
+    \item \textbf{Texture}: Texture indicates the number of instruments or voices that are used
+    to contribute to the density of the music. Texture can be split up into 3 types of Monophonies,
+    Homophony and Polyphony.
+    Monophony describes a single layer of sound e.g. a solo voice.
+    Homophony is a melody with an accompaniment which can be a lead singer with a band or a solo
+    singer an a guitar or piano.
+    Polyphony is a form of texture which consists of two or more independent voices.
+    One voice forms the melody and the other forms a support role.
+    This could be for example a lead singer with a choir.\cite{2019ShawMusic}
+
+    \item \textbf{Timbre}: Timbre, also known as tone colour or tone quality,
+    can be described as the specific tone or quality an instrument or a voice has.
+    Timbre helps to distinguish instruments from each other when playing the same melody or simple notes.
+    For example, a “C” Note on the Piano and a sung “C” have the same pitch but different sound
+    quality which gets differentiated by timbre.
+    Timbre usually can be described with adjectives used to describe color, temperature,
+    or the human voice e.g., warm, cold, metallic, harsh, dry.\cite[94]{Hemming2015}
+
+\end{itemize}
+
+\subsubsection{Lyrics and Instruments}
+
+Another way to characterize music is Text. Lyrics are the definition for the linguistic part of a song.
+Lyrics usually consist of verses and choruses and can be implicit or explicit.
+More or less every song uses unique lyrics but nevertheless we can categorize lyrics by topics they address.\cite{Shipman2014Analysis}
+Statistics have shown that the most common themes are Growing Up, Friendship, Statements of Discontent,
+heartbreak or Death.\cite{2020AIMMListening}
+Another factor that must be taken into consideration when characterizing music are instruments.
+In the previous chapter we already talked about the fact that timbre is used to distinguish instruments
+from each other.
+The timbre focuses mainly on the sound of the instruments to distinguish them.
+However, we can distinguish instruments not only by the way they sound but also by how the sound is produced
+in the first place.
+This is done with a classification of the instruments into 5 categories.
+
+\begin{itemize}
+    \item Idiophones: Sound gets produced by the body of the instrument vibrating e.g., xylophones
+    \item Membranophones: Sound produced by vibration of a tightly stretched membrane such as drums
+    \item Chordophones: Sound produced by vibrating strings e.g., piano or cello
+    \item Aerophones: Produce sound by vibrating columns of air such as the pipe organ or oboe
+    \item Electrophones: Produce sound by electronic means e.g., synthesizers or electronic instruments.
+\end{itemize}
+
+Independently of the tone production, a classification according to the type of player is also possible,
+i.e., wind instruments, percussion instruments, string instruments, keyboard instruments,
+plucked instruments.\cite{GoshenInstrumentClass}
+
+\subsubsection{Chronological Classification}
+
+Not only compositional aspects can be used to distinguish music,
+but also the history of music provides a basis for this.
+This is done with the help of epochs.
+In music, an epoch is defined as a period in which stylistic similarities prevailed.
+However, epoch terms are a bit problematic because they give the impression that different styles
+were abruptly replaced.
+This is not the case, because with different styles, which often do not resemble each other at all
+or even contradict each other, there was often a smooth transition or simultaneous coexistence.
+Moreover, epochs are usually only generic terms for many undercurrents.
+The epochs that are considered relevant and for the most part include all styles since the 8th century
+are the Middle Ages, Renaissance, Baroque, Classicism, Romanticism, and the modern era.\cite{LexikonMusikepochen}
+Although the music classifications of the classical and modern eras occur together in history,
+there are several differences in distinguishing music.
+While classical eras could often be delineated by, for example, the preferred use of instruments,
+the increased emergence and sheer diversity in music since the 20th century has made it almost
+impossible to bundle all styles under a single epochal term.
+For this reason, genres were developed for the classification of so-called "new music".\cite{MusicflxRichtungen}
+
+\subsubsection{Genres}
+
+Musical genres assign different pieces of music with common characteristics to a unified tradition,
+history, or convention.
+Thus, a genre combines songs that sound the same or emit the same feelings,
+as well as songs that are based on the same characteristics of lyrics and instruments in songs.
+Dividing music into genres has become standard in today's music industry and due to the diverse
+number of possibilities in the creation of songs, there are now already over 1800 recognized specific
+genres with various subcategories.
+These subcategories or also called subgenres have again basic characteristics of the main
+genre as a basis but also their own characteristics to clearly distinguish themselves in their own
+genre and are often also often called style of the genre.
+These subgenres in turn have subcategories so that somewhat of a "genre tree" can be formed.
+The sheer number of genres and subgenres reflects the diversity of music.
+In this thesis the focus will be on the 3 main genres Hip Hop, Jazz and Rock which will be discussed
+in more detail below.\cite{MusicflxRichtungen}
+
+\textbf{Hip Hop}
+
+Although Hip Hop is often widely considered as a synonym for rap music it can rather be defined as somewhat
+of a cultural movement or a form of lifestyle that includes a music genre.
+Hip Hop culture consists of various elements which are united under this umbrella term.
+Elements are djing/turntablism, rapping, beatboxing, breakdancing, and graffiti/visual art.\cite{MusicalDictHipHop}
+These typical street style elements or activities created a cultural revolution and shaped music styles,
+fashion, technology, art, and more.\cite{TateHipHop}
+Even to this day hip hop continues to develop new art forms that impact the lives of new and old generations.
+When it comes to the history of Hip Hop the culture has its origins in the 1970s where it first appeared
+in African American ghettos.
+Because of this heritage, hip hop still sees itself as street culture, and musicians who practice
+this form of music often have close ties to gangs, clans, and poverty.\cite{Rory2019}
+Basic elements of hip hop come from the genres of funk and soul, which are also influenced by
+African Americans.
+Especially because of the distinctive rhythms, these genres offered themselves very well as a basis.
+Through the development of hip hop, however, it is also becoming more and more unique in type and form.
+The main characteristic of the music of hip hop is the interaction between a rapper and a beat.
+Rarely are real instruments used for the music and beats are usually created by electronic
+instruments or samples which is, the use of already finished or existing sound/music recordings.
+Beats can be very diverse and can represent many moods, e.g., aggressive, relaxed, harsh, etc.\cite{MusicalDictHipHop}
+But the main focus in rap is usually on the rapper himself and even more on the lyrics.
+Rappers use rhythm, lyrics, and the timbre of their voice to express themselves.
+The Artists use their voice as an instrument and more importantly different voice pitches
+to adapt to the intention of the lyrics.
+Rappers are often measured by the scene on their so-called "flow",
+the ability how quickly and how smoothly they can perform chants without errors.
+The themes of Hip Hop songs are often poverty, drugs, violence, struggles, or righteousness.
+Since many hip-hoppers come from ethnic and racial minorities, they often use personal life
+experiences for their lyrics.
+In addition, many songs also want to convey a message that often revolves around necessary
+political changes, social justice, or grievances in society.\cite{Goodrich2017}
+
+\textbf{Jazz}
+
+Jazz is a musical style in which improvisation plays a central role.
+In many jazz performances, artists often play pieces they just made up from their heads and
+perform them on spot.
+Jazz has its historical roots in the early 19th century America more specifically in New Orleans.
+The city was an ideal breeding ground for jazz music because of given cultural diversity.
+The percentage of ethnic minorities was much higher in this city than elsewhere in America,
+which is why it was often called a melting pot of cultures. African Americans, people from the Caribbean,
+European immigrants, and sometimes even white Americans usually lived in the same neighborhoods and racially
+segregated ghettos that often existed in other American cities were not present here.\cite{Beek2021Jazz}
+However, the biggest influence on Jazz had the Afro-American culture as the music somewhat
+reflected the breaking away from previous rules of slavery and oppression.
+The improvisation of songs should act symbolically as a counter to the rules they had to deal with for a
+long time.
+Since its inception, jazz has gone through many different phases.
+The beginnings of jazz, from the 1910s to the 1920s, were characterized by small bands,
+often consisting of only a frontman and a few accompanists.
+The frontman often improvised pieces using a cornet or a trumpet,
+while the accompanists supported him with clarinets or trombones.
+In addition, often instruments like the banjo, piano, double bass, or drums were used to create a rhythm.
+In the 1930s and 1940s, the Swing and Big Band era emerged.
+Now, for the first time, singers appeared before big bands and bandleaders,
+and the clarinet was largely replaced by the saxophone.
+Moreover, the jazz epicenter shifted from New Orleans further and further to New York.\cite{Wildridge2020}
+The 1950s and 1960s then introduced laid-back cool jazz in contrast to the more fast-paced songs
+of the previous decades.
+Here a jazz quartet often played soothing and slow songs. With the introduction of electronic
+instruments in jazz from 1970 onwards, many subgenres were formed, such as jazz-rock.
+Until today, there are many forms of jazz, which are mainly oriented to the New Orleans origins
+and the 3 mentioned eras.
+Jazz has its main musical roots in the blues, but there are also elements of rock and classical music in it.\cite{JazzAmHistory}
+A distinctive rhythm is a key characteristic of jazz music,
+these are created mainly by "swinging" eighth notes.
+The so-called swinging is created by emphasizing one note of the eighth note pair while the second
+note is lighter and "swings" to the next note.
+Jazz is also very polyphonic, which means that many sounds are played simultaneously and as a result,
+various layers of harmony are laid over an initial basic melody.
+In Addition to the use of classical European instruments such as the saxophone or trumpet,
+instruments such as drums, bass, keyboard, guitar, and trombone are often used.
+Some types of jazz also have front singers, but often pieces are played without vocals.\cite{2020MasterclassJazz}
+As already mentioned before. As already mentioned before the main characteristic of Jazz is
+the spirit of improvisation. This unifies almost all forms of jazz music.
+All members of a jazz band can be asked to improvise on a jazz tune when performing it.
+In addition, jazz artists attach great importance to imprinting their own sound and style on the music,
+so they usually even play their own songs slightly modified or with a distinct style.
+This leads to the fact that thousands of jazz recordings can be found for the same song,
+but they all sound different.
+Finally, it is important to mention that jazz can also reflect many different emotions.
+Everything from pain to joy is possible. For many People of Colour, it resembles the feeling of freedom,
+because for them, as mentioned above, jazz represents a strong voice against suffering, oppression,
+and injustice.\cite{MusicalDictJazz}
+
+\textbf{Rock}
+
+The musical Genre Rock is a popular music genre that combines elements of rhythm and blues,
+jazz and country music while adding electric instruments.
+It originated as Rock `n Roll in the late 1940's and early 1950's and of course also is constantly
+changing and evolving.
+The basis of rock formed the music genres blues, gospel and country.
+Early rock 'n' roll came from cities like Memphis, Chicago, New Orleans or St. Louis.
+However, the genre spread very quickly throughout Western culture, and so it was mainly
+the British who liked the genre very much and who, in turn, took it to new heights.\cite{2021MasterclassRock}
+British bands like the Beatles or the Rolling Stones emerged and became very popular in the USA as well.
+Rock dominated the music with its loud, dynamic, energetic and intense style for almost over
+50 years until it was replaced by hip hop as the most mainstream genre.
+One of the main characteristics of rock is the infectious beat and rhythm.
+The music was primarily designed for dancing and was a clear distinction from other music genres
+popular at the time, such as jazz or swing.
+Thats why from its start in the 50s the genre was very popular among young people as they felt
+they could break out of rigid traditions.
+Furthermore it is also important to mention that rock, like hip-hop later on,
+not only had an impact on music but also a cultural influence on the generations
+from the 1950s to the 1990s.\cite{2021MasterclassRock} Rock especially supported the sense of rebellion and social
+justice in the western world of the 1960s and influenced clothing style,
+hair style and even attitude of its listeners for over 40 years.
+The older, more conservative generation at the time, which favored more quiet songs,
+rather detested rock.
+The energy already mentioned above is a unique characteristic that sets rock apart
+from many other genres. Rock music is often very wild, impulsive and driving.
+But what defines rock the most is the use of electric instruments and especially
+the use of the electric guitar.\cite{MusicalDictRock}
+The indispensable electric guitar makes rock probably the genre that is most
+influenced by a single instrument. Pioneers of rock like Elvis Presley,
+Jimi Hendrix or Chuck Berry experimented a lot with the electric guitar
+and used the unique sound to their advantage.
+Hendrix in particular often used the so-called "scream" of the electric guitar as his trademark,
+where he plucked the string in such a way that a shrill sound could be heard through the amplifier.
+This instrument allowed the artists to reach new melodic aspects and pitches that are not achievable
+with the use of pure acoustic instruments.\cite{MusicalDictRock} Rock music is typically performed only in bands with a lead singer.
+He usually plays an electric guitar himself and is accompanied either by other electric guitars,
+normal guitars, other electric instruments and a drum kit.
+Lyrical texts of rock are also very diverse due to its division into many subgenres.
+Lyrics may not be very profound other lyrics by artists like Bob Dylan, however,
+are considered comparable to fine poetry.
+Rock music subgenres are very different and vary greatly in terms of rhythm and tempo.
+For example, the music genre of heavy metal is almost incomparable with soft rock.\cite{Clark2021}
