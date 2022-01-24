@@ -42,7 +42,13 @@ the learning rate and many more. The most impactful of these parameters are expl
 \end{itemize}
 
 \subsubsection{Cross Validation}
-\{explain cross validation here\}
+
+Cross Validation is a method structure the dataset for modelling. It allows the use of 
+one single dataset for both training and validation as the dataset is randomly split into \(N\) N sections. Each 
+section contains an equal distribution of label data as the original dataset. One subset is reserved as a 
+validation dataset while the other subsets are used for the modelling of the dataset. The modelling takes place 
+N times and for every iteration another subset is used for validation. Therefore \(N\) models are created in total. 
+Each model can agian be tested against the subset that is reserved for validation with the best model chosen \cite[p.8f]{lewis2000introduction}. 
 
 \subsubsection{Hyperparameter Tuning}
 
