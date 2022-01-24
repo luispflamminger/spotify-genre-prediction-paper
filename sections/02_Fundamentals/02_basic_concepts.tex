@@ -1,21 +1,18 @@
 \subsection{Basic Concepts of Big Data}
 
-Big Data is an umbrella term used to describe various technological but also
-organizational developments.
-Originally, Big Data refers to large sets of structured and unstructured data
-which must be stored and processed to gain business value.
-Today, Big Data is also often used as buzzword to outline various modern use cases
-that deal with large amounts of data. Big Data is therefore often used in conjunction
-with other buzzwords like automatization, personalization or monitoring.
-This chapter presents the foundation of Big Data in its technical implementation and
-combines the topics with busines cases. 
+Big Data is an umbrella term used to describe various technological but also organizational 
+developments. Originally, Big Data refers to large sets of structured and unstructured data
+which must be stored and processed to gain business value. Today, Big Data is also often used 
+as buzzword to outline countless modern use cases that deal with large amounts of data \cite[p.5]{Meier_2021}. Big Data 
+is therefore often used in conjunction with other keywords like automatization, personalization 
+or monitoring. This chapter presents the foundation of Big Data and gives an overview of 
+technological and business standards. (QUELLE) 
 
 \subsubsection{Relevance of Data}
 
-Data in combination with Business Intelligence become increasingly important
+Data in combination with Business Intelligence has become increasingly important
 over the past decades and is closely associated with the advances of the internet
-itself.
-Looking back, Business Intelligence can be divided into three sub-categories,
+itself \cite[p.1165]{Chen_2012}. Looking back, Business Intelligence can be divided into three sub-categories,
 which follow another linearly. The first phase is centered around getting critical
 insights into operations from structured data gathered while running the business
 and interacting with customers. Examples would be transactions and sales.
@@ -23,13 +20,12 @@ The second phase focuses increasingly on data mining and gathering customer-spec
 data. These insights can be used to identify customer needs, opinions and interests.
 The third phase, often referred as Big Data, enhances the focus set in phase
 two by more features and much deeper analysis possibilities.
-It allows to gain critical information such as location,person,
-context often through mobile and sensor-based context. 
+It allows organizations and researchers to gain critical information such as location, person,
+context often through mobile and sensor-based context \cite[p.1166]{Chen_2012}. 
 
 In conclusion, organizations require Business Intelligence as it allows them to gain
 crucial insights which is needed to run the business and achieve an advantage
-over the competition.
-It is important to minimize the uncertainty of decisions
+over the competition. It is important to minimize the uncertainty of decisions
 and maximize the knowledge about the opportunity costs and derive their intended impacts. 
 It is clearly noticeable that the insights and analysis possibilities become
 progressively deeper and much more detailed.
@@ -42,9 +38,94 @@ When describing Data, a reference is often made to the five Vs,
 which highlight its main characteristics.
 The previous aspects of Big Data can again be recognized in averted form. 
 
-\textbf{Volume:} The size of the datasets is in the range of tera- and zettabyte
-. This massive volume is not a challenge for storing but also extracting
-relevant information from the mass of data. 
+\textbf{Volume:} The size of the datasets is in the range of tera- and zettabyte. 
+This massive volume is not only a challenge for storing but also extracting
+relevant information \cite[p.6]{Meier_2021}. 
+
+\textbf{Variety:} Variety refers to the diversity of the data itself. For modern Business 
+Analytics almost every data format and type plays a vital role. They range from the more classical 
+text and figures to images, audio and video \cite[p.6]{Meier_2021}. Whereas classical formats 
+typically are stored in a structured way other formats rely on a semi- or unstructured database. 
+The main differences between structured and unstructured data will be discussed in the following 
+chapter as part of the different storage solutions for Big Data. Without much preface, 
+unstructured data is more difficult to classify and further complicates the extraction of 
+information but allows much deeper analysis possibilities \cite[p.2f]{Tanwar2015}.
+
+\textbf{Velocity:} Velocity is about the speed in which the data must be stored, 
+and valuable information extracted. In a fast-paced environment, like the current globalized world, 
+faster analysis can be a key advantage. Some special use cases, like malfunction detection, even 
+require real-time processing of data \cite[p.6]{Fasel_2016}. 
+
+\textbf{Value:} The goal of Business Analytics and the extraction of information out of data is, 
+as mentioned already in the previous, to create business value (Big Data Analytics, 6). Value 
+that minimizes uncertainty of action or processes and gives the operators a key advantage \cite[p.6]{Meier_2021}. 
+
+\textbf{Veracity:} Veracity describes a challenge of analytics with data. The gathered data is 
+often vague and not concise. Its information is not easily identifiable from the outside. 
+Furthermore, some samples of the dataset are often of bad quality for multiple possible reasons 
+and therefore hinder the algorithm and it’s training rather than supporting it. The predictions 
+on the other hand must be precise. This conflict is a massive challenge when creating analysis 
+models \cite[p.6]{Fasel_2016}.
+
+\subsection{Differencation between Big Data and Big Data Analytics}
+
+The term Big Data Analytics is used in literature to describe the subcategory of Big Data that 
+focusses primarily on the analytics of existing data, as the name already suggests. The analysis 
+of data is of very high interest for many use-cases and organizations as its outcome is business 
+value (comparison to the previous chapter: Why is data so important).
+
+The term Analytics is used to describe a systematical analysis of data in some form. Analytics is 
+about detecting hidden patterns, clusters and meaningful features ranging from simple detection 
+over deep analysis and predictions. The goal is to process the data in such a way that value is 
+created from it \cite[p.2]{Tanwar2015} \cite[p.8f]{Meier_2021}. The creation of value is closely linked to 
+the use cases for which in-depth knowledge is required and in which form. Generally, literature 
+distinguishes between four main groups of analytics by grouping them according to the methodology 
+and their objectives starting with Descriptive Analytics. Descriptive Analytics is the simplest 
+form of Analytics and is often the first step for further research. Descriptive Analytics gives 
+information about what has happened in the past. Descriptive Analytics is often used for reporting 
+on relevant topics for operation such as KPIs, sales or revenue. Typically, visual presentation 
+methods are used for displaying the information. Diagnostic Analytics is based on Descriptive 
+Analytics but serves a different goal, since its goal is to give insights on why something has 
+happened in the past. Diagnostic Analytics evaluates the impact of features, detects correlations 
+and dependencies. Predictive Analytics takes this approach one step further as it predicts what 
+is most likely going to happen in the future based on the knowledge gained from past data. It 
+creates models with the help of algorithms to determine the probability of outcomes. The final 
+step of Analytics is Prescriptive Analytics, which again is based on its predecessor. Prescriptive 
+Analytics predicts outcomes and recommends actions to avoid or support them respectively \cite[p.8f]{Meier_2021}.
+
+This project contains elements of descriptive, diagnostics and predictive analytics. Using the 
+Crisp Dm process model (CHAPTER X), the data set is first analyzed and then a predictive model 
+is generated to classify new data based on known data.
+
+https://www.sigmacomputing.com/blog/descriptive-predictive-prescriptive-and-diagnostic-analytics-a-quick-guide/
+
+\subsection{Data Formats}
+
+As part of Big Data, the storage of data faces similar challenges as Big Data itself. Adequate 
+storage solutions are key to providing data for the following analysis step. This chapter gives 
+a quick overview on data types. Storage is a very important topic for Big Data but plays only a 
+minor role for the project itself and therefore will not be discussed in more detail.  
+
+Variety already outlined the shift from structured to unstructured data formats. Structured data 
+has a fixed format and fits into a predefined data model which can be stored in tabular form. 
+Unstructured data, on the other hand, has no fixed format, schema or structure.  It comes in 
+almost every form such as PDF, text, image, audio and many more. Basically, the whole internet 
+and everything that is published on it is some form of unstructured data. Therefore, it is 
+believed, that approximately 95 percent of all data is in unstructured form. In between structured 
+and unstructured data there exists a subcategory called semi-structured data. Semi-structured 
+data has no strict standard and but can be read by machines since it often consists out of 
+user-defined data tags. An example for semi-structured data is XML \cite[p.2f]{Tanwar2015}. 
+
+Structured and semi-structured data is relatively easy to analyze compared to unstructured data 
+because machines mostly rely on structural organization. Unstructured data, on the contrary, has 
+great potential because the amount of information stored inside it is huge. To analyze 
+unstructured data, it is often required to deconstruct it into metadata which again is comparable 
+to semi-structured data. Often both structured and unstructured data is necessary to form 
+well-founded business decisions and gain a competitive advantage \cite[p.2f]{Tanwar2015}. 
+
+The dataset used for this project and described in more detail in chapter X is a structured 
+dataset. It consists of classical numerical and categorical features which all have a predefined 
+range of values. 
 
 \subsubsection{Reinforcement Learning}
 
