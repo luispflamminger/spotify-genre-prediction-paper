@@ -203,13 +203,13 @@
   urldate = {2022-01-13},
 }
 
-@Article{Lane2019a,
+@Article{Lane2019WhatIs,
   author  = {Lane, Kin},
-  title   = {Intro to APIs: What Is an API?},
   date    = {2019-10-05},
-  groups  = {2.4 API},
+  title   = {Intro to APIs: What Is an API?},
   url     = {https://blog.postman.com/intro-to-apis-what-is-an-api/},
   urldate = {2022-01-13},
+  groups  = {2.4 API},
 }
 
 @Article{McLaughlin1996,
@@ -464,4 +464,263 @@
 @WWW{WuttkeDatasolutMachine,
   author       = {Wuttke, Laurenz},
   title        = {Machine Learning: Definition, Algorithmen, Methoden und Beispiele},
-  url          = {https://datasolut.com/was-ist-machine-learning/#
+  url          = {https://datasolut.com/was-ist-machine-learning/#teilueberwachtes-lernen},
+  organization = {datasolut},
+  urldate      = {2022-01-23},
+  groups       = {2.1.4},
+  owner        = {luisp},
+}
+
+@Report{2018VDMAQuick,
+  date        = {2018},
+  institution = {VDMA Software und Digitalisierung},
+  title       = {Quick Guide: Machine Learning im Maschinen und Anlagenbau},
+  groups      = {2.1.4},
+  owner       = {luisp},
+}
+
+@WWW{Becker2021WhatIsMusic,
+  author       = {Becker, Rachel},
+  date         = {2021-10-29},
+  title        = {What is Music?},
+  url          = {https://study.com/learn/lesson/what-is-music-characteristics-of-music-how-music-is-made.html},
+  organization = {Study.com},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{Havers2021Sax,
+  author       = {Havers, Richard},
+  date         = {2021-09-23},
+  title        = {John Coltrane Quotes: The Iconic Saxophonist In His Own Words},
+  url          = {https://www.udiscovermusic.com/stories/john-coltrane-in-20-quotes/},
+  organization = {UDiscoverMusic},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{MilneMusicFundamentals,
+  title  = {Chapter 2: Music: Fundamentals and Educational Roots in the U.S.},
+  url    = {https://milnepublishing.geneseo.edu/music-and-the-child/chapter/chapter-2/},
+  groups = {2.6 Music Theory},
+  owner  = {luisp},
+}
+
+@WWW{2019ShawMusic,
+  date         = {2019-04},
+  title        = {Music Theory: 5 Fundamentals That You Should Know},
+  url          = {https://www.shawacademy.com/blog/music-theory-5-fundamentals-that-you-should-know/},
+  organization = {Shaw Academy},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{Shipman2014Analysis,
+  author       = {Shipman, Matt},
+  date         = {2014-03-18},
+  title        = {Analysis of 50 Years of Hit Songs Yields Tips for Advertisers},
+  url          = {https://news.ncsu.edu/2014/03/wms-henard-hits2014/},
+  organization = {NC State University},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{2020AIMMListening,
+  date         = {2020-02-14},
+  title        = {What Are We Listening to? | The Most Popular Themes In Songs},
+  url          = {https://www.aimm.edu/blog/most-popular-themes-in-songs},
+  organization = {Atlanta Institute of Music and Media},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@Book{Hemming2015,
+  author    = {Hemming, Jan},
+  date      = {2015-10-28},
+  title     = {Methoden der Erforschung populärer Musik},
+  isbn      = {3658114967},
+  pagetotal = {514},
+  publisher = {Gabler, Betriebswirt.-Vlg},
+  url       = {https://www.ebook.de/de/product/25204785/jan_hemming_methoden_der_erforschung_populaerer_musik.html},
+  ean       = {9783658114961},
+  groups    = {2.6 Music Theory},
+  owner     = {luisp},
+  year      = {2015},
+}
+
+@WWW{GoshenInstrumentClass,
+  title        = {Instrument Classification},
+  url          = {https://www.goshen.edu/academics/music/mary-k-oyer-african-music-archive/instrument-classification/},
+  organization = {Goshen College},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{LexikonMusikepochen,
+  title        = {Musikepochen},
+  url          = {http://www.musiklexikon.info/musiklexikon/musikepochen},
+  organization = {musiklexikon.info},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{MusicflxRichtungen,
+  title        = {Musikrichtungen},
+  url          = {https://www.musicflx.de/musikrichtungen/},
+  organization = {MUSICFLX},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{MusicalDictRock,
+  title        = {What is Rock Music?},
+  url          = {https://musicaldictionary.com/what-is-rock-music/},
+  organization = {Musical Dictionary},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{TateHipHop,
+  author       = {Tate, Greg},
+  title        = {hip-hop music and cultural movement},
+  url          = {https://www.britannica.com/art/hip-hop},
+  organization = {Encyclopædia Britannica, Inc.},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{Rory2019,
+  author       = {PQ, Rory},
+  date         = {2019-11-13},
+  title        = {Hip Hop History: From the Streets to the Mainstream},
+  url          = {https://iconcollective.edu/hip-hop-history/},
+  organization = {Icon Collective},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{Goodrich2017,
+  author = {Goodrich, Katie},
+  date   = {2017-04-25},
+  title  = {What is hip-hop?},
+  url    = {https://medium.com/@katiegoodrich/what-is-hip-hop-9f9abfffb25e},
+  groups = {2.6 Music Theory},
+  owner  = {luisp},
+}
+
+@WWW{Beek2021Jazz,
+  author       = {Beek, Michael},
+  date         = {2021-07-15},
+  title        = {What is jazz music?},
+  url          = {https://www.classical-music.com/features/articles/jazz-music-what-it-is-and-how-it-evolved/},
+  organization = {BBC Music Magazine},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{Wildridge2020,
+  author       = {Dr. Justin Wildridge},
+  date         = {2020-01-15},
+  title        = {Characteristics of Jazz: An Introduction},
+  url          = {BBC Music Magazine},
+  organization = {CMUSE},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{JazzAmHistory,
+  date         = {What is Jazz?},
+  title        = {What is Jazz?},
+  url          = {https://americanhistory.si.edu/smithsonian-jazz/education/what-jazz},
+  organization = {National Museum of American History},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{Clark2021,
+  author       = {Clark, Brian},
+  date         = {2021-08-19},
+  title        = {30 Different Types of Rock Music (Rock Subgenres)},
+  url          = {https://www.musicianwave.com/types-of-rock-music-subgenres/},
+  organization = {MusicianWave.com},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{2021MasterclassRock,
+  date         = {2021-10-25},
+  title        = {Rock ’n’ Roll Music Guide: 4 Characteristics of Rock ’n’ Roll},
+  url          = {https://www.masterclass.com/articles/rock-n-roll-music-guide},
+  organization = {MasterClass},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{MusicalDictHipHop,
+  title        = {What is Hip-Hop?},
+  url          = {https://musicaldictionary.com/what-is-hip-hop/},
+  organization = {Musical Dictionary},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{2020MasterclassJazz,
+  date         = {2020-11-08},
+  title        = {What Is Jazz? A Guide to the History and Sound of Jazz},
+  url          = {https://www.masterclass.com/articles/what-is-jazz#what-is-jazz-music},
+  organization = {MasterClass},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{MusicalDictJazz,
+  title        = {What is Jazz?},
+  url          = {https://musicaldictionary.com/what-is-jazz/},
+  organization = {Musical Dictionary},
+  groups       = {2.6 Music Theory},
+  owner        = {luisp},
+}
+
+@WWW{StoplightAPITypes,
+  title        = {Types of APIs \& Popular REST API Protocol},
+  url          = {https://stoplight.io/api-types/},
+  organization = {Stoplight},
+  urldate      = {2022-01-24},
+  groups       = {2.4 API},
+  owner        = {luisp},
+}
+
+@Book{gourley2002http,
+  author    = {Gourley, D. and Totty, B. and Sayer, M. and Aggarwal, A. and Reddy, S.},
+  title     = {HTTP: The Definitive Guide},
+  isbn      = {9781565925090},
+  publisher = {O'Reilly Media, Incorporated},
+  series    = {Definitive Guides},
+  groups    = {2.4 API},
+  lccn      = {2002023325},
+  owner     = {luisp},
+  year      = {2002},
+}
+
+@WWW{MozillaJSON,
+  title        = {Working with JSON},
+  url          = {https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON},
+  organization = {Mozilla},
+  groups       = {2.4 API},
+  owner        = {luisp},
+}
+
+@WWW{OracleJSON,
+  title        = {JSON definiert},
+  url          = {https://www.oracle.com/de/database/what-is-json/},
+  organization = {Oracle},
+  groups       = {2.4 API},
+  owner        = {luisp},
+}
+
+@Book{masse2011rest,
+  author    = {Masse, M.},
+  title     = {REST API Design Rulebook},
+  isbn      = {9781449310509},
+  publisher = {O'Reilly Media},
+  series    = {Or
