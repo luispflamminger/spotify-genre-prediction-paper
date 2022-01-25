@@ -1,6 +1,6 @@
-\printsymline{\text{A}}{\text{A}}{AB}{Aufrechter Buchstabe}{VII}
-\printsymline{\mathbb{N}}{\mathbb{N}}{symnz}{Menge aller natuerlichen Zahlen ohne die Null}{VII}
-\printsymline{\mathbb{N}_{0}}{\mathbb{N}_{0}}{symnzmn}{Menge aller natuerlichen Zahlen einschliesslich Null}{VII}
-\printsymline{\mathbb{Z}}{\mathbb{Z}}{GZ}{Menge aller ganzen Zahlen}{VII}
-\printsymline{\mathbb{Q}}{\mathbb{Q}}{RatZ}{Menge aller rationalen Zahlen}{VII}
-\printsymline{\mathbb{R}}{\mathbb{R}}{RZ}{Menge aller reellen Zahlen}{VII}
+\printsymline{\text{A}}{\text{A}}{AB}{Aufrechter Buchstabe}{VI}
+\printsymline{\mathbb{N}}{\mathbb{N}}{symnz}{Menge aller natuerlichen Zahlen ohne die Null}{VI}
+\printsymline{\mathbb{N}_{0}}{\mathbb{N}_{0}}{symnzmn}{Menge aller natuerlichen Zahlen einschliesslich Null}{VI}
+\printsymline{\mathbb{Z}}{\mathbb{Z}}{GZ}{Menge aller ganzen Zahlen}{VI}
+\printsymline{\mathbb{Q}}{\mathbb{Q}}{RatZ}{Menge aller rationalen Zahlen}{VI}
+\printsymline{\mathbb{R}}{\mathbb{R}}{RZ}{Menge aller reellen Zahlen}{VI}
