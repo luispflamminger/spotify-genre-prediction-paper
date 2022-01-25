@@ -63,13 +63,7 @@ samples.
     \includegraphics[width=0.5\textwidth]{coordinate_system_initial_dataset.png}
 \end{figure}
 
-\textbf{Recursive Tree Construction:}
-
-The Decision Tree Algorithms splits the Dataset recursively into subsets. Each split is represented with 
-a node. Nodes are mathematically described as \(Q_{m}\) and contain a fixed group samples \(N_{m}\) 
-for which the split will take place. Nodes split can either split the sample-group into two ore multiple 
-subgroups. For CART only binary splitting into two subgroups definded as \(Q^{left}_{m}\) and \(Q^{right}_{m}\)
-is allowed. 
+\textbf{Recursive Tree Construction:} 
 
 The Decision Tree Algorithms splits the Dataset recursively into subsets. At the beginning, the whole dataset is 
 contained within the Root-Node from which the division into subtrees start. Each Node is mathematically described
@@ -78,11 +72,11 @@ further or act as a final Classifier as from of a Leaf (in case of a Classificat
 binary or multiway. CART only utilizes binary splits and divides the Node \(Q_{m}\) into two repective subgroups 
 labeled as \(Q^{left}_{m}\) and \(Q^{right}_{m}\). 
 
-The Decision Tree Algorithm is greedy and determines for each split an optimal division of the samples according to 
+The Algorithm is greedy and thus determines for each split an optimal division of the samples according to 
 the impurity of both subgroups. The goal for every split is to divide the group of data into two subgroups which are 
-more homogeneous as the origin and maximize the overall homogenity of the data. The division of the data is 
+more homogeneous as the origin and maximize the overall homogenity. The division of the data is 
 always performed using a feature, on the basis of which the samples can be divided either by a threshold for 
-nominal values or an actual-equal query for categorical values. The split is mathematically described as the 
+nominal values or an is-equal-to query for categorical values. The split is mathematically described as the 
 following (1). It consists out of the the feature \(j\) and a criteria \(t_{m}\).
 
 (1) \(\theta = (j, t_{m})\)
@@ -90,16 +84,16 @@ following (1). It consists out of the the feature \(j\) and a criteria \(t_{m}\)
 \textbf{Splitting Criteria and Information Gain:}
 
 The optimal split is determined by selecting the feature that has the highest Information Gain. Information Gain 
-stands for the knowledge and information abot the dependence between features and labels gained by splitting a group 
+stands for the knowledge and information about the dependence between features and labels gained by splitting a group 
 of samples by a feature. Ideally, the Information Gain is maximized. Mathematically spoken, the split is optimal if 
-the Information Gain \(G(Q_{m}, \theta)\) (1) is minimized as shown in (3). 
+the Information Gain \(G(Q_{m}, \theta)\) (2) is minimized as shown in (3). 
 
 (2) \(G(Q_{m},\theta) = \frac{N^{left}_{m}}{N_{m}} H(Q^{left}_{m}, \theta ) + \frac{N^{right}_{m}}{N_{m}} H(Q^{right}_{m}, \theta ) \)
 
 (3) \(\theta ^* = argmin_{\theta}  G(Q_{m}, \theta)\)
 
 To determine the overall best \(G(Q_{m}, \theta)\) the respective Impurities \(H\) for both subgroups \(Q^{left}_{m}\) 
-and \(Q^{right}_{m}\) are required. Each Impurity is is weighted according to its overall impact by its relative size 
+and \(Q^{right}_{m}\) are required. Each Impurity is weighted according to its overall impact by its relative size 
 \(\frac{N^{left}_{m}}{N_{m}}\).
 
 The Impurity \(H\) for CART is calculated by the Gini Index. Gini index measures the probability that a sample 
@@ -381,7 +375,7 @@ recent predicted probabilities \(p\) for all samples in the Leaf (11).
 For \(R_{2,1}\), which contains track h1, the calculation looks like the following (12). The Output Values of the complete 
 dataset are displayed in figure X. 
 
-(12) \(\gamma_{2,1} = \frac{0.375+0.375+0.375+0.375}{0.625 * (1 - 0.625) + 0.625 * (1 - 0.625) + 0.625 * (1 - 0.625) + 0.625 * (1 - 0.625)} 
+(12) \(\gamma_{2,1} = \frac{0.375 ~ + ~ 0.375+0.375+0.375}{0.625 * (1 - 0.625) + 0.625 * (1 - 0.625) + 0.625 * (1 - 0.625) + 0.625 * (1 - 0.625)} 
                     = 1.6 \)
 
 \begin{figure}[H]
@@ -417,29 +411,42 @@ h5 the prediciton got worse. This is why multiple iterations are necessary to fo
 The second iteration of the modelling phase follows the exact same principles and will again be showcased for track h1. 
 It marks the end for this example. 
 
-New probabilities:
+\begin{itemize}
 
-\(p = \frac{e^{1.31}}{1 + e^{1.31}} = 0,79 \)
+    \item New Probability:
 
-New Pseudo Residuals: 
+\(p = \frac{e^{1.47}}{1 + e^{1.47}} = 0,81 \)
 
-\(r_{1, 2} = 1 - 0.79 = 0.21 \)
+    \item New Pseudo Residual: 
 
-New decision tree and terminal regions:
+\(r_{1, 2} = 1 - 0.81 = 0.19 \)
 
+    \item New Decision Tree with Terminal Regions:
 
+\end{itemize}
 
-New output values: 
+\begin{figure}[H]
+    \centering
+    \caption[]{Gradient Boosting: Second Regression Tree}
+	\label{gb_2_regression_tree}
+    \includegraphics[width=0.5\textwidth]{gb_2_regression_tree.svg.pdf}
+\end{figure}
+
+\begin{itemize}
+
+    \item New Output Value: 
 
 \(\gamma_{2,2} = \frac{0.98}{0.54} = 1.81 \)
 
-New prediction:
+    \item New Prediction:
 
 \(F_{2}(x) = 1.47 + 0.6 * 1.81 = 2.56\)
 
-New probability:
+    \item New Probability:
 
 \(p = \frac{e^{2.56}}{1 + e^{2.56}} = 0.93 \)
+
+\end{itemize}
 
 The iterative modelling is repeated until \(M\) is reached. \(M\) marks the completion of the training of the Gradient 
 Boosting Model. The \(F_{M}(x)\) is the final prediction for every sample. Lastly, the predicitions
@@ -451,8 +458,9 @@ for binary Classification is 0.5 as it splits \(F_{M}(x)\) into two equal classe
 
 Sample h1 has a final probability of 0.93 of belonging to the category "Hiphop". 0.93 is by far greater than the 
 predefined threshold of 0.5 and thus h1 is classified as a track that belongs to the category "Hiphop". Figure X shows
-that all samples are classified correctly but some less clear than others. A real-world implementation would utilize far
-more iterations and would use different Regression Trees and Learning Rates to enhance the classification potential. 
+that all samples are classified correctly but some less clear than others. A real-world implementation would consist 
+out of more iterative models with different Regression Trees and a different Learning Rate to enhance the 
+classification potential. Also the dataset would be very different with more samples that consist out of more features. 
 
 (FIGURE)
 
