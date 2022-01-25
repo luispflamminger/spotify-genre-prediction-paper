@@ -2,7 +2,10 @@
 \label{sec:Data Collection}
 
 In this section the approach and implementation of data collection for this project is 
-examined.
+examined. First, the basic requirements for the dataset are given and some existing datasets
+are evaluated. Then the resources used are presented and the general approach to data collection
+is explained, including authorization and how features and labels are collected.
+Lastly, the concrete implementation in Python is explained.
 
 \subsubsection{Requirements for the dataset}
 
@@ -12,49 +15,53 @@ Basic requirements the dataset should fulfill are
     \item \textbf{Includes Spotify song features}
 
     Spotify provides a set of song features that were generated using their own models.
-    The dataset should inlude these features, as they are needed to train the model
+    The dataset should include these features, as they are needed to train the model.
+    
     \item \textbf{Includes genre as label}
 
     The dataset needs to include the genre of the track to use as a label for the classifier
+
     \item \textbf{Has sufficient sample size per genre}
 
     In order to train the model well, a sufficient sample size is needed per genre.
-    It was not known before collecting the data, how many samples were enough. 
+    It was not known before collecting the data, how many samples are enough to get a decent result,
+    which is why the dataset with the highest sample size is preferred, without compromising too
+    much on the other criteria. 
+
     \item \textbf{Song and Artist name}
 
     The best way to filter out duplicates is to use the song and artist names.
     Spotify does provide a track id for each song, however, if a song is released twice
-    (e.g. as a single and later in an album), these track ids will differ which will lead to a duplicate entry.
+    (e.g. as a single and later in an album), these track ids will differ which will lead
+    to a duplicate entry.
 \end{itemize}
 
-Additional fields are not going to be used in this analysis, but might still be collected in order to publish the
-dataset and enable others to use it for different applications.
+Additional fields are not going to be used in this analysis, but might still be collected in order to
+publish the dataset and enable others to use it for different applications.
 
 \subsubsection{Existing Datasets}
 
 As this paper examines creating a model specifically on Spotify Song Data,
 a search on the internet was conducted first, to find a potential pre-made dataset,
 pulled from the Spotify \ac{API}, which could be used.
-Kaggle \footnote{Kaggle Website: https://www.kaggle.com/} lists an extensive
+Kaggle\footnote{Link to the Kaggle Website: https://www.kaggle.com/} lists an extensive
 catalogue of community provided datasets, so the main sources of this search were
 Kaggle and Google search for the term "Spotify Song Data".
 Kaggle lists a couple of datasets that could be applicable to the research question in
 this paper. Some examples of datasets listed are given and explained, why they could not 
 be used for this project.
 
-"Spotify music analysis" by user Aeryan \footnote{https://www.kaggle.com/aeryan/spotify-music-analysis}
+"Spotify music analysis" by user Aeryan \footnote{Link to the dataset: https://www.kaggle.com/aeryan/spotify-music-analysis}
 is a dataset of 2017 rows, which includes musical features like acousticness and tempo,
 the song title and artist, but lacks a genre field. Because of the small sample size
 and the missing genre field, this dataset could not be used.
 
 There are multiple datasets which include songs that were featured in Spotify's "Top 50" Playlists,
-charts, or year in review, recorded at a single point in time or historically.
-\footnote{https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018}
-\footnote{https://www.kaggle.com/leonardopena/top50spotify2019}
+charts, or year in review, recorded at a single point in time or historically.\footnote{Link to the dataset: https://www.kaggle.com/nadintamer/top-spotify-tracks-of-2018}\footnote{Link to the dataset: https://www.kaggle.com/leonardopena/top50spotify2019}
 These could not be used, as the sample size is again too small and the focus is specifically
 on the most popular tracks and not a wide variety of music in a genre.
 
-"Dataset of songs in Spotify" \footnote{https://www.kaggle.com/mrmorj/dataset-of-songs-in-spotify}
+"Dataset of songs in Spotify"\footnote{Link to the dataset: https://www.kaggle.com/mrmorj/dataset-of-songs-in-spotify}
 is the most promising dataset examined, as it has a big sample size and includes genre data.
 However, the methodology of how the data was collected is not included and there
 could be multiple ways of how genre data for a given song is collected, as is explained later.
@@ -65,16 +72,16 @@ a dataset was specifically created for this paper using the Spotify Web API.
 
 \subsubsection{Ressources and Approach}
 
-Spotify provides extensive documentation for developers on their developer website \footnote {https://developer.spotify.com/}.
+Spotify provides extensive documentation for developers on their developer website.\cite{SpotifyDev}
 This includes development and design guidelines for teams, that want to integrate
-Spotify's service into their own apps, documentation on IOS and Android development
-a community forum, a developer dashboard and the Web API documentation, which is the main ressource
+Spotify's service into their own apps, documentation on iOS and Android development
+a community forum, a developer dashboard and the Web API documentation, which is the main resource
 for data collection from Spotify.
 
-The \ac{API} is based on the \ac{REST} architecture. The different endpoints return JSON metadata
-directly from the Spotify Data Catalogue \cite[]{SpotifyWebAPI}. There are also features to query for
+The \ac{API} is based on the \ac{REST} architecture. The different endpoints return \ac{JSON} metadata
+directly from the Spotify Data Catalogue\cite{SpotifyWebAPI}. There are also features to query for
 user related data using an authorization flow with the users Spotify account, but this is not relevant
-in this context. \cite{SpotifyWebAPI} Requests to the \ac{API} are made via HTTPS GET or POST methods.
+in this context.\cite{SpotifyWebAPI} Requests to the \ac{API} are made via HTTP GET or POST methods.
 The \ac{API} can be used by anyone, but authorization via the OAuth protocol is required to access data
 from the \ac{API}. 
 To explore the \ac{API} and find endpoints to use, Spotify provides a developer console, which can be used to 
@@ -83,11 +90,11 @@ requests programmatically, but is helpful for API exploration. As there is not o
 required fields, multiple queries that build on top of each other have to be made.
 
 The approach began with using the \ac{API} reference to get an overview over the endpoints and their responses.
-The specific endpoints that might return interesting data were queried using the Spotify Web Console, to see
+The specific endpoints that might return interesting data were queried using the Spotify Web Console to see
 a response with live data and which exact fields are returned.
 Beyond the Web Console, the tool "Postman" was used to explore the \ac{API}.
 It is a platform that can be used to make HTTP requests to an API and store these requests in
-a collaborative environment. \cite{PostmanWhatIs} It supports the required authorization workflows
+a collaborative environment.\cite{PostmanWhatIs} It supports the required authorization workflows
 and enabled the research team to explore endpoints together, easily make \ac{API} calls without having to
 authenticate by hand, and save the endpoints and required input parameters in a shared workspace.
 Once exploration was complete, the complete data collection was implemented in Python 3, mainly using the
@@ -97,20 +104,16 @@ and further processing.
 Many API endpoints give the option to specify a country and locale that the results should apply to.
 Whenever possible these values were explicitly specified to eliminate the risk of receiving data for multiple different
 countries or languages, which would have made the dataset incoherent.
-For country, we used the country tag "US" which means that the API replies only with datapoints that are applicable
-to users in the United States of America.
-For locale we used en\_US in order to receive the data in the english language.
-These two values differ in that country changes the actual entries from the database that are selected for the response
-and sent to the users. Locale defines in which language these selected entries are returned in.
+For country, the country tag \emph{US} was used, which means that the API replies only with datapoints that are
+applicable to users in the United States of America.
+For locale, the value \emph{en\_US} was used in order to receive the data in the english language.
 
 \subsubsection{Authorization}
 
 Using the Spotify documentation for authorization workflows \cite{SpotifyAuth}, authorization was first tested
 using Postman and then implemented in Python.
-The workflow is explained using the Python code.
-Using a Spotify account to log in, the developer dashboard can be accessed. Here an application was registered with
-Spotify for the research project. Spotify tracks \ac{API} usage per application and can recognize if the API is
-being abused or too many requests are sent, which will result in rate limitation or blocking.
+Using a Spotify account to log in, the developer dashboard can be accessed. Here an application was registered
+for the research project.
 On the API Dashboard, a "Client ID" and "Client Secret" can be retrieved. These credentials are used to start
 the authorization flow, as described by Spotify in Figure \ref{fig:Spotify Authorization Flow}.
 
@@ -122,9 +125,10 @@ the authorization flow, as described by Spotify in Figure \ref{fig:Spotify Autho
     Source: \cite{SpotifyAuth}
 \end{figure}
 
-Step one is a post request to the Spotify Account Service with the client id and client secret from the application dashboard, which returns an
-access token, that is valid for one hour. This token can be used to access any endpoint of the actual \ac{API} that
-does not require user specific data. When the token expires, a new one has to be requested before querying the \ac{API} again.
+Step one is a post request to the Spotify Account Service containing the client id and client secret in the body,
+which returns an access token valid for one hour.
+This token can be used to access any endpoint of the actual \ac{API} that does not require user specific data.
+When the token expires, a new one has to be requested before querying the \ac{API} again.
 Figure \ref{fig:Access Token Request} shows the full request and response to acquire the token.
 
 \begin{figure}[H]
@@ -158,10 +162,8 @@ Figure \ref{fig:Access Token Request} shows the full request and response to acq
 \subsubsection{Getting Features}
 
 In order to predict the genre of a track based on audio features, these features have to be requested
-for every track. Spotify provides an endpoint to get audio features for a single track or up to 99 tracks at
-a time. The latter is used in the Python implementation as it reduces the number of requests to be made.
-The typical request/response pattern for the audio-feature request endpoint is shown in
-figure \ref{fig:Audio Feature Request}.
+for every track. Spotify provides an endpoint to get audio features for up to 99 tracks at a time.
+The typical request/response pattern for the audio-feature request endpoint is shown in figure \ref{fig:Audio Feature Request}.
 
 \begin{figure}[H]
     \caption{Audio Feature Request}
@@ -205,7 +207,7 @@ figure \ref{fig:Audio Feature Request}.
 \end{apiRoute}
 \end{figure}
 
-With the exception of type, id, uri, track\_href and analysis\_url, all of the fields included in this response
+With the exception of \emph{type}, \emph{id}, \emph{uri}, \emph{track\_href} and \emph{analysis\_url}, all of the fields included in this response
 can be used as features in the dataset. However, this api call expects a track id, which we need to get using
 other api calls first. This could be a search endpoint, getting all tracks in a playlist, etc.
 Also, it does not give the track or artist names and doesn't include a genre.
@@ -217,8 +219,8 @@ in its response. The exploration of the API using the reference, web console and
 two ways of getting the genre of a track. 
 
 The first way is using the artist of a track. Given a track id, the artists of the track and their corresponding
-ids can be requested by using the "/tracks/{id}" endpoint. Then, using the artist id, the genres that an
-artist is known for are returned, as can be seen in figure \ref{fig:Artist Request}.
+ids can be requested by using the \emph{/tracks/{id}} endpoint. Then, using the artist id, the genres that an
+artist is known for are returned, as shown in figure \ref{fig:Artist Request}.
 
 \begin{figure}[H]
     \caption{Artist Request}
@@ -232,7 +234,7 @@ artist is known for are returned, as can be seen in figure \ref{fig:Artist Reque
             \begin{routeResponseItemBody}
 {
     "external_urls": {
-        "spotify": "https://open.spotify.com/artist/6l3HvQ5sa6mXTsMTB19rO5"
+        "spotify": "link to resource.."
     },
     "followers": {
         "href": null,
@@ -244,36 +246,34 @@ artist is known for are returned, as can be seen in figure \ref{fig:Artist Reque
         "north carolina hip hop",
         "rap"
     ],
-    "href": "https://api.spotify.com/v1/artists/6l3HvQ5sa6mXTsMTB19rO5",
+    "href": "link to resource...",
     "id": "6l3HvQ5sa6mXTsMTB19rO5",
-    "images": [
-        ...
-    ],
+    "images": [ links to album covers... ],
     "name": "J. Cole",
     "popularity": 89,
     "type": "artist",
-    "uri": "spotify:artist:6l3HvQ5sa6mXTsMTB19rO5"
-    }
+    "uri": "spotify:artist:6l3Hv..."
+}
             \end{routeResponseItemBody}
         \end{routeResponseItem}
     \end{routeResponse}
 \end{apiRoute}
 \end{figure}
 
-This examplary API response shows a problem with this approach. One artist can be sorted
+The examplary API response shows a problem with this approach. One artist can be sorted
 into multiple genres.
 A given track might be associated with either of the artists genres, but the data does
 not show, which one exactly.
 Additionally a track might have multiple artists which further complicates this.
 Given these circumstances, this approach is problematic.
 
-The second way is Spotifys "categories" feature. The apps search tab provides a number of
-categories that a user can browse through to find new music in their preferred genre or style.
+The second way is Spotifys "categories" feature. The app's search tab provides a number of
+categories that a user can browse to find new music in their preferred genre or style.
 In figure \ref{fig:Categories and Playlists in Spotify App}a an overview over some of the categories
-that are available in the Spotify App is shown. There are categories of multiple types, e.g.
-specific activities, like Cooking or Gaming, or places, like "At Home" or "In the Car".
+that are available in the Spotify app is shown. There are categories of multiple types, e.g.
+specific activities, like "Cooking" or "Gaming", or places, like "At Home" or "In the Car".
 But there are also categories for nearly all major genres. In the app screenshot
-there is for example Classical, Jazz or Soul.
+there for example "Classical", "Jazz or "Soul".
 These categories can be used to get tracks that belong in each specific category. When a user taps on
 one of the categories, playlists that contain tracks of the respective category are shown to the user,
 like shown in figure \ref{fig:Categories and Playlists in Spotify App}b.
@@ -288,13 +288,13 @@ like shown in figure \ref{fig:Categories and Playlists in Spotify App}b.
 \end{figure}
 
 The API mirrors the apps behaviour and provides an endpoint to get a list of categories and their ids,
-one to get all playlists and playlist\_ids in a category, and one to get all tracks and track\_ids in
+one to get all playlists and playlist ids in a category, and one to get all tracks and track ids in
 a playlist. This chain of API calls is used to request every track in every playlist in a certain category.
 
 
 \subsubsection{Python Implementation}
 
-This section describes, how the previously explained API-Calls are used to request data from the API
+This section describes, how the previously explained API calls are used to request data from the API
 and save the complete dataset as a CSV file. The script was implemented in a way that lets anyone with a registered Spotify
 developer application run it to gather their own data.
 It supports filtering for certain genres to speed up the process and exporting the current data after each step
@@ -306,20 +306,20 @@ requests we need without having to write complicated code.
 The dotenv library is used to read the client id and secret from a seperate .env file, rather than writing it into the code.
 This prevents these sensitive credentials from being committed into version control,
 which is hosted in a public GitHub repository and would therefore make the credentials public.
-The "json" library is used for transforming Python dictionaries into json data, "math" for access to rounding functions,
-"os" for managing system paths and access to files, "http" to define retry and timeout behaviour of the API-Calls and "csv"
+The \emph{json} library is used for transforming Python dictionaries into json data, \emph{math} for access to rounding functions,
+\emph{os} for managing system paths and access to files, \emph{http} to define retry and timeout behaviour and \emph{csv}
 to finally transform the json data into a CSV file.
 
-First, the credentials are read using "load\_dotenv". Then a method is defined which takes the client id and secret as input,
-executes a POST request to the accounts API, as shown in \ref{fig:Access Token Request} and return the access token from the
-"access\_token" field in the response. 
+First, the credentials are read using \emph{load\_dotenv}. Then a method is defined which takes the client id and secret as input,
+executes a POST request to the accounts API, as shown in \ref{fig:Access Token Request}, and return the access token from the
+\emph{access\_token} field in the response. 
 
 \begin{lstlisting}[language=Python]
     #Get environment variables from ".env" file and read credentials
     load_dotenv('.env')
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
-    
+   
     # Authenticate and get an API Token from Spotify using a Client ID and secret
     def getAuthTokenFromCredentials(id, secret):
     
@@ -339,7 +339,7 @@ executes a POST request to the accounts API, as shown in \ref{fig:Access Token R
 
 Next the http library is configured to use a ten second timeout and attempt five retries. If a request to the API is made
 and no response is given from Spotify's servers after ten seconds, the request will be sent again. If there is still no
-answer from the server after five attempts, an Exception is thrown and the script ends.
+answer from the server after five attempts, an exception is thrown and the script ends.
 Timeouts are crucial as short disconnections from the Internet could result in the whole data collection step failing.
 The http setup code is found in appendix \ref{appendix:http setup}.
 
@@ -349,10 +349,7 @@ The next part of the script implements the filter mechanism
     category_filter = None
 
     # comment this out if you don't want to set a filter
-    category_filter = ["hiphop", "pop", "country", "rock", "latin", "rnb", "mood", "indie_alt",
-                        "regional_mexican", "edm_dance", "inspirational", "chill", "party", "roots",
-                        "kpop", "instrumental", "ambient", "alternative", "classical", "jazz", "soul",
-                        "punk", "blues", "arab", "afro", "metal", "caribbean", "funk"]
+    category_filter = ["hiphop", "jazz", "rock"]
     
     # tells data collection functions to not use filter if it's not set
     if category_filter is not None:
@@ -379,35 +376,23 @@ Possible values are all valid category ids, which can be requested using the API
         \begin{routeResponseItem}{200}{ok}
             \begin{routeResponseItemBody}
 {
-    "categories": {
-        "href": "...",
-        "items": [
-            {
-                "href": "...",
-                "icons": [
-                    {
-                        "height": 274,
-                        "url": "...",
-                        "width": 274
-                    }
-                ],
-                "id": "hiphop",
-                "name": "Hip-Hop"
-            },
-            {
-                "href": "...",
-                "icons": ...
-                "id": "pop",
-                "name": "Pop"
-            },
-            ...
-        ],
-        "limit": 10,
-        "next": "...",
-        "offset": 0,
-        "previous": "...",
-        "total": 58
-    }
+  "categories": {
+    "href": "...",
+    "items": [
+      {
+        ...
+        "id": "hiphop",
+        "name": "Hip-Hop"
+        },
+        {
+          ...
+          "id": "pop",
+          "name": "Pop"
+        },
+        ...
+    ],
+    ...
+  }
 }
             \end{routeResponseItemBody}
         \end{routeResponseItem}
@@ -415,8 +400,9 @@ Possible values are all valid category ids, which can be requested using the API
 \end{apiRoute}
 \end{figure}
 
-The response shows an id field for each item in the items array. These ids can be used in the filter list.
-If the category\_filter variable is undefined, no filter is set.
+The response shows an \emph{id} field for each item in the items array.
+These ids can be used in the filter list.
+If the \emph{category\_filter} variable is undefined, no filter is set.
 
 Next, the option to import existing data from a file is given.
 If a user already has the json data containing all playlists for all categories they want to use,
@@ -448,17 +434,21 @@ The function definition for getting the categories looks like this:
 
 \begin{lstlisting}[language=Python]
     def getAllCategories(
-        requests_session, # takes the requests session, which was set up in the beginning
-        auth_token, # this is the token which was retrieved in the authorization step
-        use_category_filter=False, # set to True if the category_filter should be used
-        category_filter=None,  # this takes the list which is used as a category filter
-        write_to_file=False, # set to True if the result of this step should be written into a json file
-        path_to_file=''): # give the file path at which the json file should be stored
-
-        ...
+        # takes the requests session, which was set up in the beginning
+        requests_session,
+        # this is the token which was retrieved in the authorization step
+        auth_token,
+        # set to True if the category_filter should be used
+        use_category_filter=False, 
+        # this takes the list which is used as a category filter
+        category_filter=None,  
+        # set to True if the result of this step should be written into a json file
+        write_to_file=False, 
+        # give the file path at which the json file should be stored
+        path_to_file=''): 
 \end{lstlisting}
 
-The function first makes a simple API call with limit=1 to get the total amount of categories available.
+The function first makes a simple API call with \emph{limit=1} to get the total amount of categories available.
 This is necessary, because the API returns a maximum number of 50 entries per request, so if the total number of
 items exceeds 50, multiple calls have to be made.
 
@@ -478,9 +468,9 @@ items exceeds 50, multiple calls have to be made.
         raise SystemExit(e)
 \end{lstlisting}
 
-The requests\_session is saved in the http variable. Then the auth\_token is wrapped in an Authorization header
-conforming to the OAuth Bearer Token standard, which is used by the API.
-The url is given with the right country and locale settings and the request is sent inside of a try block.
+\emph{auth\_token} is wrapped in an Authorization header conforming to the OAuth Bearer Token standard,
+which is used by the API for authorization.
+The URL is given with the right country and locale settings and the request is sent inside of a try block.
 If the response doesn't contain an HTTP status code 200, an Exception is raised and the program is stopped,
 as there is possibly an error in the request or response which could mean corrupted data.
 
@@ -496,11 +486,10 @@ Next, the total amount of categories is extracted from the response and the numb
 \end{lstlisting}
 
 By dividing the category amount by 50 and rounding up to the next integer, the number of API calls necessary to get 
-all entries is calculated. We call this pages, like pages in a book. Page one contains items 0 to 49 and is retrieved by
-using offset 0 and limit 50. Page two contains items 50 to 99 and is retrieved by using offset 50 and limit 50.
-This is done as many times as required. the last page will not necessarily contain 50 items but less, as those are left over.
+all entries is calculated. Each call returns a "page" of items, e.g. page one contains items 0 to 49 and is retrieved by
+using offset 0 and limit 50, page two contains items 50 to 99 and is retrieved by using offset 50 and limit 50.
 
-A for loop is used to execute the request for every page as shown before. The offset is increased by 50 with each run.
+A for loop is used to execute the request for every page as shown before.
 Each category's id and name are read from the response and appended to the data object:
 
 \begin{lstlisting}[language=Python]
@@ -523,7 +512,7 @@ Each category's id and name are read from the response and appended to the data 
                 })
 \end{lstlisting}
 
-Outside of the for loop, the resulting data is written to a file if write\_to\_file was set to True and the 
+Outside of the for loop, the resulting data is written to a file if \emph{write\_to\_file} was set to \emph{True} and the 
 data object is returned:
 
 
@@ -553,8 +542,7 @@ The data collected after this step looks like this:
 }
 \end{lstlisting}
 
-
-This concludes the function getAllCategories.
+This concludes the function \emph{getAllCategories}.
 The data retrieved from this step is used for the next step, getting the playlists.
 The function definition here is slightly different:
 
@@ -567,10 +555,10 @@ The function definition here is slightly different:
         path_to_file=''):
 \end{lstlisting}
 
-Instead of the filtering options, which only apply to the categories, this function takes the data\_object from the
+Instead of the filtering options, which only apply to the categories, this function takes the \emph{data\_object} from the
 previous step. This could be passed in directly from the previous function or read from a file.
 The function implements a nested for loop. The outer loop iterates over all categories in the data object.
-The inner loop uses an endpoint to get each category's playlists. The API request/response is shown in figure \ref{fig: Get Category's Playlists Request and Response}.
+The inner loop uses an endpoint to get each category's playlists. The API request/response is shown in figure \ref{fig:Get Category's Playlists Request and Response}.
 
 \begin{figure}[H]
     \caption{Get Category's Playlists Request and Response}
@@ -586,36 +574,36 @@ The inner loop uses an endpoint to get each category's playlists. The API reques
         \begin{routeResponseItem}{200}{ok}
             \begin{routeResponseItemBody}
 {
-    "playlists": {
+  "playlists": {
+    "href": "...",
+    "items": [
+      {
+        "collaborative": false,
+        "description": "New music from YoungBoy...",
+        "external_urls": ...
         "href": "...",
-        "items": [
-            {
-                "collaborative": false,
-                "description": "New music from YoungBoy Never Broke Again, DaBaby and 2 Chainz. ",
-                "external_urls": ...
-                "href": "...",
-                "id": "37i9dQZF1DX0XUsuxWHRQd",
-                "images": ...
-                "name": "RapCaviar",
-                "owner": ...
-                "primary_color": null,
-                "public": null,
-                "snapshot_id": "...",
-                "tracks": {
-                    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0XUsuxWHRQd/tracks",
-                    "total": 50
-                },
-                "type": "playlist",
-                "uri": "spotify:playlist:37i9dQZF1DX0XUsuxWHRQd"
-            },
-            ...
-        ],
-        "limit": 50,
-        "next": "...",
-        "offset": 0,
-        "previous": null,
-        "total": 50
-    }
+        "id": "37i9dQZF1DX0XUsuxWHRQd",
+        "images": ...
+        "name": "RapCaviar",
+        "owner": ...
+        "primary_color": null,
+        "public": null,
+        "snapshot_id": "...",
+        "tracks": {
+          "href": "...",
+          "total": 50
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:37i9dQZF1DX..."
+      },
+      ...
+    ],
+    "limit": 50,
+    "next": "...",
+    "offset": 0,
+    "previous": null,
+    "total": 50
+  }
 }
             \end{routeResponseItemBody}
         \end{routeResponseItem}
@@ -624,9 +612,9 @@ The inner loop uses an endpoint to get each category's playlists. The API reques
 \end{figure}
 
 As there is an upper limit of 50 playlists per request, the same paging method is used as in the category function.
-It is checked, if each items "type" field contains the value "playlist", to filter out any items that don't fit the schema.
+If an items \emph{type} is not \emph{playlist}it is filtered out, as it doesn't fit the schema.
 Then each playlists name and id is stored in the data object, which is returned from the function.
-The json data after this step looks like this:
+The JSON data after this step looks like this:
 
 \begin{lstlisting}[language=Python]
 {
@@ -652,19 +640,20 @@ The json data after this step looks like this:
 
 The third step gets all tracks in each playlist. The function definition is the same as before, as this function also
 takes data from the previous step. This time, there are three nested for loops. One for looping through the categories,
-then another one for looping through the playlists. In this one there is again calculated how many pages of 50 tracks
-need to be requested and the third loop requests the pages and appends the tracks to the playlist data.
-The request parameters for this request differ from the other steps. Instead of country, there is a market parameter,
-which essentially does the same thing. There is also a fields parameter, which takes a string that can be used to
-define which fields the API should return. This is done to save bandwith, as the response of this endpoint is very large and most
+then another one for looping through the playlists. In this one the number of pages is calculated.
+The third loop requests the pages and appends the tracks to the playlist data.
+The request parameters for this request differ from the other steps.
+Instead of country, there is a market parameter, which essentially does the same thing.
+There is also a fields parameter, which takes a string that can be used to define which fields the API should
+return. This is done to save bandwith, as the response of this endpoint is very large and most
 of the datapoints might not be needed by the client.
-In this case, the value "items(track(name, id, album(name, id), artists)), total" is used to return only items of type track,
-their id and name, their albums name and id, and their artist information. Also the total amount of tracks in the playlist is returned.
-There is also an "additional\_types" parameter, which can be used to specify if only music tracks, or also podcast episodes should be returned.
-In this case, only tracks are returned as podcasts are irrelevant to our analysis.
-An examplary API request/response using the described "fields" and "additional\_types" parameters is shown in figure \ref{fig:Get Playlist's Tracks}.
-As a track can have multiple artists, each artist's name and id are extracted and saved with the track.
-As this function is very similar to the previous one, the code is not shown here. It can be found in the appendix.
+In this case, the value \emph{items(track(name, id, album(name, id), artists)), total} is used to return only
+items of type track, their id and name, their albums name and id, and their artist information.
+Also the total amount of tracks in the playlist is returned.
+The parameter \emph{additional\_types} is set to \emph{track}, as podcasts are irrelevant to this analysis.
+An examplary API request/response is shown in figure \ref{fig:Get Playlist's Tracks}.
+Because a track can have multiple artists, each artist's name and id are extracted and saved with the track.
+The function code can be found in the appendix.
 
 \begin{figure}[H]
     \caption{Get Playlist's Tracks}
@@ -682,76 +671,37 @@ As this function is very similar to the previous one, the code is not shown here
         \begin{routeResponseItem}{200}{ok}
             \begin{routeResponseItemBody}
 {
-    "items": [
-        {
-            "track": {
-                "album": {
-                    "id": "4oxmme6i4mypSt2DDzPTsW",
-                    "name": "DS4EVER"
-                },
-                "artists": [
-                    {
-                        "external_urls": {
-                            "spotify": "..."
-                        },
-                        "href": "...",
-                        "id": "2hlmm7s2ICUX0LVIhVFlZQ",
-                        "name": "Gunna",
-                        "type": "artist",
-                        "uri": "spotify:artist:2hlmm7s2ICUX0LVIhVFlZQ"
-                    },
-                    ...
-                ]
-            }
+  "items": [
+    {
+      "track": {
+        "album": {
+          "id": "4oxmme6i4mypSt2DDzPTsW",
+          "name": "DS4EVER"
         },
-        ...
-    ],
-    "total": 50
+        "artists": [
+          {
+            "external_urls": {
+                "spotify": "..."
+            },
+            "href": "...",
+            "id": "2hlmm7s2ICUX0LVIhVFlZQ",
+            "name": "Gunna",
+            "type": "artist",
+            "uri": "spotify:artist:2hlmm7s2ICUX0LVIhVFlZQ"
+          },
+          ...
+        ]
+      }
+    },
+    ...
+  ],
+  "total": 50
 }
             \end{routeResponseItemBody}
         \end{routeResponseItem}
     \end{routeResponse}
 \end{apiRoute}
 \end{figure}
-
-The data collected after this step looks like this:
-
-\begin{lstlisting}[language=Python]
-{
-  "categories": [
-    {
-      "id": "hiphop",
-      "name": "Hip-Hop",
-      "playlists": [
-        {
-          "id": "37i9dQZF1DX0XUsuxWHRQd",
-          "name": "RapCaviar",
-          "tracks": [
-            {
-              "id": "2AaJeBEq3WLcfFW1y8svDf",
-              "name": "By Your Side",
-              "album": {
-                "id": "2RrZgDND03MLu6pRJdTkz5",
-                "name": "By Your Side"
-              },
-              "artists": [
-                {
-                  "id": "45TgXXqMDdF8BkjA83OM7z",
-                  "name": "Rod Wave"
-                }
-              ]
-            },
-            ... 
-          ]
-        },
-        ...
-      ],
-      ...
-    },
-    ...
-  ]
-}
-\end{lstlisting}
 
 The fourth step is getting the audio features for each track.
 The request that is used was already shown in \ref{fig:Audio Feature Request}
@@ -803,7 +753,7 @@ The data collected after this step looks like this:
             ...
 \end{lstlisting}
 
-This JSON contains all the necessary fields that are needed for continueing with the CRISP DM process.
+This JSON contains all the necessary fields needed for continuing with the CRISP DM process.
 To prepare the dataset for data analysis, the JSON data needs to be transformed into a flat structure to
 be stored as a CSV file.
 Another Python function is used to flatten the data. It takes the resulting data from the last step and
@@ -839,14 +789,17 @@ transforms it into the following format.
 ]
 \end{lstlisting}
 
+The function is also found in the appendix.
 Notice, that the nested fields and arrays have been flattened to represent a two dimensional data structure,
-containing only one array to represent rows which contains json objects with 22 fields. Each field represents
-a column. In the original JSON data, "artists" is a list containing one or more entries. If the data was flattened
-in a way that groups the entries by each individual artist, there could be multiple rows for the same track.
-If for example track1 had two artists artist1 and artist2, there would be two datapoints, both containing the same
-song name, id and features, but different artists. As the dataset should be grouped by individual tracks,
-not by artists, which results in multiple entries per track, multiple artists are condensed into a comma-seperated
-list during flattening. This list is stored in the "categories.playlists.tracks.artists" field.
+containing only one array to represent rows which contains JSON objects with 22 fields. Each field represents
+a column. In the original JSON data, \emph{artists} is a list containing one or more entries.
+If the data was flattened in a way that groups the entries by each individual artist,
+there could be multiple rows for the same track.
+If for example \emph{track1} had two artists \emph{artist1} and \emph{artist2}, there would be two datapoints,
+both containing the same song name, id and features, but different artists.
+As the dataset should be grouped by individual tracks, not by artists, which results in multiple
+entries per track, multiple artists are condensed into a comma-seperated list during flattening.
+This list is stored in the \emph{categories.playlists.tracks.artists} field.
 This means, that the individual artist data is lost in favor of grouping the dataset by tracks.
 
 After this process, the resulting two-dimensional structure is converted to a CSV file and saved for
