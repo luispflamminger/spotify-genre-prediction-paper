@@ -1,66 +1,100 @@
 \subsection{Cross Industry Standard Process for Data Mining}
 
-The CRISP-DM Reference Model is an organizational model for data mining projects and provides an overview of the life cycle of such projects. 
+The CRISP-DM Reference Model is an organizational model for data mining projects and provides
+an overview of the life cycle of such projects. 
 It includes the phases of a project, their respective tasks, and their deliverables. 
-The life cycle of a data mining project is divided into six phases: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation and Deployment. 
-The order of the phases is not strictly adhered to. In certain projects, the outcome of each phase determines which phase or which specific task in a phase must be performed next. 
-However, the process of data mining is to be understood more as a part of the process. This means that data mining is not necessarily complete once a solution is implemented. 
-The lessons that emerge during the process and from the solution can raise new, often more focused business questions. 
-Subsequent data mining processes can benefit from, and often build on, the lessons learned from previous processes. 
-The chapters that now follow deal with the respective phases and explain the steps to be completed in more detail.
+The life cycle of a data mining project is divided into six phases: Business Understanding,
+Data Understanding, Data Preparation, Modeling, Evaluation and Deployment. 
+The order of the phases is not strictly adhered to. In certain projects,
+the outcome of each phase determines which phase or which specific task in a phase must be performed next.
+However, the process of data mining is to be understood more as a part of the process.
+This means that data mining is not necessarily complete once a solution is implemented. 
+The lessons that emerge during the process and from the solution can raise new,
+often more focused business questions. 
+Subsequent data mining processes can benefit from, and often build on,
+the lessons learned from previous processes. 
+The chapters that now follow deal with the respective phases and explain the steps
+to be completed in more detail.
 
 \subsubsection{Business Understanding}
 The first prerequisite for a successful data science project is business understanding. 
-Without an exchange of information between the data science experts and the business experts, it will be difficult to achieve the desired result. 
-It is necessary to define exactly what is to be achieved by the data analysis. This phase of the project defines the requirement and identifies the problem to be solved. 
-The source of the data and the problem definition are discussed. Data, project scope, available resources and required procedures are defined. 
+Without an exchange of information between the data science experts and the business experts,
+it will be difficult to achieve the desired result. 
+It is necessary to define exactly what is to be achieved by the data analysis.
+This phase of the project defines the requirement and identifies the problem to be solved. 
+The source of the data and the problem definition are discussed.
+Data, project scope, available resources and required procedures are defined. 
 Only from this point it is possible to plan concrete steps.
 
 \subsubsection{Data Understanding}
 For the step of Data Understanding, Data is collected in a targeted or untargeted manner. 
-The collected Data can be table entries, answers from questionnaires, sequence recordings from machines and so on. 
-As a result, the relevant data must be pulled together and made accessible. In the case of data, it is also crucial how it is collected. 
+The collected Data can be table entries, answers from questionnaires,
+sequence recordings from machines and so on. 
+As a result, the relevant data must be pulled together and made accessible.
+In the case of data, it is also crucial how it is collected. 
 An insufficiently thought-out survey for example can very easily lead to bias or incorrect answers. 
 This means that the design of the data collection must be representative. 
-Large, i.e. sufficient, data volumes are a prerequisite for the subsequent formation of stable models and reliable forecasts. 
+Large, i.e. sufficient, data volumes are a prerequisite for the subsequent formation of
+stable models and reliable forecasts. 
 However, it is not impossible that even moderate amounts of data lead to good results. 
-For example, a carefully selected sample may show better results than large amounts of data, which are not verifiable. 
-Ideally, a data evaluation should be based on access to data that is sufficiently realistic for the complex processes of the company and the question to be investigated. 
+For example, a carefully selected sample may show better results than large amounts of data,
+which are not verifiable. 
+Ideally, a data evaluation should be based on access to data that is sufficiently realistic
+for the complex processes of the company and the question to be investigated. 
 This is the prerequisite for models that are to produce meaningful forecasts.
 
 \subsubsection{Data Preparation}
-In Data Preparation, data is first extracted from databases, tables and systems and transformed into the desired form (e.g. time series vectors, multidimensional matrices). 
-This step allows the data to be further processed and analyzed using mathematical (statistical) based software or Data-Algorithms. 
-The next step of this project phase is the verification, cleaning and, if necessary, the further transformation of the data. 
-These processes are essential because data often cannot be further processed in its raw state. The algorithms used for analysis are often very demanding. 
-In other words, they are not very tolerant. Even zero values (empty cells of a table) can become a problem. 
-It is examined which values are plausible and which are rather extraordinary. For Example, it needs to be clear what empty Cell means, or the extreme Value of a cell. 
+In Data Preparation, data is first extracted from databases, tables and systems and transformed
+into the desired form (e.g. time series vectors, multidimensional matrices). 
+This step allows the data to be further processed and analyzed using mathematical (statistical)
+based software or Data-Algorithms. 
+The next step of this project phase is the verification, cleaning and, if necessary,
+the further transformation of the data. 
+These processes are essential because data often cannot be further processed in its raw state.
+The algorithms used for analysis are often very demanding. 
+In other words, they are not very tolerant. Even zero values (empty cells of a table)
+can become a problem. 
+It is examined which values are plausible and which are rather extraordinary. For Example,
+it needs to be clear what empty Cell means, or the extreme Value of a cell. 
 If it is possible to explain these values, what the measuring points are and so on.
-Zero values, no data, extreme values, multiple notations, or different scales can possibly be interpreted quickly by humans. 
-With algorithms, the situation is somewhat different. They capture data as pure values, which can lead to different results depending on the situation. 
-Data cleaning and quality assurance of the data within the data exploration is the most costly phase of the project. 
+Zero values, no data, extreme values, multiple notations, or different scales can possibly be
+interpreted quickly by humans. 
+With algorithms, the situation is somewhat different.
+They capture data as pure values, which can lead to different results depending on the situation. 
+Data cleaning and quality assurance of the data within the data exploration is the most costly phase
+of the project. 
 It will usually also require the largest share of the available project time, but it is crucial. 
 Here, possible anomalies in the data structure as well as data errors can be identified in advance. 
 This phase has a decisive influence on the quality of the overall result. 
 
 \subsubsection{Modeling}
-This is the heart of any data analysis. The appropriate analytical procedure is chosen to generate predictions and groupings. 
-Connections and structures in the data are also visualized. 
-It is important to present these in such a way that the most meaningful visualizations possible are created, which allow the company to make decisions based on evidence-based data. 
-If good preparatory work has been done in the preceding project phases. That is, if the data has been checked, incorrect entries filtered out and business structures understood. 
+This is the heart of any data analysis. The appropriate analytical procedure is chosen to generate
+predictions and groupings. Connections and structures in the data are also visualized. 
+It is important to present these in such a way that the most meaningful visualizations
+possible are created, which allow the company to make decisions based on evidence-based data. 
+If good preparatory work has been done in the preceding project phases.
+That is, if the data has been checked, incorrect entries filtered out and business structures understood. 
 It is possible to save a lot of time and costs in this phase.
 
 \subsubsection{Evaluation}
-In the iterative processes of model building, several models with different approaches and sometimes objectives are often formed. 
-In the process, models are also reworked that have led to very good predictions but have become too complex at best. 
+In the iterative processes of model building, several models with different approaches and sometimes
+objectives are often formed. 
+In the process, models are also reworked that have led to very good predictions but have become
+too complex at best. 
 The intention is to simplify the models until the best possible results are obtained. 
-At the end of the evaluation, there are many models that differ not only in the application of different methods, but also in their robustness, complexity and results. 
-Discussing and assessing the intermediate results with company representatives leads to the optimization of the results. 
+At the end of the evaluation, there are many models that differ not only in the application
+of different methods, but also in their robustness, complexity and results. 
+Discussing and assessing the intermediate results with company representatives leads to
+the optimization of the results. 
 Furthermore, visual insights into the results (data) help to better understand the subject matter. 
-By evaluating established criteria, results are assessed, models are compared, and the best approach or approaches are selected.
+By evaluating established criteria, results are assessed, models are compared,
+and the best approach or approaches are selected.
 
 \subsubsection{Deployment}
-The creation of the model is generally not the end of the project. Typically, the knowledge gained must be organized and presented in a way that the customer can use. 
-Depending on the requirements, the deployment phase can be as simple as creating a report or as complex as implementing a repeatable data mining process. 
+The creation of the model is generally not the end of the project.
+Typically, the knowledge gained must be organized and presented in a way that the customer can use. 
+Depending on the requirements, the deployment phase can be as simple as creating a report or
+as complex as implementing a repeatable data mining process. 
 In many cases, it is the user, not the data analyst, who performs the implementation steps. 
-In either case, it is important to understand in advance what actions need to be performed in order to use the models that have been created.
+In either case, it is important to understand in advance what actions need to be performed in
+order to use the models that have been created.
