@@ -1,8 +1,47 @@
 \section{Einleitung}
 Dies soll eine \LaTeX{}-Vorlage für den persönlichen Gebrauch werden. Sie hat weder einen Anspruch auf Richtigkeit, noch auf Vollständigkeit. Die Quellen liegen auf Github zur allgemeinen Verwendung. Verbesserungen sind jederzeit willkommen.
 
-\subsection{Problem Definition}
+\subsection{Problem Definition and Goal}
+The amount of data collected every day is growing uncompromisingly. Further Proliferation of the Internet, Social Networks, 
+Search queries and increasing networking of IoT devices and sensors means that the amount of data is growing exponentially. 
+To remain competitive in their respective markets, companies must be able to extract value from the large amount of data.
+ A technology that decisively supports companies in exactly this task is Big Data. Big Data encompasses the entire process of data collection from collecting the data to storing, 
+ processing, and analyzing it. When combined with machine learning technology, Big Data unfolds its full potential. The combination allows very large data sets to be processed, 
+ which is incredibly valuable for companies. This enables companies to capture their macro and microenvironment in data and create deciding business value. 
+ Due to its wide range of applications, this field offers opportunities for improvement for companies of all kinds. 
+ Even companies from the entertainment industry, such as Spotify, Netflix or Disney are already using these practices to improve the services they offer, 
+ to differentiate themselves from the competition and to make the customer experience unique. 
+ Spotify for example uses Big Data to give its users an individual Discover Weekly Playlist which consists of thirty recommended songs for that user. 
+ This project has the purpose to illustrate and solve a real-world big data-related problem that could also occur in a company's Value creation process. 
+ For this purpose, algorithms are applied to the solution within a controlled framework. Based on the Crisp DM process, the data used was first collected, analyzed, 
+ and finally evaluated. The problem to be solved is classifying songs using pre-generated features provided by Spotify for each music track on their platform. 
+ For the classification, predefined genres by Spotify are taken as categories.
 
-\subsection{Goal}
+The final goal of this paper is to apply a gradient boosting data algorithm to filtered data from Spotify. 
+This algorithm should be trained during the course of the project and be able to assign songs to selected genres in the final product. 
+Along the way, the basics of Big Data itself, but also the working models and processes used in the project/model should be presented 
+in their theoretical form and explained clearly. Since not explicitly given, the individual collection of data by means of a given API (written out) 
+in combination with own coding shall find place as part of the model in an extra step. 
+Additionally, this paper should cover all the steps of the CRISP-DM model, and furthermore be an example of how Big Data projects can be approached 
+and performed in this style of work. Besides the Coding, the mechanisms of the Spotify algorithm and the mechanisms inside Spotify as a company are 
+explicitly explained to guarantee an overall good understanding of the whole project.
 
-\subsection{Structure}
+\subsection{Structure and Methodology of the Assignment}
+The thesis is divided into 4 parts: Introduction, with problem statement, goal and structure of the Paper. 
+A basic part, which contains the basics of Big Data as a whole with focus on the concepts used in the project as well as basics of music theory. 
+The practical part, which explains the coding and procedure used in the project in more detail and finally a conclusion part with summary and conclusion of the project and the work. 
+The basic part deals with the concepts of Big Data as a whole, including the relevance of data, the 4V matrix, the storage of data and the associated data formats, 
+Big Data analytics and methods of learning algorithms. Further, this chapter explains in more detail how gradient boosting algorithms work, 
+since such an algorithm was used in the project. In addition, the functionality of CRISP-DM as the modeling process used is explained. 
+Since a separate data set was produced for the data collection, the principles of so-called API's are presented in the theoretical form. 
+The basics of music conclude this chapter. These are important to get a perspective for the facts of the project. 
+All of these points will be referred to further in the rest of the thesis, so it is important to build this foundation first.
+The practical part follows the steps of the Crisp DM model. Business Understanding can be omitted as a part here, because the model was developed in the course of a project work. 
+Therefore, this chapter starts with the Data Collection, in this case the development of the API to collect the used data set. 
+It continues with the so-called Data Understanding, where both the origin of the data (Spotify algorithm) and the meaning of the individual labels are explained, 
+and finally put in relation to each other. It continues with the Data Preparation, the preparation of the data for the algorithm, followed by the modeling itself. 
+At the end an evaluation of the whole project and the result follows.
+The basics of Big Data concepts explained in this thesis are derived from renowned book sources. 
+Further numbers, data and facts, which cannot be read out of reference books (e.g. information about Spotify as a company) 
+are proven with the help of suitable sources from the internet. Everything else is covered by own coding and with the help of the concepts introduced in the basic part 
+understandably reinforced and explained. 
