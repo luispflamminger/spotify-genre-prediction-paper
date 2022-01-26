@@ -105,7 +105,7 @@ The features are decisive in the classification of the songs to the genres.
 For a better presentation, they are divided into three clusters below, 
 which can be used to better capture them. These clusters are Mood, Properties and Context.
 
-Musical standards
+\textbf{Musical Standards}
 
 However, at the beginning the features that capture and reflect the standard properties of music will
 be discussed. These features are "Duration", "Key", "Mode" and Time Signature. 
@@ -120,7 +120,7 @@ The feature “Time Signature” is measured in an integer between 3 and 7.
 It is a notational convention to specify how many beats are in each bar (or measure). 
 The time signature ranges from 3 to 7 indicating time signatures of "3/4", to "7/4".
 
-Mood
+\textbf{Mood}
 
 Following these features is the Mood cluster.
 This cluster lists those features that measure the emotive values in songs, 
@@ -145,7 +145,7 @@ minute (BPM).
 In musical terminology, tempo is the speed or pace of a given piece and derives directly from the
 average beat duration.
 
-Properties
+\textbf{Properties}
 
 This cluster includes all features that capture the audio characteristics of the tracks,
 such as "Loudness", "Speechiness" and "Instrumentalness".
@@ -170,7 +170,7 @@ The closer the Instrumentalness value is to 1.0, the greater likelihood the trac
 Values above 0.5 are intended to represent instrumental tracks,
 but confidence is higher as the value approaches 1.0.
 
-Context
+\textbf{Context}
 
 This Cluster unions the Features “Liveness” and “Acousticness”.
 These capture everything around the Songs, for example if it is played in front of a live audience.
@@ -192,6 +192,13 @@ fig. 1  shows a genre independent matrix.
 This means that the features of all songs that could be gathered in the step of data
 collection were analyzed to create this figure. 
 
+\begin{figure}[H]
+    \centering
+    \caption[]{Correlation matrix: categorie-independent correlation of features}
+	\label{fig:du_cm_overall}
+    \includegraphics[width=0.4\textwidth]{output_overall.png}
+\end{figure}
+
 Generally, the features of the "Musical Standards" cluster can be ignored in this representation,
 as they do not measure but only reflect characteristics (e.g., time signature or key).
 It can be seen that "Energy" and "Loudness" have the highest correlation of the features,
@@ -208,6 +215,17 @@ Outside of these extreme values, the remaining correlation values settle between
 Worth mentioning here are the correlations between "Instrumentalness" and "loudness" at
 approx. -0.3 as well as "Instrumentalness" and Valence also at approx. -0.3. Furthermore,
 in the positive "Speechiness" and "Energy" at a value of approx. 0.3.
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Correlation matrix: categorie Rock]{{\includegraphics[width=4cm]{output_Rock.png} }}%
+    \qquad
+    \subfloat[\centering Correlation matrix: categorie HipHop]{{\includegraphics[width=4cm]{output_Hip_Hop.png} }}%
+    \qquad
+    \subfloat[\centering Correlation matrix: categorie Jazz]{{\includegraphics[width=4cm]{output_Jazz.png} }}%
+    \caption{Correlations inside categories}%
+    \label{fig:du_cm_categorie_dependent}%
+\end{figure}
 
 If these correlations are now considered on a category-specific basis,
 it can be seen that the patterns described above also appear there.
@@ -235,6 +253,13 @@ with a minimum value of -32.06 and a maximum value of 2.044.
 Interestingly, the loudest song is not found under rock, but under hip-hop.
 The quietest song is found in jazz. 
 
+\begin{figure}[H]
+    \centering
+    \caption[]{distribution Plot: Loudness compared over the different categories}
+	\label{fig:du_dp_loudness}
+    \includegraphics[width=0.4\textwidth]{output_Loudness.png}
+\end{figure}
+
 Figure 1  shows a so-called distribution plot.
 The X-axis contains the scale of the feature used (in this case "loudness").
 The Y-axis reflects the density of the respective category.
@@ -256,7 +281,14 @@ The closer the value approaches 1, the higher the probability that there are no 
 elements in the song. The overall average for this feature is 0.174.
 The lowest value overall is 0.0 while the highest goes up to 0.989.
 
-For a better understanding, Figure 2  also shows a distribution plot,
+\begin{figure}[H]
+    \centering
+    \caption[]{distribution Plot: Instrumentalness compared over the different categories}
+	\label{fig:du_dp_instrumentaness}
+    \includegraphics[width=0.4\textwidth]{output_instumentelness.png}
+\end{figure}
+
+For a better understanding, Figure x  also shows a distribution plot,
 but adapted to the current feature.
 It shows that both hip-hop and rock are almost exclusively found in the 0.0 - 0.1 range.
 This means that songs in these categories almost exclusively contain vocals or similar.
@@ -275,7 +307,14 @@ comparisons, rock and hip-hop are similar in their characteristics here and clea
 Basically, it is to be noted that there is a high average value of 0.65 overall.
 This is clearer for rock with an average value of 0.7531.
 
-If we now look at the data in a distribution plot (Figure 3 ),
+\begin{figure}[H]
+    \centering
+    \caption[]{distribution Plot: Energy compared over the different categories}
+	\label{fig:du_dp_enegry}
+    \includegraphics[width=0.4\textwidth]{output_energy.png}
+\end{figure}
+
+If we now look at the data in a distribution plot (Figure x),
 we see clear differences between the categories.
 Jazz spreads over the whole graph but has no high point.
 This can be attributed to the different types of jazz (slow jazz, free jazz),
@@ -288,3 +327,17 @@ but offers by far the most strongly energetic songs.
 
 After these three sample features, some more distributions and boxplots are added to better
 explain the characteristics of the individual genres.
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: Speechiness]{{\includegraphics[width=4cm]{output_Speechiness.png} }}%
+    \qquad
+    \subfloat[\centering Boxplot: Danceability]{{\includegraphics[width=4cm]{output_Danceability_Boxplot.png} }}%
+    \qquad
+    \subfloat[\centering Distribution plot: Accousticness]{{\includegraphics[width=4cm]{output_accousticness.png} }}%
+    \qquad
+    \subfloat[\centering Distribution plot: Valence]{{\includegraphics[width=4cm]{output_valence.png} }}%
+    \qquad
+    \caption{Different features visualized in distribution- and boxplots}%
+    \label{fig:du_ds_bp_comparison}%
+\end{figure}
