@@ -2,14 +2,10 @@
 
 In the following section the data collected during data collection is prepared and cleaned up for training 
 the model. At the end of data collection, the result was saved in a CSV file. This file is imported and converted
-into a Pandas Dataframe using the Pandas Python library and it's "read\_csv" method:
+into a Pandas Dataframe using the Pandas Python library and it's \emph{read\_csv} method:
 
 \begin{lstlisting}[language=Python]
-    import os
-    import pandas as pd
-    
-    # reading data from csv
-    df = pd.read_csv(os.path.join('..', 'data_collection', 'final_result.csv'))
+    df_import = pd.read_csv(os.path.join('..', 'data_collection', 'final_result.csv'))
 \end{lstlisting}
 
 Next, duplicates are removed. If there are two or more datapoints, which have the same value in their artist
@@ -20,65 +16,35 @@ caught using the id, as different releases have different id values. As the arti
 all duplicates are caught using artist and name.
 
 \begin{lstlisting}[language=Python]
-    df = df.drop_duplicates(subset=['categories.playlists.tracks.artists', 'categories.playlists.tracks.name'])
+    df_dedup = df_import.drop_duplicates(subset=['categories.playlists.tracks.artists', 'categories.playlists.tracks.name'])
 \end{lstlisting}
 
 Next, all genres that are not to be used for training the model are filtered out.
 
 \begin{lstlisting}[language=Python]
     genre_filter = ['hiphop', 'jazz', 'rock']
-    df = df[df['categories.id'].isin(genre_filter)]
+    df_filtered = df_dedup[df_dedup['categories.id'].isin(genre_filter)]
 \end{lstlisting}
 
 Then columns that are not needed for training are removed, including category name, all playlist information and
 all track and album information. The category id is kept, as it will serve as the label.
 The remaining columns are renamed, as the long JSON tree names are no longer needed.
-The field "category.id" is renamed to "category" and each audio feature is renamed for example 
-the danceability column is now called "feature\_danceability".
-
-\begin{lstlisting}[language=Python]
-    columns_to_drop = [
-        "categories.name",
-        "categories.playlists.id",
-        "categories.playlists.name",
-        "categories.playlists.tracks.id",
-        "categories.playlists.tracks.name",
-        "categories.playlists.tracks.album.id",
-        "categories.playlists.tracks.album.name",
-        "categories.playlists.tracks.artists"
-        ]
-    df = df.drop(columns=columns_to_drop)
-    
-    df = df.rename(columns={
-        "categories.id": "category",
-        "categories.playlists.tracks.features.danceability": "feature_danceability",
-        "categories.playlists.tracks.features.energy": "feature_energy",
-        "categories.playlists.tracks.features.key": "feature_key",
-        "categories.playlists.tracks.features.loudness": "feature_loudness",
-        "categories.playlists.tracks.features.mode": "feature_mode",
-        "categories.playlists.tracks.features.speechiness": "feature_speechiness",
-        "categories.playlists.tracks.features.acousticness": "feature_acousticness",
-        "categories.playlists.tracks.features.instrumentalness": "feature_instrumentalness",
-        "categories.playlists.tracks.features.liveness": "feature_liveness",
-        "categories.playlists.tracks.features.valence": "feature_valence",
-        "categories.playlists.tracks.features.tempo": "feature_tempo",
-        "categories.playlists.tracks.features.duration_ms": "feature_duration_ms",
-        "categories.playlists.tracks.features.time_signature": "feature_time_signature"
-    })
-    df
-\end{lstlisting}
-
+The field \emph{category.id} is renamed to \emph{category} and each audio feature is renamed for example 
+the danceability column is now called \emph{feature\_danceability}.
 With unnecessary columns removed, a check is done to show any remaining null values.
 
 \begin{lstlisting}[language=Python]
     df.isnull().sum()
 \end{lstlisting}
 
-In this dataset, there are no null values present. As the dataset is now clean, it can now be prepared
-for input into sklearn's Gradient Boosting Classifier, which is used for training.
+In this dataset, there are no null values present.
+
+As this data comes from one single API there are no concerns for problems like data value conflicts or
+referential integrity, which means that the dataset is now clean and can be prepared for input into sklearn's
+Gradient Boosting Classifier, which is used for training.
 The classifier only supports integer values as labels, which means that the category data needs to be encoded.
-This is done by defining a function "encode\_target", which takes the dataframe and the name of the column containing
-the target. It then maps an integer to each unique value in the target column, adds a new "target" column in the
+This is done by defining a function \emph{encode\_target}, which takes the dataframe and the name of the column containing
+the target. It then maps an integer to each unique value in the target column, adds a new \emph{target} column in the
 dataframe and stores the mapped integer in it.
 
 \begin{lstlisting}[language=Python]
@@ -96,43 +62,84 @@ dataframe and stores the mapped integer in it.
 \end{lstlisting}
 
 The head of the resulting dataframe is shown in table \ref{tbl:Dataframe after cleanup}. The category to target integer mapping is shown in table \ref{tbl:Category to target integer mapping}.
-\begin{scriptsize}
-\begin{table}[H]
- \caption{Dataframe after cleanup}
- \label{tbl:Dataframe after cleanup}
-\begin{tabular}{||c c c c c c c c c c c c c c||} 
- \hline
- category & feature\_danceability & feature\_energy & feature\_key & feature\_loudness & feature\_mode & feature\_speechiness & feature\_acousticness & feature\_instrumentalness & feature\_liveness & feature\_valence & feature\_tempo & feature\_duration\_ms & feature\_time\_signature \\ [0.5ex]
- \hline\hline
- hiphop & 0.649 & 0.508 & 8.0 & -10.232 & 1.0 & 0.0959 & 0.03450 & 0.000036 & 0.0736 & 0.405 & 157.975 & 194051.0 & 4 \\ [1ex]
- \hline
-\end{tabular}
-\end{table}
-\end{scriptsize}
 
-\begin{scriptsize}
-\begin{table}[H]
- \caption{Category to target integer mapping}
- \label{tbl:Category to target integer mapping}
-\begin{tabular}{||c c||} 
- \hline
- target & category \\ [0.5ex]
- \hline\hline
- 0 & hiphop \\ [1ex]
- \hline
- 1 & rock \\ [1ex]
- \hline
- 2 & jazz \\ [1ex]
- \hline
-\end{tabular}
-\end{table}
-\end{scriptsize}
+\textbf{Hier Dataframe head von df}
+\label{tbl:Dataframe after cleanup}
+
+\textbf{Hier Category/target mapping table}
+\label{tbl:Category to target integer mapping}
+
+Looking at the number of values per category reveals that the dataset is very uneven, with more than half of
+the samples being in the category \emph{rock}.
+
+\textbf{Hier value counts per category}
+
+As explained in section \ref{sec:Mean Removal, Variance Scaling and Standardization} and \ref{sec:Dimension Reduction}
+methods like standardization and \ac{PCA} can have a positive impact on the models accuracy.
+Before finding the best model using hyperparameter tuning, the best form of input data is evaluated by transforming
+the data in different ways and training a Gradient Boosting model using the default parameters specified in sklearn.
+This way, the best form of input data can be found without the overhead of resource intensive grid search.
+
+To be able to easily train models using different forms of input data, a method \emph{eval\_prep} was created,
+which takes a dataframe, a list of all feature column names and the label column name. It then splits the dataframe
+into train and test sets, trains a Gradient Boosting Classifier and returns a simple score.
+This process is explained in depth in the modeling section.
+
+First, the regular dataframe is used as input data, resulting in an accuracy score of $0.8505$.
+
+\begin{lstlisting}[language=Python]
+    score = eval_prep(df, features, "target")
+\end{lstlisting}
+Next, mean removal, variance scaling and standardisation are attempted, by using the \emph{StandardScaler}
+class from sklearn to transform the data. Below is the code for standardization, but the class can also do
+mean removal, by passing the parameter \emph{with\_std=False}, or variance scaling by passing \emph{with\_mean=False}.
+
+\begin{lstlisting}[language=Python]
+    X_s = df[features]
+    y = df["target"]
+
+    X_s = StandardScaler().fit_transform(X_s)
+
+    df_s = pd.DataFrame(data=X_s)
+    df_s.insert(0, "target", y)
+    df_s.columns = ["target"] + features
+
+    score = eval_prep(df_s, features, "target")
+\end{lstlisting}
+
+This results in the following scores, beating the untransformed data in all cases.
+
+\begin{itemize}
+    \item Mean Removal: $0.8509$
+    \item Variance Scaling: $0.8520$
+    \item Standardization: $0.8523$
+\end{itemize}
+
+Next \ac{PCA} is attempted using sklearns \emph{PCA} class. It is able to take any dataset and reduce
+its dimensionality to any number of dimensions. The dimensionality was reduced from 13 to 2 dimensions
+and everything in between. Then the dimensionality resulting in the best score was output.
+\ac{PCA} was done both on the raw dataset and in combination with standardized data (both before and afterwards)
+
+\ac{PCA} did not yield good results in this dataset. The score for all of the combination was always best
+when keeping 13 dimensions, getting worse when removing more dimensions. Also the score with 13 principal
+components was worse than using the regular features, as seen here:
+
+\begin{itemize}
+    \item PCA only with 13 components: $0.8352$
+    \item Standardization after PCA with 13 components: $0.8348$
+    \item Standardization before PCA with 13 components: $0.8277$
+\end{itemize}
+
+As the results using \ac{PCA} do not improve the score, the code is not shown here, but can be found in the appendix.
+The results from testing data transformation and dimension reduction with this dataset and a default \emph{GradientBoostingClassifier}
+are, that the model benefits the most from standardized data improving the overall score compared to the raw dataset
+by $0.19\%$. Therefore, standardized data is used going forward.
 
 Now that all columns needed for training the model are prepared, the dataset needs to be split in 
 test and training data. This is necessary to be able to calculate an accuracy score for the model after training.
 In order to calculate this score, data is needed that the model has never seen before, which ensures that 
 the score is not just a result of overfitting, but the accuracy would be the same on real world data.
-For splitting the data, the function train\_test\_split from sklearn is used.
+For splitting the data, the function \emph{train\_test\_split} from sklearn is used.
 First the dataset is shuffled so each set contains a near equal amount of entries for each genre.
 Then the shuffled dataset is split, with an 80\% of samples going into the training set and 20\% going 
 into the test set. This results in 10.701 rows of training data and 2.676 rows of test data.
