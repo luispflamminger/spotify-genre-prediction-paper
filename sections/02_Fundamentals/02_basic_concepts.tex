@@ -295,7 +295,7 @@ the final score, is involved in the optimization process, which could again lead
 overfitted directly to the training and test data.
 
 Cross validation is a solution to this problem During optimization, the training set is
-split into k groups, named folds. A given estimator is trained on $k-1$ folds and is accuracy
+split into $k$ groups, named folds. A given estimator is trained on $k-1$ folds and its accuracy
 is calculated using the samples in the remaining folds. This is done $k$ times, using a different fold
 for scoring each time. The average of all scores is the cross-validation score, giving a good
 representation of the overall performance of the estimator.
