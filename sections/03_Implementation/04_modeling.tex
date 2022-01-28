@@ -36,6 +36,12 @@ the learning rate and many more. The most impactful of these parameters are expl
 
 
     \item \textbf{criterion}
+
+    The loss criterion values used in this model, differ from the ones explained in fundamentals
+    section \ref{sec:Gradient Boosting Algorithm}. The reason for this is that the optimal criterion
+    depends on the dataset and type of classification. In the fundamentals -log likelyhood was used
+    to better explain the concepts behind Gradient Boosting. For this model, the best function
+    available in sklearn is determined using hyperparameter tuning.
     \item \textbf{min\_samples\_split}
     \item \textbf{min\_samples\_leaf}
     \item \textbf{max\_features}
