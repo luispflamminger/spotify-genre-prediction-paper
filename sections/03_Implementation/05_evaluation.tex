@@ -1,1 +1,149 @@
 \subsection{Evaluation}
+
+After the completion of the modelling phase, the next step is to evaluate the results. The evaluation is split into 
+the evaluation of the model itself followed by the evaluation of the overall process. 
+
+\subsection{Gradient Boosting Evaluation}
+
+In this section the Gradient Boosting Algorithm will observed in more detail by the most common metrics. Additionally, it also
+will be compared with the much simpler Classification Tree Algorithm to highlight commonalities and different approaches between 
+the two algorithms and create an all-encompassing picture for Gradient Boosting. 
+
+The overall accuracy measured is around 86\%. This result is already positive as the Gradient Boosting Algorithm outperforms 
+the Classification Tree, which achieves an also respectable 80\% accuracy. However, the accuracy score can only be used as a
+fundamental basis for evaluating the overall performance with many unknowns that need to be worked through.
+
+The first step of a deeper analysis is to create a confusion matrix for all categories. The confusion matrix is an approach of 
+visualizing the performance by clustering the the output. The x1-axis represents the predicted values for the classes 
+while the x2-axis stands of actual (correct) values. For this analysis three numbered classes 1 to 3 are necessary that 
+typify the categories hiphop, rock and jazz in the stated order. The confusion matrix reveals two types of correct predictions and 
+also two types of errors displayed in figure x. The confusion matrix for the Gradient Boosting Model is shown in figure x2
+
+The confusion matrix reveals four combinations of predicted and actual values (1). For Gradient Boosting the confusion matrix looks 
+like the following (3).
+
+(1) confusion matrix theory 
+
+(2) confusion matrix example
+
+Visually, the highest misclassification takes place between classes jazz and rock while the lowest missclassification occurs
+between hiphop and jazz. This result however has little significance, since the number of rock tracks, with a total of over 
+1400, is significantly larger than the amount of both rock and jazz tracks. An evaluation based on absolute numbers would lead to 
+misleading results partly due to the imbalance of the dataset. 
+
+A better approach is to look at the following metrics which can be derived form the confusion matrix for every category (3). 
+
+precision = true positive / true positive + false positive
+
+recall    = true positive / true positive + false negative 
+
+f1-score  = 2* (precision * recall / precision + recall)
+
+Figure X
+
+Precision and Recall are both performance metrics with different objectives. While precision is a measure of how many of the 
+predicted elements for a class were correct, recall measures how many elements of a category were detected. It can be observed that 
+the precision is high across all categories with rock being classified best with 12\% false-positive predictions while 
+the false-positive rate for jazz was worst with over 21\%. Interestingly the results for recall are very similar with the model 
+performing best for the category rock with an recall of 0.89 and again worst for jazz with 0.79. Hiphop is for both metrics in 
+between of both extremas at around 0.85. 
+
+The f1-score is a combination out of precision and recall and an attempt of capturing both metrics in a single value. Therefore
+the results are not surpising. Jazz performed worst with only 0.79 while rock was classified best with 0.88 according to the 
+f1-score. 
+
+In conclusion all scores can be evaluated as positive outputs without any negative and unexplainable abnormalities. Also in comparison 
+to decision trees a clear improvement of the results can be seen. The reason that jazz is ranked worst while rock reaches the 
+highest values may be due to several reasons. One possible explanation can be found by reviewing the findings from the Data 
+Understanding chapter. it it recognizable that the value-ranges for the features of jazz were significantly more distributed 
+than for both rock and jazz and often without any high points. In addition, the value ranges of rock were often different from 
+those of hip-hop and jazz, which simplifies classification. 
+
+Another measure to evaluate a models performance is to plot its Reciver Operating Characteristics. The ROC is a plot of the true-positive
+rate for the x1-axis and the false-positive rate on the x2-axis for every possible threshold. The benefit of ROC is that it plots the 
+misclassification for every threshold while other metrics rely on a single threshold. Often there are also requirements for 
+models in which the overall accuracy plays a subordinate role, such as that all samples of class X must be detected. The ROC helps 
+to visualize such problems to find optimal solutions. A model whose results are close to the diagonal classifies data worse than a 
+model whose curve is as close as possible to the point (0/1) in the coordinate system. This performance is often measured by means of 
+the AUC, which is derived directly from the ROC. With help of the AUC comparability between models is possible. The ROC and AUC for 
+the project are shown in figure X.
+
+\begin{figure}[H]
+    \centering
+    \caption[]{Feature Importance}
+	\label{fig:gb_roc_and_auc}
+    \includegraphics[width=0.6\textwidth]{gb_roc_and_auc.png}
+\end{figure}
+
+\begin{figure}[!tbp]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+      \includegraphics[width=\textwidth]{gb_roc_and_auc.png}
+      \caption{Feature Importance Gradient Boosting}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+      \includegraphics[width=\textwidth]{dt_roc_and_auc.png}
+    \end{minipage}
+  \end{figure}
+
+From the following matrix it can be seen that the model works well for all classes. Both ROC and the associated AUC are convincing 
+in all cases. What is interesting is the fact that rock has the worst AUC while being classified best according to the previous metrics.
+Hiphop on the other hand has the significantly best AUC followed by jazz. An explanation for this result is complicated, with a 
+possible reason again being the imbalance of the dataset. The model is focussed classifing rock correctly as it constitutes to a large part of the 
+dataset. Therefore the optimum for both jazz and hiphop are exchanged for an overall optimum. It is noted that a well founded 
+explanation would require more in-depth analysis. Regardless, the result is worth including in the analysis and leaves room for 
+further research.   
+
+In addition, a very different evaluation can be performed. It is also interesting to take a closer look on the input data with help of 
+the so-called feature importance. The feature importance is a measure of how much impact a feature had for the classification of the 
+dataset and is presented in the following figure for both Gradient Boosting and Decision Trees. 
+
+(Figure Feature Performance)
+
+It is clearly visible that both Gradient Boosting and Decision Trees relied on similiar features to similar extends for the classification task with 
+minor differences for features such as danceability. Noticeable is that Gradient Boosting is heavily focused on a few features 
+while the Classification Tree makes more use out of features like duration, valence and mode. One possibility for the difference in weighting  
+could be the overall construction of the algorithms. Gradient Boosting consists out of multiple small weak learners while the Classification Tree
+Algorithm froms a widely branched and deep tree. For feature importance again an analogy can be made to Data Understanding and the Music Theory. 
+The features that theoretically distinguish the genres from another play the most important role for the modeling while musical standards and 
+more subjective featues only play a subordinate role. This result is positive both for theory and the Machine Learning Model. The result states 
+that music theory can be confirmed by real-world examples while giving credibility and plausibility to the model.
+
+\subsection{Process Evaluation}
+
+The evaluation of the overall process is complicated as there are many unknowns starting with the data itself. The data used is preprocessed by 
+Spotify without detailed definition and theoretical basis. The features are furthermore heavily subjective which adds another layer of 
+complexity. Also the data collection is non-trivial and error-prone. Both the collection process itself and the collection approach 
+would have to be revised for a productive use case. On the other hand the data quality is decent with high correlation to the music 
+theory. In addition the dataset convinces with its uniqueness and novelty.
+
+The model in combination with the preprocessing and evaluation also leaves room for further research. The use of only two very 
+similar Machine Learning Algorithms allows no comparison to completely differnt approaches based on other algorithms and concepts. 
+It can therefore not be ruled out that even better results can be achieved. The pre-processing is intensive with many constallations 
+tested. A possible improvement would be to apply the hyperparametric optimization not only on the standardized data but on all 
+approaches to ensure the overall best result. In addition, there are further hyperparameter constellations which were not tested.
+The evaluation may also have reached incorrect conclusions and assumptions for a variety of reasons. 
+
+The overall highest risk is the fact that all participants of the group are not familiar with the Machine Learning and lack in 
+experience. For this reason, the result can be considered promising. 
+
+
+Daten:
+
+- vorprozessiert von Spotify
+- oft auch interpretation und subjektiv
+- keine eindeutige Definition, was Aussagekraft schwierig macht
+- Datensammlung -> Ungenau, fehleranfällig, jedoch gute und sehr interessante Datenbasis
+
+Modelle:
+
+- Korrektes Modell gewählt? -> kein Vergleich 
+
+Vorprozessierung, Klassifikation und Auswertung: 
+
+- hyperparameter nur auf standardized 
+- Mehr optionen zu hyperparameter
+- Evaluation und Schlüsse korrekt? -> Daten vielleicht nicht aussagekräftig
+- Allgemein viel selbstgeschriebenes Coding -> fehleranfällig, da neu in Materie 
+
