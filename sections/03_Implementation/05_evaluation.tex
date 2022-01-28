@@ -15,31 +15,74 @@ fundamental basis for evaluating the overall performance with many unknowns that
 
 The first step of a deeper analysis is to create a confusion matrix for all categories. The confusion matrix is an approach of 
 visualizing the performance by clustering the the output. The x1-axis represents the predicted values for the classes 
-while the x2-axis stands of actual (correct) values. For this analysis three numbered classes 1 to 3 are necessary that 
+while the x2-axis stands of actual (correct) values \cite[p.235]{Davis_2006}. For this analysis three numbered classes 1 to 3 are necessary that 
 typify the categories hiphop, rock and jazz in the stated order. The confusion matrix reveals two types of correct predictions and 
-also two types of errors displayed in figure x. The confusion matrix for the Gradient Boosting Model is shown in figure x2
+also two types of errors displayed in figure x. The confusion matrix for the Gradient Boosting Model is shown in figure x2.
 
 The confusion matrix reveals four combinations of predicted and actual values (1). For Gradient Boosting the confusion matrix looks 
 like the following (3).
 
 (1) confusion matrix theory 
 
-(2) confusion matrix example
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    predicted & class 1         &  class 2          \\
+    actual    &                 &                   \\
+    \midrule
+    class 1   &  true positive  &  false negative   \\
+    class 2   &  false positive &  true negative    \\
+    \bottomrule
+    \end{tabular}
+  \caption{Evaluation: Confusion Matrix}%
+  \label{tbl:evaluation_confusion_matrix}%
+\end{table} 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    predicted &    0 &     1 &    2 &   all \\
+    actual &      &       &      &       \\
+    \midrule
+    0      &  438 &    68 &   19 &   525 \\
+    1      &   41 &  1307 &  122 &  1470 \\
+    2      &   30 &   115 &  536 &   681 \\
+    all    &  509 &  1490 &  677 &  2676 \\
+    \bottomrule
+    \end{tabular}
+  \caption{Evaluation: Gradient Boosting Confusion Matrix}%
+  \label{tbl:gb_confusion_matrix}%
+\end{table} 
 
 Visually, the highest misclassification takes place between classes jazz and rock while the lowest missclassification occurs
 between hiphop and jazz. This result however has little significance, since the number of rock tracks, with a total of over 
 1400, is significantly larger than the amount of both rock and jazz tracks. An evaluation based on absolute numbers would lead to 
 misleading results partly due to the imbalance of the dataset. 
 
-A better approach is to look at the following metrics which can be derived form the confusion matrix for every category (3). 
+A better approach is to look at the following metrics which can be derived form the confusion matrix for every category \cite[p.235]{Davis_2006} (3). 
 
-precision = true positive / true positive + false positive
+\(precision\;= \;\frac{true\:positive}{true\:positive\;+\;false\:positive}\)
 
-recall    = true positive / true positive + false negative 
+\(recall\;= \;\frac{true\:positive}{true\:positive\;+\;false\:negative}\)
 
-f1-score  = 2* (precision * recall / precision + recall)
+\(f1-score\;= \;\frac{precision\;*\;recall}{precision\;+\;recall}\)
 
-Figure X
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lllll}
+    \toprule
+    classes & precision & recall & f1-score & support \\
+    \midrule
+     hiphop &      0.86 &   0.83 &     0.85 &     525 \\
+       rock &      0.88 &   0.89 &     0.88 &    1470 \\
+       jazz &      0.84 &   0.79 &     0.79 &     681 \\
+    \bottomrule
+    \end{tabular}
+  \caption{Evaluation: Gradient Boosting Classification Report}%
+  \label{tbl:gb_classification_Report}%
+\end{table} 
 
 Precision and Recall are both performance metrics with different objectives. While precision is a measure of how many of the 
 predicted elements for a class were correct, recall measures how many elements of a category were detected. It can be observed that 
@@ -66,26 +109,16 @@ models in which the overall accuracy plays a subordinate role, such as that all 
 to visualize such problems to find optimal solutions. A model whose results are close to the diagonal classifies data worse than a 
 model whose curve is as close as possible to the point (0/1) in the coordinate system. This performance is often measured by means of 
 the AUC, which is derived directly from the ROC. With help of the AUC comparability between models is possible. The ROC and AUC for 
-the project are shown in figure X.
+the project are shown in figure X (sklearn + theroy).
 
-\begin{figure}[H]
+  \begin{figure}[H]
     \centering
-    \caption[]{Feature Importance}
-	\label{fig:gb_roc_and_auc}
-    \includegraphics[width=0.6\textwidth]{gb_roc_and_auc.png}
+    \subfloat[\centering Gradient Boosting]{{\includegraphics[width=6cm]{gb_roc_and_auc.png} }}%
+    \qquad
+    \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{dt_roc_and_auc.png} }}%
+    \caption{Evaluation: Comparison of ROC and AUC}%
+    \label{fig:roc_and_auc_for_gb_and_dt}%
 \end{figure}
-
-\begin{figure}[!tbp]
-    \centering
-    \begin{minipage}[b]{0.4\textwidth}
-      \includegraphics[width=\textwidth]{gb_roc_and_auc.png}
-      \caption{Feature Importance Gradient Boosting}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.4\textwidth}
-      \includegraphics[width=\textwidth]{dt_roc_and_auc.png}
-    \end{minipage}
-  \end{figure}
 
 From the following matrix it can be seen that the model works well for all classes. Both ROC and the associated AUC are convincing 
 in all cases. What is interesting is the fact that rock has the worst AUC while being classified best according to the previous metrics.
@@ -97,9 +130,16 @@ further research.
 
 In addition, a very different evaluation can be performed. It is also interesting to take a closer look on the input data with help of 
 the so-called feature importance. The feature importance is a measure of how much impact a feature had for the classification of the 
-dataset and is presented in the following figure for both Gradient Boosting and Decision Trees. 
+dataset and is presented in the following figure for both Gradient Boosting and Decision Trees (sklearn). 
 
-(Figure Feature Performance)
+\begin{figure}[H]
+  \centering
+  \subfloat[\centering Gradient Boosting]{{\includegraphics[width=6cm]{gb_feature_importance.png} }}%
+  \qquad
+  \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{dt_feature_importance.png} }}%
+  \caption{Comparison of Feature Importance}%
+  \label{fig:feature_inportance_for_gb_and_dt}%
+\end{figure}
 
 It is clearly visible that both Gradient Boosting and Decision Trees relied on similiar features to similar extends for the classification task with 
 minor differences for features such as danceability. Noticeable is that Gradient Boosting is heavily focused on a few features 
@@ -145,5 +185,4 @@ Vorprozessierung, Klassifikation und Auswertung:
 - hyperparameter nur auf standardized 
 - Mehr optionen zu hyperparameter
 - Evaluation und Schlüsse korrekt? -> Daten vielleicht nicht aussagekräftig
-- Allgemein viel selbstgeschriebenes Coding -> fehleranfällig, da neu in Materie 
-
+- Allgemein viel selbstgeschriebenes Coding -> fehleranfällig, da neu in Materie
