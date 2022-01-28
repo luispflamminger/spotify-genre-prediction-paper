@@ -7,7 +7,7 @@ detex thesis_main.tex > thesis_main.txt
 
 # Removes everything before Einleitung and after Anhang
 BEGINNING="Einleitung"
-ENDING="Anhang"
+ENDING="Appendix"
 while read p; do
   # end txt when end was found
   echo "$p" | grep $ENDING && break
@@ -24,4 +24,4 @@ echo
 echo "Anzahl der Wörter vom Kapitel Einleitung bis Anhang:"
 wc -w wordcounts.txt # zeilen, wörter, zeichen
 rm wordcounts.txt 2> /dev/null
-rm thesis_main.txt 2> /dev/null
+#rm thesis_main.txt 2> /dev/null

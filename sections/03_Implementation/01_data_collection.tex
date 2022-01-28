@@ -612,7 +612,7 @@ The inner loop uses an endpoint to get each category's playlists. The API reques
 \end{figure}
 
 As there is an upper limit of 50 playlists per request, the same paging method is used as in the category function.
-If an items \emph{type} is not \emph{playlist}it is filtered out, as it doesn't fit the schema.
+If an items \emph{type} is not \emph{playlist}, it is filtered out, as it doesn't fit the schema.
 Then each playlists name and id is stored in the data object, which is returned from the function.
 The JSON data after this step looks like this:
 
