@@ -26,14 +26,22 @@ internal nodes. Like the root, internal nodes are responsible for the recursive 
 the data. Branches connect Nodes with another. For classical trees, information only flows from 
 top to bottom of the tree. 
 
-In practice, there exist various Algorithms for computing Decision Trees with the most common ones 
-being: ID3, C4.5, C5.0 and \ac{CART}. Each algorithm follows the same principle of regressively finding 
-perfect splits to separate data but utilizes different methods to find the ideal splitting 
-criteria, which strongly influences the structure of the tree, its accuracy and performance. 
-Additionally, each algorithm has its benefits and constraints. Therefore, it is important to 
-determine the best Algorithm before implementing a decision tree based on the prediction task 
-and dataset. This project uses the python library sklearn to implement a classification tree. 
+%In practice, there exist various Algorithms for computing Decision Trees with the most common ones 
+%being: ID3, C4.5, C5.0 and \ac{CART}. Each algorithm follows the same principle of regressively finding 
+%perfect splits to separate data but utilizes different methods to find the ideal splitting 
+%criteria, which strongly influences the structure of the tree, its accuracy and performance. 
+%Additionally, each algorithm has its benefits and constraints. Therefore, it is important to 
+%determine the best Algorithm before implementing a decision tree based on the prediction task 
+%and dataset. This project uses the python library sklearn to implement a classification tree. 
+%Sklearn is based on the \ac{CART} algorithm \cite[10.10.6]{sklearn Decision Trees}.
+
+In practice, there exsist various implementations for computing decision trees. Each follows the same 
+principle of regressively finding perfect splits to seperate the data but different methods to find 
+the ideal splitting criteria, which strongly influences the structure of the tree, its accuracy and 
+performance. Thus each implementation has benefits and constraints which have to be taken into account
+when determining the model. This project uses the python library sklearn to implement a classification tree. 
 Sklearn is based on the \ac{CART} algorithm \cite[10.10.6]{sklearn Decision Trees}.
+
 
 \subsubsection{Decision Tree Algorithm}
 
@@ -74,7 +82,7 @@ samples.
 The decision tree algorithms splits the dataset recursively into subsets. At the beginning, the whole dataset is 
 contained within the root node from which the division into subtrees start. Each node is mathematically described
 as \(Q_{m}\) and contains a subgroup \(N_{m}\) of the input dataset. Nodes split their respective groups of data 
-further or act as a final classifier as from of a leaf (in case of a classification problem). The split can be 
+further or act as a final classifier in the form of a leaf. The split can be 
 binary or multiway. \ac{CART} only utilizes binary splits and divides the Node \(Q_{m}\) into two repective subgroups 
 labeled as \(Q^{left}_{m}\) and \(Q^{right}_{m}\). 
 
@@ -105,7 +113,7 @@ G(Q_{m},\theta) = \frac{N^{left}_{m}}{N_{m}} H(Q^{left}_{m}, \theta ) + \frac{N^
 \end{equation}
 
 To determine the overall best \(G(Q_{m}, \theta)\) the respective impurities \(H\) for both subgroups \(Q^{left}_{m}\) 
-and \(Q^{right}_{m}\) are required. Each impurity is weighted according to its overall impact by its relative size 
+and \(Q^{right}_{m}\) are required. Each impurity is weighted according to its relative size 
 \(\frac{N^{left}_{m}}{N_{m}}\).
 
 The impurity \(H\) for \ac{CART} is calculated by the gini index. Gini index measures the probability that a sample 
@@ -127,9 +135,9 @@ Gini = 1 - \sum ^k_{j = 1}(p_{j})^2
 \end{figure}
 
 The optimal splits for the first iteration of the dataset look like the following. For numerical features the determination of 
-the optimal split as for categorical ones as the optimal splitting criteria for a feature is inside its value 
-range and must be determined by trial and error. In this example only the overall best splitting criteria is shown. 
-The trial and error solution is implemented in python (and be looked up in the github repo). 
+the optimal split is more complex as for categorical ones because the the calculation is not straight forward but must be computed
+for every value in the value range to find the best overall split for a single feaute. The example only shows the best splitting
+criteria is shown while a trial and error approach can be found in the appendix. 
 
 Danceability: 
 \begin{equation*}
@@ -141,10 +149,6 @@ Danceability:
         G(Q_{0},\theta) &= \frac{5}{8} * 0,48 + \frac{3}{8} * 0 = 0,30
     \end{aligned}
 \end{equation*}
-
-%\begin{equation*}
-
-%\end{equation*}
 
 Acousticness: 
 \begin{equation*}
@@ -174,7 +178,7 @@ will start with each leaf as its input. The second iteration will split the node
 
 The natural stop criterion is a completely homogeneous data-gorup for a node. If a node only contains one single 
 class of samples, no further splitting is possible. This is the case for the right node of the example marked in blue. The samples are completely
-homogeneous and only consist out of the category \emph{hiphop}. The Node therefore automatically becomes a leaf and represents the 
+homogeneous and only consist out of the category \emph{hiphop}. The node therefore automatically becomes a leaf and represents the 
 category of samples. Other stop criteria can be predefined depending on own preference. The most relevant criterion is the 
 definition of a maximum depth of the decision tree. A maximum depth describes a maximum amount of recurrent iterations before 
 the algorithm automatically stops and threats the last nodes as leaves \cite[p.7]{lewis2000introduction}. Maximum depth belongs to a set of hyperparameters that
@@ -251,9 +255,9 @@ In conclusion, decision trees can be assessed as follows. Starting with the adva
 the main benefit is the overall simplicity of decision trees, both from a technical and 
 business point of view. For researchers and developers, trees are easy to construct, require little
 to no data preparation, are almost univerally applicable with a possibility of validation. 
-However, the simplicity for business should not be underestimated either. When comparing Machine
-Learning Algorithms, the main comparison is often the accuracy of a model. The areas in which 
-Decision Trees stand out include visualization and comprehensibility. The decision tree algorithm 
+However, the simplicity for business should not be underestimated either. When comparing machine
+learning algorithms, the main comparison is often the accuracy of a model. The areas in which 
+decision trees stand out include visualization and comprehensibility. The decision tree algorithm 
 is a white box model that allows complete transparency and explainability \cite[p.339]{James2021} \cite[10.10.]{sklearn Decision Trees}. 
 
 The disadvantages of decision trees are again closely related to its simplicity. Overfitting and 
@@ -305,8 +309,8 @@ F^{*} = \arg \min_{\gamma} L(y,\gamma)
 \textbf{Loss Function and Weak Learners:}
 
 The loss function is an indicator for the quality of the model. A small loss for a data point 
-means that the prediction is close or identical to the observed Label and the model therefore 
-categorizes the sample correctly whereas a high Loss implies that the model could not predict 
+means that the prediction is close or identical to the observed label and the model therefore 
+categorizes the sample correctly whereas a high loss implies that the model could not predict 
 the sample well. Given a particular learning task and dataset, different loss functions must 
 be considered as loss functions are only suitable for specific data and task constellations. The most common 
 loss function for binary classification is the so-called bernoulli loss (6). The bernoulli loss 
