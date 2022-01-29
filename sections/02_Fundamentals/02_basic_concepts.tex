@@ -74,67 +74,67 @@
 %of data is of very high interest for many use-cases and organizations as its outcome is business 
 %value (comparison to the previous chapter: Why is data so important).
 
-The project belongs to the umbrella term big data originally is defined as a large set of information
-that has to be stored and evaluated to create value and falls under the subcategory big data analytics 
-which mainly focusses on the analysis process. 
+The project belongs to the umbrella term big data. Big data is defined as a large set of information
+which has to be stored and processed to create value. The analyis represents a part of this and is 
+referred to as big data analytics. 
 
-The term Analytics is used to describe a systematical analysis of data of any format. Analytics is 
+The term analytics is used to describe a systematical analysis of data of any format. Analytics is 
 about detecting hidden patterns, clusters and meaningful features ranging from simple detection 
-over deep analysis and predictions. The goal is to process the data in such a way that value is 
-created from it \cite[p.2]{Tanwar2015} \cite[p.8f]{Meier_2021}. The creation of value is closely linked to 
+over deep analysis to predictions. The goal is to process the data in such a way that value is 
+created \cite[p.2]{Tanwar2015} \cite[p.8f]{Meier_2021}. The creation of value is closely linked to 
 the use cases for which in-depth knowledge is required. Generally, literature distinguishes 
-between four main groups of analytics by grouping them according to the methodology 
-and their objectives starting with Descriptive Analytics. Descriptive Analytics is the simplest 
-form of Analytics and is often the first step for further research. Descriptive Analytics gives 
-information about what has happened in the past. Descriptive Analytics is often used for reporting 
-on relevant topics for operation such as KPIs, sales or revenue. Typically, visual presentation 
-methods are used for displaying the information. Diagnostic Analytics is based on Descriptive 
-Analytics but serves a different goal, since its goal is to give insights on why something has 
-happened in the past. Diagnostic Analytics evaluates the impact of features, detects correlations 
-and dependencies. Predictive Analytics takes this approach one step further as it predicts what 
+between four subsections of analytics by grouping them according to the methodology 
+and their objectives. Descriptive analytics is the simplest 
+form of analytics and is often the first step for further research. It gives 
+information about what has happened in the past and is mostly used for reporting. Diagnostic analytics is based on descriptive 
+analytics but serves a different goal, since its objective is to give insights on why something has 
+happened in the past. Diagnostic analytics evaluates the impact of features, detects correlations 
+and dependencies. Predictive analytics takes this approach one step further as it predicts what 
 is most likely going to happen in the future based on the knowledge gained from past data. It 
 creates models with the help of algorithms to determine the probability of outcomes. The final 
-step of Analytics is Prescriptive Analytics, which again is based on its predecessor. Prescriptive 
-Analytics predicts outcomes and recommends actions to avoid or support them respectively \cite[p.8f]{Meier_2021}.
+step of analytics is prescriptive analytics, which again is based on its predecessor. Prescriptive 
+analytics predicts outcomes and recommends actions to avoid or support them respectively \cite[p.8f]{Meier_2021}.
 
 This project contains elements of descriptive, diagnostics and predictive analytics. Using the 
-Crisp Dm process model (CHAPTER X), the data set is first analyzed and then a predictive model 
-is generated to classify new data based on known data.
+\ac{CRISP-DM} process model, the dataset is analyzed first. Afterwards a predictive model 
+is generated to classify new data based on known patterns.
 
 https://www.sigmacomputing.com/blog/descriptive-predictive-prescriptive-and-diagnostic-analytics-a-quick-guide/
 
 \subsubsection{Classification of the project}
 
-The research area that big data analytics covers is large and includes many different approaches
-starting with the input data, the learning methods and the model objective. 
+Big data analytics covers a large variety of research areas that differenciate mostly in their input
+and learning methodology. 
 
-Input data can come in various formats for which adequate storage solutions and machine learning 
+Input data exists in various formats for which adequate storage solutions and machine learning 
 algorithms are required. Conventional data is almost exclusively stored in structured data formats 
 while modern developments increasingly rely on semi- and unstructured data. Unstructured data has no
-fixed format, schema or structure. Structured data on the other hand has a fixed format and fits into 
-a predefined data model. Semi-structured data is an intermediate stage and is not based on a strict
-standard and often consists out of predefined tags like json. This project utilizes semi-structured 
-data for the collection which is converted into a structured format for the modelling. 
+fixed format, scheme or structure. Structured data on the other hand has a fixed format and fits into 
+a predefined data models. Semi-structured data is an intermediate stage and is not based on a strict
+standard and often consists out of predefined tags like \ac{JSON}. This project utilizes semi-structured 
+data during the collection-phases which is converted into a structured format for the modelling. 
 
 The fundamental learning methods are unsupervised, supervised and reinforced learning with 
-semi-supervised learning as a subcategory. the methods differ in how the model learns and which 
+semi-supervised learning as a subcategory. The methods differ in how the model learns and which 
 input data is required \cite[4]{2018VDMAQuick}. For supervised learning a model is created which 
 maps input values, often refered to as targets, to a known label value. The model thus learns 
-on already correct and complete data through the detection of hidden pattern and causalities. 
+on already correct and complete data through the detection of hidden pattern and correlations. 
+The target labels are either nominal or numerical which results in a classification or regression 
+task \cite[46]{Paass2020}.
 Unsupervised learning forms the opposite as its input data has no target labels. The algorithm 
-is autonomous in deriving or recognizing common structures. Semi-supervised learning lays in 
+is autonomous in deriving or recognizing common structures \cite[97]{schacht2019blockchain}. Semi-supervised learning lays in 
 between both extremas and includes samples from both categories. Reinforcement learning is 
 fundamentally different from the learning methods with no training data being available at the 
-beginning. The algorithm acquires data only by interacting with the environment. Models train by 
+beginning \cite[7]{2018VDMAQuick}. The algorithm acquires data only by interacting with the environment. Models train by 
 tackling challenging problems and having their decisions immediately rewardedif successful or 
-punished if unsuccessful through feedback signals. For this project only supervised learning is 
+punished if unsuccessful through feedback signals \cite[98]{schacht2019blockchain}. For this project supervised learning is 
 used as the implementation is centered around the gradient boosting algorithm. 
 
-Furthermore the objective of the model can be divided into the most common targets of classification 
-and regression. In classification problems, the algorithm must assign a sample to a nominal number of labels. 
-A regression is present if the label has metric target values\cite[46]{Paass2020}. The objective for this 
-project is to assign songs to one of a total of three genres. Accordingly, a classification problem is 
-present. 
+%Furthermore the objective of the model can be divided into the most common targets of classification 
+%and regression. In classification problems, the algorithm must assign a sample to a nominal number of labels. 
+%A regression is present if the label has metric target values\cite[46]{Paass2020}. The objective for this 
+%project is to assign songs to one of a total of three genres. Accordingly, a classification problem is 
+%present. 
 
 %\subsubsection{Data Formats}
 %
