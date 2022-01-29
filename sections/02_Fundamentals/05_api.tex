@@ -37,10 +37,6 @@ can then use\cite[4]{gourley2002http}.
 To tell the server, which specific resource it wants, the client uses a \ac{URL}, which 
 uniquely identifies a resource on the web. 
 Figure \ref{fig:Description of different parts of a URL} shows how URLs are structured.
-It starts with the protocol to be used, which tells the server, how the communication should commence.
-Next the host is specified, usually in form of a domain. It refers to a specific
-server or a group of servers which have the resource or know where to find it.
-After the domain, the path to the requested resource is given.\cite[6f., 24]{gourley2002http}
 If the server knows where to find the resource and the client is authorized to see it,
 the server will send it to the client.
 In the context of APIs, a URL pointing to a specific resource is also called an "API endpoint".\cite{Cooksey2014}
@@ -68,18 +64,7 @@ HTTP request and response message.
     Source: \cite[47]{gourley2002http}
 \end{figure}
 
-Every HTTP request message has a start line.
-It contains a method, which tells the server what action to perform on the resource, the URL
-and some protocol information.\cite[47]{gourley2002http}
-After the start line, some headers are given. These contain information about the request,
-e.g. what types of data the client can accept or credentials for authorization.
-Some requests also contain a body to give some data to the server. \cite[52]{gourley2002http}
-
-A response message also starts with a start line, although it does not contain a method or URL
-Instead it contains protocol information and status information in the form of a numerical
-status code and status text.\cite[48]{gourley2002http}
-A response also contains headers and might contain a body.\cite[52]{gourley2002http}
-
+Every HTTP request message starts with a method.
 There are many HTTP methods defined, that can be used to delete a resource, store
 data on the server, get header information for a document and more.\cite[48]{gourley2002http}
 In this paper, only two HTTP methods are used, GET and POST.
@@ -88,11 +73,29 @@ It does not contain a body.\cite[48]{gourley2002http}
 A POST request message is used to send data to the server for processing. The data to be
 processed is sent in the request body.\cite[48]{gourley2002http}
 
-Status codes tell the client the status of a transaction.
-Some possible status might be success, the server not being able to find a resource, not
-being able to store the data, or the client being unauthorized to see the data\cite[49]{gourley2002http}.
+A request also includes the URL, protocol information and a set of headers, delivering
+additional information about the client \cite[47]{gourley2002http}.
+
+Response messages contain a status code instead of a method or URL.
+
+
+Every HTTP request message has a start line.
+It contains a method, which tells the server what action to perform on the resource, the URL
+and some protocol information.\cite[47]{gourley2002http}
+After the start line, some headers are given. These contain information about the request,
+e.g. what types of data the client can accept or credentials for authorization.
+Some requests also contain a body to give some data to the server. \cite[52]{gourley2002http}
+
+A response message does not contain a method or URL
+Instead it contains protocol information and status information in the form of a numerical
+status code and status text.\cite[48]{gourley2002http}
+A response also contains headers and might contain a body.\cite[52]{gourley2002http}
+
+Status codes tell the client if the transaction was successful or what type of problem occured\cite[49]{gourley2002http}.
+%Some possible status might be success, the server not being able to find a resource, not
+%being able to store the data, or the client being unauthorized to see the data\\
 There are many status codes defined in the HTTP standard,
-some of the most common ones are shown in \ref{tbl:Common status codes}
+some of the most common ones are shown in table \ref{tbl:Common status codes}.
 
 \begin{table}[H]
  \caption{Common status codes}
@@ -110,6 +113,16 @@ some of the most common ones are shown in \ref{tbl:Common status codes}
 \end{tabular}
 Source: \cite[50]{gourley2002http}
 \end{table}
+
+
+%There are many HTTP methods defined, that can be used to delete a resource, store
+%data on the server, get header information for a document and more.\cite[48]{gourley2002http}
+%In this paper, only two HTTP methods are used, GET and POST.
+%A GET request is used to ask the server to send a resource to the client.
+%It does not contain a body.\cite[48]{gourley2002http}
+%A POST request message is used to send data to the server for processing. The data to be
+%processed is sent in the request body.\cite[48]{gourley2002http}
+
 
 \subsubsection{JSON}
 
