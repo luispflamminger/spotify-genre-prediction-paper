@@ -41,7 +41,7 @@ In this dataset, there are no null values present.
 
 As this data comes from one single API there are no concerns for problems like data value conflicts or
 referential integrity, which means that the dataset is now clean and can be prepared for input into sklearn's
-Gradient Boosting Classifier, which is used for training.
+\emph{GradientBoostingClassifier}, which is used for training.
 The classifier only supports integer values as labels, which means that the category data needs to be encoded.
 This is done by defining a function \emph{encode\_target}, which takes the dataframe and the name of the column containing
 the target. It then maps an integer to each unique value in the target column, adds a new \emph{target} column in the
@@ -82,7 +82,7 @@ This way, the best form of input data can be found without the overhead of resou
 
 To be able to easily train models using different forms of input data, a method \emph{eval\_prep} was created,
 which takes a dataframe, a list of all feature column names and the label column name. It then splits the dataframe
-into train and test sets, trains a Gradient Boosting Classifier and returns a simple score.
+into train and test sets, trains a \emph{GradientBoostingClassifier} and returns a simple accuracy score.
 This process is explained in depth in the modeling section.
 
 First, the regular dataframe is used as input data, resulting in an accuracy score of $0.8505$.
@@ -90,9 +90,10 @@ First, the regular dataframe is used as input data, resulting in an accuracy sco
 \begin{lstlisting}[language=Python]
     score = eval_prep(df, features, "target")
 \end{lstlisting}
+
 Next, mean removal, variance scaling and standardisation are attempted, by using the \emph{StandardScaler}
-class from sklearn to transform the data. Below is the code for standardization, but the class can also do
-mean removal, by passing the parameter \emph{with\_std=False}, or variance scaling by passing \emph{with\_mean=False}.
+class from sklearn to transform the data. The code for standardization is shown below.
+Mean removal and variance scaling work in the same way.
 
 \begin{lstlisting}[language=Python]
     X_s = df[features]
@@ -116,12 +117,12 @@ This results in the following scores, beating the untransformed data in all case
 \end{itemize}
 
 Next \ac{PCA} is attempted using sklearns \emph{PCA} class. It is able to take any dataset and reduce
-its dimensionality to any number of dimensions. The dimensionality was reduced from 13 to 2 dimensions
-and everything in between. Then the dimensionality resulting in the best score was output.
-\ac{PCA} was done both on the raw dataset and in combination with standardized data (both before and afterwards)
+its dimensionality to any number of dimensions. The dimensionality was reduced to all dimensions
+between 2 and 13 to see, which dimensionality results in the best score.
+\ac{PCA} was done both on the raw dataset and in combination with standardized data (both before and afterwards).
 
 \ac{PCA} did not yield good results in this dataset. The score for all of the combination was always best
-when keeping 13 dimensions, getting worse when removing more dimensions. Also the score with 13 principal
+when keeping 13 dimensions, getting worse while removing more dimensions. Also the score with 13 principal
 components was worse than using the regular features, as seen here:
 
 \begin{itemize}
@@ -130,9 +131,9 @@ components was worse than using the regular features, as seen here:
     \item Standardization before PCA with 13 components: $0.8277$
 \end{itemize}
 
-As the results using \ac{PCA} do not improve the score, the code is not shown here, but can be found in the appendix.
-The results from testing data transformation and dimension reduction with this dataset and a default \emph{GradientBoostingClassifier}
-are, that the model benefits the most from standardized data improving the overall score compared to the raw dataset
+As the results using \ac{PCA} do not improve the score, the code is not shown here.
+Testing data transformation and dimension reduction with this dataset and a default \emph{GradientBoostingClassifier}
+shows, that the model benefits slightly from standardized data, improving the overall score compared to the raw dataset
 by $0.19\%$. Therefore, standardized data is used going forward.
 
 Now that all columns needed for training the model are prepared, the dataset needs to be split in 
