@@ -3,7 +3,7 @@
 After the completion of the modelling phase, the next step is to evaluate the results. The evaluation is split into 
 the evaluation of the model itself followed by the evaluation of the overall process. 
 
-\subsection{Gradient Boosting Evaluation}
+\subsubsection{Gradient Boosting Evaluation}
 
 In this section the gradient boosting algorithm will observed in more detail by the most common metrics. Additionally, it also
 will be compared with the much simpler classification tree algorithm to highlight commonalities and different approaches between 
@@ -17,7 +17,7 @@ The first step of a deeper analysis is to create a confusion matrix for all cate
 visualizing the performance by clustering the the output. The \(x1\)-axis represents the predicted values for the classes 
 while the \(x2\)-axis stands of actual (correct) values \cite[p.235]{Davis_2006}. For this analysis three numbered classes \(1\) to \(1\) are necessary that 
 typify the categories hiphop, rock and jazz in the stated order. The confusion matrix reveals four combinations of predicted 
-and actual values (1). For Gradient Boosting the confusion matrix looks like the following XXX.
+and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting the confusion matrix is displayed in table \ref{tbl:gb_confusion_matrix}.
 
 \begin{table}[H]
   \centering
@@ -30,7 +30,7 @@ and actual values (1). For Gradient Boosting the confusion matrix looks like the
     class 2   &  false positive &  true negative    \\
     \bottomrule
     \end{tabular}
-  \caption{Evaluation: Confusion Matrix}%
+  \caption{Confusion matrix}%
   \label{tbl:evaluation_confusion_matrix}%
 \end{table} 
 
@@ -47,7 +47,7 @@ and actual values (1). For Gradient Boosting the confusion matrix looks like the
     all    &  509 &  1490 &  677 &  2676 \\
     \bottomrule
     \end{tabular}
-  \caption{Evaluation: Gradient Boosting Confusion Matrix}%
+  \caption{Gradient boosting confusion matrix}%
   \label{tbl:gb_confusion_matrix}%
 \end{table} 
 
@@ -56,7 +56,7 @@ between \emph{hiphop} and \emph{jazz}. This result however has little significan
 \(1400\), is significantly larger than the amount of both \emph{hiphop} and \emph{jazz} tracks. An evaluation based on absolute numbers would lead to 
 misleading results partly due to the imbalance of the dataset. 
 
-A better approach is to look at the following metrics which can be derived form the confusion matrix for every category \cite[p.235]{Davis_2006} (3). 
+A better approach is to look at the following metrics which can be derived form the confusion matrix for every category \cite[p.235]{Davis_2006} \cite[p.862]{fawcett2006introduction}(\ref{tbl:gb_classification_Report}). 
 
 \begin{equation*}
   \begin{aligned}
@@ -64,7 +64,7 @@ A better approach is to look at the following metrics which can be derived form 
     \\
     recall &= \;\frac{true\:positive}{true\:positive\;+\;false\:negative}
     \\
-    f1-score &= \;\frac{precision\;*\;recall}{precision\;+\;recall}
+    f1-score &= \;2\;*\;\frac{precision\;*\;recall}{precision\;+\;recall}
   \end{aligned}
 \end{equation*}
 
@@ -79,7 +79,7 @@ A better approach is to look at the following metrics which can be derived form 
        jazz &      0.84 &   0.79 &     0.79 &     681 \\
     \bottomrule
     \end{tabular}
-  \caption{Evaluation: Gradient Boosting Classification Report}%
+  \caption{Gradient boosting classification report}%
   \label{tbl:gb_classification_Report}%
 \end{table} 
 
@@ -108,14 +108,14 @@ models in which the overall accuracy plays a subordinate role, such as that all 
 to visualize such problems to find optimal solutions. A model whose results are close to the diagonal classifies data worse than a 
 model whose curve is as close as possible to the point \((0/1)\) in the coordinate system. This performance is often measured by means of 
 the \ac{AUC}, which is derived directly from the \ac{ROC}. With help of the \ac{AUC} comparability between models is possible. The \ac{ROC} and \ac{AUC} for 
-the project are shown in figure XXXX (sklearn + theroy).
+the project are shown in figure \ref{fig:roc_and_auc_for_gb_and_dt} \cite[p.862f]{fawcett2006introduction} \cite{scikit-roc_and_auc}.
 
   \begin{figure}[H]
     \centering
     \subfloat[\centering Gradient Boosting]{{\includegraphics[width=6cm]{gb_roc_and_auc.png} }}%
     \qquad
     \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{dt_roc_and_auc.png} }}%
-    \caption{Evaluation: Comparison of ROC and AUC}%
+    \caption{Comparison of ROC and AUC}%
     \label{fig:roc_and_auc_for_gb_and_dt}%
 \end{figure}
 
@@ -129,14 +129,14 @@ further research.
 
 In addition, a very different evaluation can be performed. It is also interesting to take a closer look on the input data with help of 
 the so-called feature importance. The feature importance is a measure of how much impact a feature had for the classification of the 
-dataset and is presented in the following figure for both gradient boosting and decision trees (sklearn). 
+dataset and is presented in the following figure \ref{fig:feature_inportance_for_gb_and_dt} for both gradient boosting and decision trees \cite{scikit-learn_feature_importance}. 
 
 \begin{figure}[H]
   \centering
   \subfloat[\centering Gradient Boosting]{{\includegraphics[width=6cm]{gb_feature_importance.png} }}%
   \qquad
   \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{dt_feature_importance.png} }}%
-  \caption{Comparison of Feature Importance}%
+  \caption{Comparison of feature importance}%
   \label{fig:feature_inportance_for_gb_and_dt}%
 \end{figure}
 
@@ -149,7 +149,7 @@ The features that theoretically distinguish the genres from another play the mos
 more subjective featues only play a subordinate role. This result is positive both for theory and the machine learning model. The result states 
 that music theory can be confirmed by real-world examples while giving credibility and plausibility to the model.
 
-\subsection{Process Evaluation}
+\subsubsection{Process Evaluation}
 
 The evaluation of the overall process is complicated as there are many unknowns starting with the data itself. The data used is preprocessed by 
 Spotify without detailed definition and theoretical basis. The features are furthermore heavily subjective which adds another layer of 
@@ -185,4 +185,3 @@ experience. For this reason, the result can be considered promising.
 %- Mehr optionen zu hyperparameter
 %- Evaluation und Schlüsse korrekt? -> Daten vielleicht nicht aussagekräftig
 %- Allgemein viel selbstgeschriebenes Coding -> fehleranfällig, da neu in Materie
-
