@@ -139,7 +139,7 @@ A correlation matrix is used for this purpose. This shows on a scale between \(1
 features correlate with each other. Since every song uses every feature,
 a high correlation here does not mean that the features often appear together,
 but how similar the values per song are. To start with an overall look over the data,
-fig. 1  shows a genre independent matrix.
+fig. \ref{fig:du_cm_overall}  shows a genre independent matrix.
 This means that the features of all songs that could be gathered in the step of data
 collection were analyzed to create this figure. 
 
@@ -184,7 +184,7 @@ These correlations above now show the matrix on a category-specific basis.
 It can be seen that the patterns described above also appear there.
 However, the average correlation changes depending on the category.
 For example, \emph{\emph{hiphop}} has the same characteristics as the independent matrix category but shows
-fundamentally more negative correlations (cf. Fig. 1 with Fig. 2 ).
+fundamentally more negative correlations (cf. Fig. \ref{fig:du_cm_categorie_dependent}).
 
 \subsubsection{Correlation Music theorie - Data}
 In the final step of Data Understanding,
@@ -213,7 +213,7 @@ with a minimum value of \(-32.06\) and a maximum value of \(2.044\).
     \label{fig:du_dp_bp_ln_categorie_dependent}%
 \end{figure}
 
-Figure 1  shows a so-called distribution plot.
+Figure \ref{fig:du_dp_bp_ln_categorie_dependent} shows a so-called distribution plot.
 The X-axis contains the scale of the feature used (in this case \emph{loudness}).
 The Y-axis reflects the density of the respective category, meaning the more songs are found in the respective value, the higher the density.
 As can be seen in the figure, all categories offer a very wide range of volume levels.
@@ -238,10 +238,10 @@ The lowest value overall is \(0.0\) while the highest goes up to \(0.989\).
     \qquad
     \subfloat[\centering Boxplot: \emph{instrumentalness}]{{\includegraphics[width=4cm]{output_instumentelness_boxplot.png} }}%
     \caption{\emph{instrumentalness} compared in the different categories}%
-    \label{du_dp_bp_instr_categorie_dependent}%
+    \label{fig:du_dp_bp_instr_categorie_dependent}%
 \end{figure}
 
-For a better understanding, Figure x  also shows a distribution plot,
+For a better understanding, Figure \ref{fig:du_dp_bp_instr_categorie_dependent}  also shows a distribution plot,
 but adapted to the current feature.
 It shows that both \emph{\emph{hiphop}} and \emph{rock} are almost exclusively found in the \(0.0\) to \(0.1\) range.
 This means that songs in these categories almost only contain vocals.
@@ -265,10 +265,10 @@ This is clearer for \emph{rock} with an average value of \(0.7531\).
     \qquad
     \subfloat[\centering Boxplot: \emph{energy}]{{\includegraphics[width=4cm]{output_energy_boxplot.png} }}%
     \caption{\emph{energy} compared in the different categories}%
-    \label{du_dp_bp_enrg_categorie_dependent}%
+    \label{fig:du_dp_bp_enrg_categorie_dependent}%
 \end{figure}
 
-If we now look at the data in a distribution plot (Figure x),
+If we now look at the data in a distribution plot (\ref{du_dp_bp_enrg_categorie_dependent}}),
 we see clear differences between the categories.
 \emph{jazz} spreads over the whole graph but has no high point.
 This can be attributed to the different types of \emph{jazz} (slow \emph{jazz}, free \emph{jazz}),
@@ -283,22 +283,37 @@ explain the characteristics of the individual genres.
 
 \begin{figure}[H]
     \centering
-    \subfloat[\centering Distribution plot: Speechiness]{{\includegraphics[width=4cm]{output_Speechiness.png} }}%
+    \subfloat[\centering Distribution plot: \emph{Speechiness}]{{\includegraphics[width=4cm]{output_Speechiness.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Speechiness]{{\includegraphics[width=4cm]{output_Speechiness_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{Speechiness}]{{\includegraphics[width=4cm]{output_Speechiness_Boxplot.png} }}%
     \qquad
-    \subfloat[\centering Distribution plot: Danceability]{{\includegraphics[width=4cm]{output_Danceability.png} }}%
+    \label{fig:du_ds_bp_speechiness}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: \emph{danceability}]{{\includegraphics[width=4cm]{output_Danceability.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Danceability]{{\includegraphics[width=4cm]{output_Danceability_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{danceability}]{{\includegraphics[width=4cm]{output_Danceability_Boxplot.png} }}%
     \qquad
-    \subfloat[\centering Distribution plot: Accousticness]{{\includegraphics[width=4cm]{output_accousticness.png} }}%
+    \label{fig:du_ds_bp_danceability}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: \emph{accousticness}]{{\includegraphics[width=4cm]{output_accousticness.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Accousticness]{{\includegraphics[width=4cm]{output_accousticness_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{accousticness}]{{\includegraphics[width=4cm]{output_accousticness_Boxplot.png} }}%
     \qquad
-    \subfloat[\centering Distribution plot: Valence]{{\includegraphics[width=4cm]{output_valence.png} }}%
+    \label{fig:du_ds_bp_accousticness}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: \emph{valence}]{{\includegraphics[width=4cm]{output_valence.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Valence]{{\includegraphics[width=4cm]{output_valence_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{valence}]{{\includegraphics[width=4cm]{output_valence_Boxplot.png} }}%
     \qquad
     \caption{Different features visualized in distribution- and boxplots}%
-    \label{fig:du_ds_bp_comparison}%
+    \label{fig:du_ds_bp_valence}%
 \end{figure}
