@@ -3,13 +3,13 @@
 \subsubsection{The Classifier}
 
 For training the Gradient Boosting Algorithm, the \emph{GradientBoostingClassifier} class from 
-scikit learn is used. It is part of a group of classes offering all sorts of ensemble methods.
-As explained in \{Grundlagenteil Schwabe\} ensemble methods combine the predictions of several
+the scikit learn Python library is used. It is part of a group of classes offering different ensemble methods.
+As explained in section \ref{sec:Gradient Boosting}, ensemble methods combine the predictions of several
 weak learners to generate a more robust model and reduce overfitting issues.
 sklearn supports averaging methods like Bagging and Random Forests, which take the average of each learners prediction
 as their output. It also supports Boosting Methods like AdaBoost or Gradient Boosting, which
-build base estimators sequentially improving the output each time. Sklearn also provides 
-a classifier and regressor model for each method.
+build base estimators sequentially, improving the output each time.
+sklearn also provides a classifier and regressor model for each method.
 
 The Gradient Boosting Classifier supports binary and multi-class classification and uses
 20 hyperparameters to control the size of each regression tree, the number of trees,
@@ -40,50 +40,60 @@ Validation curves can be used to see, how a model's score changes when modulatin
 Here, an important distinction between the training and cross-validation score has to be made.
 The training score is the accuracy the model achieves, when being scored on the same data it was trained on.
 A very high training score could be a sign of overfitting.
-The cross-validation score is the mean accuracy achieved during 5-fold cross validation and is a good measure
+The cross-validation score (cv score) is the mean accuracy achieved during 5-fold cross validation and is a good measure
 of the actual performance of the model.
 
-Figures \ref{fig:}, \ref{fig:} and \ref{fig:}
 
+Figure \ref{fig:Validation Curves modulating 3 hyperparameters} shows the curves for each hyperparameter. The shaded
+areas around the graph are the standard deviation, while the graph itself represents the mean score between 5 folds.
 
-\subsubsection{Cross Validation}
+Figure \ref{fig:Validation Curves modulating 3 hyperparameters}a shows the best cv score with a learning rate
+between 0 and 0.2, declining as it approaches one.
+The training score rises as the learning rate increases, which indicates, that the model becomes less generalizable and
+more overfitted as the learning rate increases.
+Because of these results, only values between 0.01 and 0.25 are considered during hyperparameter tuning.
 
-Cross Validation is a method structure the dataset for modelling. It allows the use of 
-one single dataset for both training and validation as the dataset is randomly split into \(N\) N sections. Each 
-section contains an equal distribution of label data as the original dataset. One subset is reserved as a 
-validation dataset while the other subsets are used for the modelling of the dataset. The modelling takes place 
-N times and for every iteration another subset is used for validation. Therefore \(N\) models are created in total. 
-Each model can agian be tested against the subset that is reserved for validation with the best model chosen \cite[p.8f]{lewis2000introduction}. 
+The cv score stays relatively flat as the number of estimators goes beyond 25 (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
+The training score increases slightly.
+This indicates, that a training score close to, but above 25 might be optimal. As the results are not very clear,
+a range between 50 and 200 is used for optimization.
 
-\subsubsection{Hyperparameter Tuning}
+For \emph{max\_depth}, the cv score stays relatively flat between 2 and 13 (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
+The training score on the other hand increases rapidly from 0 to 7.5, where it reaches its maximum.
+Because of this, a range between 2 and 6 is used for hyperparameter tuning.
 
-Sklearn also provides methods for Hyperparameter tuning. In this project, Exhaustive Grid Search was used to 
-tune hyperparameters. To perform this search, the class GridSearchCV can be used. It takes an 
-estimator, in our case the Gradient Boosting Classifier, and a grid of parameters.
-In this case, the hyperparameters are the parameters of GradientBoostingClassifier as 
-explained above. This codeblock shows a parameter grid, as it is defined in this project.
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering learning\_rate]{{\includegraphics[width=0.45\textwidth]{validation_curve_learning_rate} }}%
+    \qquad
+    \subfloat[\centering n\_estimators]{{\includegraphics[width=0.45\textwidth]{validation_curve_n_estimators} }}%
+    \qquad
+    \subfloat[\centering max\_depth]{{\includegraphics[width=0.45\textwidth]{validation_curve_max_depth} }}%
+    \caption{Validation Curves modulatng 3 hyperparameters}%
+    \label{fig:Validation Curves modulating 3 hyperparameters}%
+\end{figure}
+
+The parameter grid is given as a Python dictionary containing the parameter name as keys and a list of values for
+each key. All undefined hyperparameters are kept at default.
+The grid used for training with the value ranges found above looks like this:
 
 \begin{lstlisting}[language=Python]
     param_grid = {
-        "loss": ["deviance", "exponential"],
-        "n_estimators": [97, 98, 99, 100, 101, 102, 103],
-        "learning_rate": [0.8, 0.9, 0.1, 0.11, 0.12],
-        "criterion": ['friedman_mse', 'squared_error'],
-        "min_samples_split": [1, 1.5, 2, 2.5, 3],
-        "min_samples_leaf": [1],
-        "max_depth": [1, 2, 3, 4, 5],
-        "random_state": [42],
-        "max_features": [None, 0.95, 0.90]
-}
+        "learning_rate": [0.01, 0.04, 0.07, 0.1, 0.13, 0.16, 0.19, 0.22, 0.25],
+        "n_estimators": [50, 75, 100, 125, 150, 175, 200],
+        "max_depth": [2, 3, 4, 5, 6]
+    }
 \end{lstlisting}
 
-The parameter grid is given as a Python dictionary containing the parameter name as keys and 
-an array of values for each key. Additionaly a GradientBoostingClassifier object is defined 
-and both are passed into the GridSearchObject.
+The grid and a \emph{GradientBoostingClassifier} object are passed into a \emph{GridSearchCV} object
+which executes the grid search using 5-fold CV.
 
 \begin{lstlisting}[language=Python]
     gbc = GradientBoostingClassifier(random_state=45)    
-    search = GridSearchCV(gbc, param_grid)
+    search = GridSearchCV(gbc, param_grid,
+        n_jobs=-1,
+        error_score="raise",
+        verbose=1)
 \end{lstlisting}
 
 The search object's fit method combines cross-validation, hyperparameter tuning and classifier
@@ -91,92 +101,67 @@ fitting to find the best possible combination of hyperparameters to the estimato
 This is done in the following way:
 
 \begin{enumerate}
-    \item An estimator is created using the first combination of hyperparameters. In the current
-    example, this is equivalent to creating the following estimator.
-    \begin{lstlisting}[language=Python]
-        estimator = GradientBosstingClassifier(loss="deviance", n_estimators=97, learning_rate=0.8, criterion='friedman_mse', min_samples_split=1, min_samples_leaf=1, max_depth=1, random_state=42, max_features=None)
-    \end{lstlisting}
-    \item The newly created classifier is fitted to the training data using this set of parameters using 5-fold cross validation.
-    When this is done, an average of the five scores resulting from cross-validation is built.
-    This average is now used as the score for this specific combination of parameters.
+    \item An estimator is created using the first combination of hyperparameters.
+    \item The training set is split into five folds and each fold is used once for calculating accuracy,
+    with the other four used for training. The average of the five scores is used as the final score for
+    this specific set of parameters.
     \item The score is saved together with the parameters
-    \item All of the above steps are repeated with every possible combination of parameters from the 
+    \item These steps are repeated with every possible combination of parameters from the 
     parameter grid. This results in a score for every set of parameters.
     \item As every model was fitted using the same method, it is clear that the model with the highest
-    score is using the best hyperparameters. A new model is trained without cross-validation so using all
-    data, to create the final model using the best parameters.
+    score is using the best hyperparameters. A new model is trained without cross-validation using all
+    available training data, to create the final model.
 \end{enumerate}
 
-The model created by grid search can then be evaluated using test data that was not used in cross validation.
-Executing this GridSearch in Python is done be calling the fit method of the search object defined in the code above 
-using the train features and labels.
+The complete standardized dataset is split in 80\% train and 20\% test data.
+The samples are shuffled before splitting to ensure an even distribution of data.
+Then features and labels are seperated for input into the classifier.
+
+\begin{lstlisting}[language=Python]
+    train, test = train_test_split(df_s, test_size=0.2, random_state=45, shuffle=True)
+
+    X_train = train[features]
+    X_test = test[features]
+    y_train = train["target"]
+    y_test = test["target"]
+\end{lstlisting}
+
+Then hyperparameter tuning and estimator fitting is started using the training features and labels.
 
 \begin{lstlisting}[language=Python]
     search.fit(X_train, y_train)
 \end{lstlisting}
 
-After fitting, the search object can be used as if it was a normal estimator built with the optimal 
-hyperparameters.
-To see, which hyperparameters were optimal, the get\_params can be used.
-It's output looks like this:
+The parameter grid above has 315 possible combinations. As each is fitted on five sets of folds,
+there are 1575 models fitted in total during this process.
+
+The resulting model with the best cross-validation score used the following parameters:
+\begin{itemize}
+    \item learning\_rate: 0.1
+    \item n\_estimators: 100
+    \item max\_depth: 3
+\end{itemize} 
+
+Calculating the accuracy of the resulting model using the test set resulted in an accuracy score of $0.8591$.
+
+A weakpoint of the parameter grid used is, that the values for \emph{n\_estimators} are spread by increments of 25,
+leaving possible room for improvement.
+To check, if the model could be improved, another parameter grid was used:
 
 \begin{lstlisting}[language=Python]
-    {'cv': 5,
-    'error_score': nan,
-    'estimator__ccp_alpha': 0.0,
-    'estimator__criterion': 'friedman_mse',
-    'estimator__init': None,
-    'estimator__learning_rate': 0.1,
-    'estimator__loss': 'deviance',
-    'estimator__max_depth': 3,
-    'estimator__max_features': None,
-    'estimator__max_leaf_nodes': None,
-    'estimator__min_impurity_decrease': 0.0,
-    'estimator__min_samples_leaf': 1,
-    'estimator__min_samples_split': 2,
-    'estimator__min_weight_fraction_leaf': 0.0,
-    'estimator__n_estimators': 100,
-    'estimator__n_iter_no_change': None,
-    'estimator__random_state': 45,
-    'estimator__subsample': 1.0,
-    'estimator__tol': 0.0001,
-    'estimator__validation_fraction': 0.1,
-    'estimator__verbose': 0,
-    'estimator__warm_start': False,
-    'estimator': GradientBoostingClassifier(random_state=45),
-    'n_jobs': -1,
-    'param_grid': {'loss': ['deviance', 'exponential'],
-        'n_estimators': [97, 98, 99, 100, 101, 102, 103],
-        'learning_rate': [0.8, 0.9, 0.1, 0.11, 0.12],
-        'criterion': ['friedman_mse', 'squared_error'],
-        'min_samples_split': [1, 1.5, 2, 2.5, 3],
-        'min_samples_leaf': [1],
-        'max_depth': [1, 2, 3, 4, 5],
-        'random_state': [42],
-        'max_features': [None, 0.95, 0.9]},
-    'pre_dispatch': '2*n_jobs',
-    'refit': True,
-    'return_train_score': False,
-    'scoring': None,
-    'verbose': 0}
+    param_grid = {
+        "learning_rate": [0.01, 0.04, 0.07, 0.1, 0.13, 0.16, 0.19, 0.22, 0.25],
+        "n_estimators": [97, 98, 99, 100, 101, 102, 103],
+        "max_depth": [2, 3, 4, 5, 6]
+    }
 \end{lstlisting}
 
-All fields starting with "estimator\_\_" contain the optimal hyperparameters for the data.
-Even though a broad spectrum of values was given in the search grid, most of the optimal values 
-are equal to the default values given by sklearn. This might suggest, that the developers
-set the default values using a similar dataset to the one used in this project.
+This did not deliver a better result.
+
+Even though a broad spectrum of values was given in the search grid, the optimal values 
+are equal to the default parameters for the estimator set by \emph{sklearn}.
+This might suggest, that the developers set the default values using a similar dataset to the one used in this project.
 
 Although many combinations were evaluated, there is still a possibility, that this is a local 
 maximum and a set of hyperparameters that is far different from the ones tested here are actually
-optimal. Trying out every possible combination of values would require a great amount of 
-computing resources, as the Grid Search shown above already took more than 1.5 hours on a 
-modern 16 core CPU.
-
-Finally the model can be evaluated using the test set defined previously. This set has never been 
-seen by the model even while doing cross validation.
-
-\begin{lstlisting}[language=Python]
-    search.score(X_test, y_test)
-\end{lstlisting}
-
-The estimators score function shows a 86.286\% accuracy for the final model using the test set.
+optimal. 
