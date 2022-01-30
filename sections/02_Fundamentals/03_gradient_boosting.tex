@@ -23,8 +23,8 @@ very end of a decision tree are referred to as leaves. Leaves do not split data 
 only mark the end of a decision tree. When reached, leaves categorize or predict a final output 
 value depending on the prediction task. Nodes in-between the root node and leaves are called 
 internal nodes. Like the root, internal nodes are responsible for the recursive splitting of 
-the data. Branches connect Nodes with another. For classical trees, information only flows from 
-top to bottom of the tree. 
+the data. Branches connect Nodes with another \cite[p.4]{lewis2000introduction}. For classical trees, information only flows from 
+top to bottom of the tree.
 
 %In practice, there exist various Algorithms for computing Decision Trees with the most common ones 
 %being: ID3, C4.5, C5.0 and \ac{CART}. Each algorithm follows the same principle of regressively finding 
@@ -40,7 +40,7 @@ principle of regressively finding perfect splits to seperate the data but differ
 the ideal splitting criteria, which strongly influences the structure of the tree, its accuracy and 
 performance. Thus each implementation has benefits and constraints which have to be taken into account
 when determining the model. This project uses the python library sklearn to implement a classification tree. 
-Sklearn is based on the \ac{CART} algorithm \cite[10.10.6]{sklearn Decision Trees}.
+Sklearn is based on the \ac{CART} algorithm \cite{scikit-decision_tree}.
 
 
 \subsubsection{Decision Tree Algorithm}
@@ -84,47 +84,52 @@ contained within the root node from which the division into subtrees start. Each
 as \(Q_{m}\) and contains a subgroup \(N_{m}\) of the input dataset. Nodes split their respective groups of data 
 further or act as a final classifier in the form of a leaf. The split can be 
 binary or multiway. \ac{CART} only utilizes binary splits and divides the Node \(Q_{m}\) into two repective subgroups 
-labeled as \(Q^{left}_{m}\) and \(Q^{right}_{m}\). 
+labeled as \(Q^{left}_{m}\) and \(Q^{right}_{m}\) \cite{scikit-decision_tree}.
 
 The algorithm is greedy and thus determines for each split an optimal division of the samples according to 
 the impurity of both subgroups. The goal for every split is to divide the group of data into two subgroups which are 
 more homogeneous as the origin and maximize the overall homogenity. The division of the data is 
 always performed using a feature, on the basis of which the samples can be divided either by a threshold for 
 nominal values or an is-equal-to query for categorical values. The split is mathematically described as the 
-following (1). It consists out of the the feature \(j\) and a criteria \(t_{m}\).
+following equation \ref{equ:dt_split}. It consists out of the the feature \(j\) and a criteria \(t_{m}\) \cite{scikit-decision_tree}.
 
 \begin{equation}
-\theta = (j, t_{m})
+    \theta = (j, t_{m})
+    \label{equ:dt_split}
 \end{equation}
 
 \textbf{Splitting Criteria and Information Gain:}
 
-The optimal split is determined by selecting the feature that has the highest information gain. Information gain 
-stands for the knowledge and information about the dependence between features and labels gained by splitting a group 
-of samples by a feature. Ideally, the information gain is maximized. Mathematically spoken, the split is optimal if 
-the nformation gain \(G(Q_{m}, \theta)\) (2) is minimized as shown in (3). 
+The optimal split is determined by selecting the feautre from which the most information can be gathered. There are multiple approaches 
+for finding this split with the most common one being the information gain. Ideally the gain should be maximised. A simplification 
+for the information gain is presented in (\ref{equ:dt_gain}). To recieve information gain, \(G(Q_{m}, \theta)\) must be subtracted from 
+the entropy of the parent node \cite[p.613f]{tangirala2020evaluating}. The simplification is to find the minimum \(G(Q_{m}, \theta)\) as stated in (\ref{equ:dt_min_gain}). Both
+approaches lead to the same result \cite{scikit-decision_tree}. 
 
 \begin{equation}
-G(Q_{m},\theta) = \frac{N^{left}_{m}}{N_{m}} H(Q^{left}_{m}, \theta ) + \frac{N^{right}_{m}}{N_{m}} H(Q^{right}_{m}, \theta )
+    G(Q_{m},\theta) = \frac{N^{left}_{m}}{N_{m}} H(Q^{left}_{m}, \theta ) + \frac{N^{right}_{m}}{N_{m}} H(Q^{right}_{m}, \theta )
+    \label{equ:dt_gain}
 \end{equation}
 
 \begin{equation}
-\theta ^* = \arg \min_{\theta}  G(Q_{m}, \theta)
+    \theta ^* = \arg \min_{\theta}  G(Q_{m}, \theta)
+    \label{equ:dt_min_gain}
 \end{equation}
 
 To determine the overall best \(G(Q_{m}, \theta)\) the respective impurities \(H\) for both subgroups \(Q^{left}_{m}\) 
 and \(Q^{right}_{m}\) are required. Each impurity is weighted according to its relative size 
 \(\frac{N^{left}_{m}}{N_{m}}\).
 
-The impurity \(H\) for \ac{CART} is calculated by the gini index. Gini index measures the probability that a sample 
+The impurity \(H\) for \ac{CART} is calculated by the gini index (\ref{equ:dt_gini}) \cite[p.613f]{tangirala2020evaluating}. Gini index measures the probability that a sample 
 does not belong to the category that represents the majority of the subgroup \cite[p.335]{James2021}. If both 
-categories of a subgroup are identical in size, the gini index reaches its maximum point at \(0,5\) (figure 1). The 
+categories of a subgroup are identical in size, the gini index reaches its maximum point at \(0,5\) (figure \ref{fig:coordinate_system_initial_dataset}). The 
 maximum of the gini index means the worst possible data constellation for a subgroup with maximum heterogeneity. 
 Gini index equal to \(0\) on the other hand represents the best possible result with the subgroup being fully 
-homogenous. \(p_{i}\) represents that probability that a sample belongs to the class \(j\).
+homogenous. \(p_{i}\) represents that probability that a sample belongs to the class \(j\) \cite[p.335]{James2021}.
 
 \begin{equation}
-Gini = 1 - \sum ^k_{j = 1}(p_{j})^2
+    Gini = 1 - \sum ^k_{j = 1}(p_{j})^2
+    \label{equ:dt_gini}
 \end{equation}
 
 \begin{figure}[H]
@@ -162,7 +167,7 @@ Acousticness:
 \end{equation*}
 
 The conclusion is that the feature \emph{danceability} creates a bettter initial prediction than \emph{acousticness} does. It is thus 
-determined to be the inital splitting criteria for the classification tree (figure 2). With the first iteration completed, the next iteration
+determined to be the inital splitting criteria for the classification tree (figure \ref{fig:theory_first_split}). With the first iteration completed, the next iteration
 will start with each leaf as its input. The second iteration will split the nodes further if no stop criteria is met. 
 
 \begin{figure}[H]
@@ -188,7 +193,7 @@ will be discussed in X and the implementation in more detail chapter.
 
 The second iteration has both nodes created by the first iteration as its input but only the yellow node requires further splitting as 
 the blue node is already fully classified. For the second iteration only the feature \emph{acousticness} is relevant as \emph{danceability} cannot 
-split this subgroup of the dataset further. The input data for the second split looks like the following (table 2) and the same calculation 
+split this subgroup of the dataset further. The input data for the second split looks like the following (table \ref{tbl:theory_input_data_second_step}) and the same calculation 
 takes place again. 
 
 \begin{table}[H]
@@ -204,7 +209,7 @@ takes place again.
         \bottomrule
         \end{tabular}       
     \caption{Theory: Input Data of second Split}%
-    \label{tbl:theory_input_data}%
+    \label{tbl:theory_input_data_second_step}%
   \end{table} 
 
   Acousticness: 
@@ -219,7 +224,7 @@ takes place again.
 \end{equation*}
 
 This time \emph{acousticness} leads to two fully homogeneous subgroups and thus marks the end of the classification tree as all samples are 
-classified correctly. The second split looks like the following with the total classification tree displayed in figure 4.
+classified correctly. The second split looks like the following with the total classification tree displayed in figure \ref{fig:dt_final_decision_tree}.
 
 \begin{figure}[H]
     \centering
@@ -253,16 +258,16 @@ classified correctly. The second split looks like the following with the total c
 
 In conclusion, decision trees can be assessed as follows. Starting with the advantages,
 the main benefit is the overall simplicity of decision trees, both from a technical and 
-business point of view. For researchers and developers, trees are easy to construct, require little
+business point of view \cite[p.339]{James2021}. For researchers and developers, trees are easy to construct, require little
 to no data preparation, are almost univerally applicable with a possibility of validation. 
 However, the simplicity for business should not be underestimated either. When comparing machine
 learning algorithms, the main comparison is often the accuracy of a model. The areas in which 
 decision trees stand out include visualization and comprehensibility. The decision tree algorithm 
-is a white box model that allows complete transparency and explainability \cite[p.339]{James2021} \cite[10.10.]{sklearn Decision Trees}. 
+is a white box model that allows complete transparency and explainability \cite[10.10.]{sklearn Decision Trees}. 
 
 The disadvantages of decision trees are again closely related to its simplicity. Overfitting and 
 the relative instability of decision trees are the main drawbacks and result in good momorization 
-but a comparatively weak generalization ability \cite[p.339]{James2021} \cite[10.10.]{sklearn Decision Trees}.
+but a comparatively weak generalization ability \cite[p.340]{James2021} \cite[10.10.]{sklearn Decision Trees}.
 
 \subsection{Gradient Boosting}
 \label{sec:Gradient Boosting}
@@ -271,14 +276,14 @@ but a comparatively weak generalization ability \cite[p.339]{James2021} \cite[10
 The gradient boosting algorithm is derived from \ac{GBM}, which are a family of 
 powerful machine learning algorithms with a certain procedure pattern for the creation of models. 
 In general, \ac{GBM}s are very flexible in their characteristics with the possibility of utilizing 
-multiple different machine learning algorithms as their foundation.
+multiple different machine learning algorithms as their foundation \cite{Natekin2013}.
 
 Boosting differs from classical approaches as it does not consist out of a single predictive 
 model but an ensemble approach. Ensemble algorithms contain multiple weak learners that form a 
 committee to create a strong prediction. Weak learners are often very simple forms of traditional 
 algorithms, like decision trees, and must just be able to predict parts of the dataset correctly. 
 Only the combination of many weak learners allows the model to perform overall accurate 
-predictions. The most common form of ensemble algorithms are bagging algorithms with random 
+predictions \cite{parr2022gb_explained_dtt}. The most common form of ensemble algorithms are bagging algorithms with random 
 forests as an example. Bagging, in essence, is the combination of multiple unique models. The 
 prediction is formed by aggregating the outputs from all models into a single representative 
 value. Typically, all models are derived from a single algorithm, like decision trees for random 
@@ -295,17 +300,18 @@ the dataset where it has previously performed poorly \cite[p.345f]{James2021}.
 
 The generic gradient boosting algorithm follows a sequence of three steps beginning with the initalization of
 of the dataset, over the sequential training and ending with a final output. At the beginning, an 
-additional initiation of the dataset and a loss function is necessary. The mathematical 
+additional initiation of the dataset and a loss function is necessary \cite{parr2022gb_explained_hrd}. The mathematical 
 representation of the dataset is like the one used for decision tees. A summary: \(x_{i}\) present the 
 explanatory features while \(y_{i}\) represents the corresponding label for one data point of the input 
 dataset \(N\) with a total number of \(n\) samples. 
 
 The mathematical goal of the algorithm is to reconstruct the unknown functional dependance \(f\) 
-between \(x_{i}\) and \(y_{i}\) with an estimate \(F^{*}\) for every data point, such that the specific Loss 
-Function \(L(y, \gamma)\) is minimized (5) \cite[p.1189]{Friedman_2001} \cite[2.1]{Natekin2013}. 
+between \(x_{i}\) and \(y_{i}\) with an estimate \(F^{*}\) for every data point, such that the specific loss 
+function \(L(y, \gamma)\) is minimized (\ref{equ:gb_theory}) \cite[p.1189]{Friedman_2001} \cite[2.1]{Natekin2013}. 
 
 \begin{equation}
-F^{*} = \arg \min_{\gamma} L(y,\gamma)
+    F^{*} = \arg \min_{\gamma} L(y,\gamma)
+    \label{equ:gb_theory}
 \end{equation}
 
 \textbf{Loss Function and Weak Learners:}
@@ -315,17 +321,19 @@ means that the prediction is close or identical to the observed label and the mo
 categorizes the sample correctly whereas a high loss implies that the model could not predict 
 the sample well. Given a particular learning task and dataset, different loss functions must 
 be considered as loss functions are only suitable for specific data and task constellations. The most common 
-loss function for binary classification is the so-called bernoulli loss (6). The bernoulli loss 
-can be transformed into a \(log(odds)\)-prediction (7) as it is better suited for further calculations. 
-Variations of (7) will be used in the following section to demonstrate the gradient boosting 
-procedure \cite[3.1]{Natekin2013}. 
+loss function for binary classification is the so-called bernoulli loss (\ref{equ:gb_bernoulli_loss}). The bernoulli loss 
+can be transformed into a \(log(odds)\)-prediction (\ref{equ:gb_loss_function}) as it is better suited for further calculations \cite[3.1]{Natekin2013} \cite{bischl2022introduction_ml_bernoulli_loss}. 
+Variations of (\ref{equ:gb_loss_function}) will be used in the following section to demonstrate the gradient boosting 
+procedure.
 
 \begin{equation}
-L(y_{m}, \gamma) = - log(likelihood)
+    L(y_{m}, \gamma) = - log(likelihood)
+    \label{equ:gb_bernoulli_loss}
 \end{equation} 
 
 \begin{equation}
-L(y_{m}, \gamma) = - y_{i} * log(odds) - log(1-p)
+    L(y_{m}, \gamma) = - y_{i} * log(odds) - log(1-p)
+    \label{equ:gb_loss_function}
 \end{equation}
 
 Additionally, a machine learning algorithm must be defined as a weak learner. For \ac{GBM}s there 
@@ -336,7 +344,6 @@ always regression trees, regardless of whether they are used for regression or c
 problems. The optimization parameters are almost identical as for standalone decision trees, 
 but the trees often look very different because they are specifically created as weak learners. 
 As a result, the decision trees often only consist out of very few layers with only 8-32 leaves.
-(QUELLE)
 
 \textbf{1. Initialization:}
 
@@ -365,17 +372,18 @@ It again consists out of eight samples with two features and two categories as t
 
 The first step is to set an initial prediction for all samples of the dataset. The initial 
 prediction is not unique for individual samples but a uniform value. The optimal initial 
-prediction can be calculated using the following equation (8). For \(F_{0}(x)\), representing the 
+prediction can be calculated using the following equation (\ref{equ:gb_initial_prediciton}) \cite[p.361]{Hastie_2009}. For \(F_{0}(x)\), representing the 
 initial prediction, a minimum of \(\gamma \) is searched for. The right-hand side of the equation 
 only consists out of a sum for each sample \(i\) (of the total dataset \(N\)) of the known loss function 
 with the respective label \(y_{i}\) and \(\gamma \) as its input. To find the low point of the equation, 
 the derivate of the loss function is required. The final calculation of the overall \(log (odds)\) 
 that a song is classified as \emph{hiphop} is the \(\log_{e}\) of the sum of songs of the category \emph{hiphop}
 divided by the sum of the songs of the category \emph{jazz}. The result can be checked graphically 
-as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)-prediction (figure 5). 
+as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)-prediction (figure \ref{fig:gb_turning_point-loss_function}). 
 
 \begin{equation}
     F_{0}(x) = \arg \min_{\gamma } \sum_{i= 1}^{n} L(y_{i}, \gamma)
+    \label{equ:gb_initial_prediciton}
 \end{equation}
 
 \begin{equation*}
@@ -385,7 +393,7 @@ as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)
 \begin{figure}[H]
     \centering
     \caption[]{Theory: Gradient Boosting Minimum for first Prediction}
-	\label{TurningPoint-LossFunctio}
+	\label{fig:gb_turning_point-loss_function}
     \includegraphics[width=0.5\textwidth]{TurningPoint-LossFunction.jpeg}
 \end{figure}
 
@@ -393,33 +401,35 @@ as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)
 
 With the completion of the initialization of the dataset the modelling can begin. The training is a sequential 
 process of constructing the regression trees with a total of \(M\) iterations. The first iteration 
-starts with \(m = 1\). The modelling consists out of four sub-steps which are numbered consecutively.
+starts with \(m = 1\). The modelling consists out of four sub-steps which are numbered consecutively \cite[p.1198]{Friedman_2001}.
 
 First, the \(log(odds)\)-prediction must be converted back into a probability \(p\) with the help of a 
-logistic function as probability is easier to use for classification (9). The result is 
-that all songs have the probability of \(0,63\) to belong to the category \emph{hiphop}.
+logistic function as probability is easier to use for classification (\ref{equ:gb_prediction}). The result is 
+that all songs have the probability of \(0,63\) to belong to the category \emph{hiphop}. QUELLE
 
 \begin{equation}
-p = \frac{e^{\log_{e}(odds)}}{1 + e^{\log_{e}(odds)}} 
+    p = \frac{e^{\log_{e}(odds)}}{1 + e^{\log_{e}(odds)}} 
+    \label{equ:gb_prediction}
 \end{equation}
 
 \begin{equation*}
-p = \frac{e^{\log_{e}(\frac{5}{3})}}{1 + e^{\log_{e}(\frac{5}{3})}} = 0,63
+    p = \frac{e^{\log_{e}(\frac{5}{3})}}{1 + e^{\log_{e}(\frac{5}{3})}} = 0,63
 \end{equation*}
 
-In the \textbf{first step} the \ac{PR}s \(r_{im}\) for each sample \(i\) of the dataset are created. The equation (10) 
+In the \textbf{first step} the \ac{PR}s \(r_{im}\) for each sample \(i\) of the dataset are created. The equation (\ref{equ:gb_redsiduals_theory}) 
 for calculating the \ac{PR} consists out of known fragments. For every sample \(i\) a PR \(r_{im}\) 
 is calculated using the derivative of the \(log(odds)\)-prediction with the label \(y_{i}\) and the 
-prediction of the last iteration \(F = F_{m - 1}\) as its input. Again, the equation can be 
+prediction of the last iteration \(F = F_{m - 1}\) as its input \cite[p.361]{Hastie_2009}. Again, the equation can be 
 transformed into a very simple equation. For each sample the \ac{PR} can be calculated by only 
-subtracting the previously calculated probability \(p\) from the observed label \(y\). Ideally, an additional 
-column is created in which the PRs are temporarily stored (table 4). 
+subtracting the previously calculated probability \(p\) from the observed label \(y\) \cite{parr2022gb_explained_hrd} \cite{parr2022gb_explained_gbd}. Ideally, an additional 
+column is created in which the PRs are temporarily stored (table \ref{tbl:theory_pseudo_residuals_1_iteration}). 
 
 \begin{equation}
     \begin{aligned}
         r_{im} &= - (\frac{\partial L(y_{i}, F(x_{i}))}{\partial F(x_{i})})_{F = F_{m - 1}}
         \\
         r_{im} &= (y_{i} - p_{i})
+        \label{equ:gb_redsiduals_theory}
     \end{aligned}
 \end{equation}
 
@@ -452,34 +462,35 @@ r_{1,1} = 1 - 0.625 = 0.375
 
 The \textbf{second step} constructs the regression trees out of the features of the samples with the corresponding 
 PR as the label. For this example, only tree stumps are created to simplify the implementation. 
-The regression tree for the first iteration is shown in figure 6. After the completion of the 
+The regression tree for the first iteration is shown in figure \ref{fig:gb_1_regression_tree}. After the completion of the 
 tree, terminal regions \(R_{jm}\) must be defined for every leaf. \(j\) starts with \(1\) and is increased for 
 every leaf \cite[p.1195]{Friedman_2001}. 
 
 \begin{figure}[H]
     \centering
     \caption[]{Theory: Regression Tree for first Iteration}
-	\label{gb_1_regression_tree}
+	\label{fig:gb_1_regression_tree}
     \includegraphics[width=0.5\textwidth]{gb_1_regression_tree.svg.pdf}
 \end{figure}
 
 In \textbf{step three}, following the completion of the regression tree, output values \(\gamma_{j, m}\) are calculated by using 
-the equation presented in (10). For each leaf in the tree \(\gamma_{j, m}\) is computed by finding 
-\(\gamma_{j, m}\) that minimizes the loss function (11). Like for the initialization step, the derivative has 
+the equation presented in (\ref{equ:gb_output_value_theory}). For each leaf in the tree \(\gamma_{j, m}\) is computed by finding 
+\(\gamma_{j, m}\) that minimizes the loss function (11) \cite[p.361]{Hastie_2009}. Like for the initialization step, the derivative has 
 to be created and must set equal to \(0\). And again, after a complicated transformation, a very simple 
 equation remains (11). The \(\gamma_{j, m}\)  can be calculated using only the \ac{PR} and the most 
 recent predicted probabilities \(p\) for all samples in the leaf. 
 
 \begin{equation}
     \begin{aligned}
-        \gamma_{jm} &= \arg \min_{\gamma}\sum_{x_{i} in R_{ij}} L(y_{i},F_{m-1}(x_{i} + \gamma))
+        \gamma_{jm} &= \arg \min_{\gamma}\sum_{x_{i} in R_{jm}} L(y_{i},F_{m-1}(x_{i}) + \gamma)
         \\
         \gamma_{jm} &= \frac{ \sum r_{im}}{\sum p_{i} * (1 - p_{i})}
+        \label{equ:gb_output_value_theory}
     \end{aligned}
 \end{equation}
 
 For \(R_{2,1}\), which contains track \emph{h1}, the calculation looks like the following. The output values of the complete 
-dataset are displayed in table 5. 
+dataset are displayed in table \ref{tbl:theory_output_values_1_iteration}. 
 
 \begin{equation*}
 \gamma_{\;2,1} = \frac{0.375\;*\;4}{(\:0.625\;*\;(1\;-\;0.625))\;*\;4} = 1.6 
@@ -507,19 +518,20 @@ dataset are displayed in table 5.
 
 \textbf{Step four} marks the end of the first iteration and creates a new prediction \(F_{m}(x)\) for each sample. 
 The new \(log(odds)\)-prediction is based on the last \(log(odds)\)-prediction plus the learning rate \(\nu\) multiplied by 
-the output values for the sample of the last regression tree (12) \cite[p.1203]{Friedman_2001}. Normally, there is only one 
+the output values for the sample of the last regression tree (\ref{equ:gb_new_prediction_theory}) \cite[p.1203]{Friedman_2001}. Normally, there is only one 
 output value for a sample which makes the summation sign obsolete. The learning rate \(\nu\) is a 
 hyperparameter for gradient boosting. For this example, a high \(\nu\) of \(0.6\) is used to better visualize 
 the changes. In practice a \(\nu \) in the order of \(0.1\) is common as a small learning rate tends to
 give better results but also requires much more iterations \cite[p.1206]{Friedman_2001}. 
 
 \begin{equation}
-F_{m}(x) = F_{m}(x- 1) + \nu * \sum_{j = 1}^{J_{m}} \gamma_{jm}I(x in R_{jm})
+    F_{m}(x) = F_{m}(x- 1) + \nu * \sum_{j = 1}^{J_{m}} \gamma_{jm}I(x in R_{jm})
+    \label{equ:gb_new_prediction_theory}
 \end{equation}
 
-The prediction \(F_{1}(x)\) for \emph{h1} looks as follows while the complete dataset is again displayed in table 6 with also 
+The prediction \(F_{1}(x)\) for \emph{h1} looks as follows while the complete dataset is again displayed in table \ref{tbl:theory_output_values_1_iteration} with also 
 the probabilites shown. As one can see, the probabilites for most samples got closer to the label. However, for track
-\emph{h5} the prediciton got worse. This is why multiple iterations are necessary to form a well-founded prediction. 
+\emph{h5} the prediciton got worse. This is why multiple iterations are necessary to form a well-founded prediction.
 
 \begin{equation*}
 F_{1}(x) = 0.51 + 0.6 * 1.6 = 1.47
@@ -601,7 +613,7 @@ for binary classification is \(0.5\) as it splits \(F_{M}(x)\) into two equal cl
 \textbf{3. Output:}
 
 Sample \emph{h1} has a final probability of \(0.93\) of belonging to the category \emph{hiphop}. \(0.93\) is by far greater than the 
-predefined threshold of \(0.5\) and thus \emph{h1} is classified as a track that belongs to the category \emph{hiphop}. Table 7 shows
+predefined threshold of \(0.5\) and thus \emph{h1} is classified as a track that belongs to the category \emph{hiphop}. Table \ref{tbl:theory_gb_final_output} shows
 that all samples are classified correctly but some less clear than others. A real-world implementation would consist 
 out of more iterative models with different regression trees and a different learning rate to enhance the 
 classification potential. Also the dataset would be very different with more samples that consist out of more features. 
@@ -634,12 +646,12 @@ the sample using the predefined threshold.
 
 Gradient boosting is a very powerful method as it can effectively capure complex dependencies for various machine 
 learning problems. \ac{GBM}s improve many existing algorithms, such as decision trees, because many problems associated 
-with single large models are (partially) solved by the iterative ensemble approach. 
+with single large models are (partially) solved by the iterative ensemble approach. QUELLE
 
 The main benefit over Decision Trees is the stability of gradient boosting. While large trees always have to make tradeoffs 
 between detail and overcategorization, gradient boosting can gradually get to a deeper and deeper level of detail thanks to 
 small trees with overall better generalization. Furthermore the flexbility of gradient boosting and boosting in general is massive 
-as it only represents the framework with many parameters to adapt the algorithm very specifically to the usecase.  
+as it only represents the framework with many parameters to adapt the algorithm very specifically to the usecase \cite[7.2]{Natekin2013}
 
 The drawbacks of gradient boosting often arise in practice. Gradient boosting has a significantly higher memory consumption and 
 build time as the model must be constructed sequentially. Also the evalutation is more time consuming as the sample must be processed 
