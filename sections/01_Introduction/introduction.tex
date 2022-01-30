@@ -1,48 +1,107 @@
 \section{Introduction}
 
-\subsection{Problem Definition and Goal}
-The amount of data collected every day is growing uncompromisingly. Further Proliferation of the Internet, Social Networks, 
-Search queries and increasing networking of IoT devices and sensors means that the amount of data is growing exponentially. 
-To remain competitive in their respective markets, companies must be able to extract value from the large amount of data.
- A conzept that decisively supports companies in exactly this task is Big Data. Big Data encompasses the entire process of data collection to analyzing it
- When combined with machine learning, Big Data unfolds its full potential. The combination allows very large data sets to be processed, 
- which is incredibly valuable for companies. This enables companies to capture their macro and microenvironment in data and create deciding business value. 
- Due to its wide range of applications, this field offers opportunities for improvement for companies of all kinds. 
- Even companies from the entertainment industry, such as Spotify, Netflix or Disney are already using these practices to improve the services they offer, 
- to differentiate themselves from the competition and to make the customer experience unique. 
- Spotify for example uses Big Data to give its users an individual Discover Weekly Playlist which consists of thirty recommended songs for that user. 
- This project has the purpose to illustrate and solve a real-world big data-related problem that could also occur in a company's Value creation process. 
- For this purpose, algorithms are applied to the solution within a controlled framework. Based on the \ac{CRISP DM} process, the data used was first collected, analyzed, 
- and finally evaluated. The problem to be solved is classifying songs using pre-generated features provided by Spotify for each music track on their platform. 
- For the classification, predefined genres by Spotify are taken as categories.
+Spotify is a music streaming service and has established itself as the leader in this
+market. Since its launch in 2006, the company has gained over 365 million users, of
+which nearly 45 percent are subscribed to the chargeable premium service.
+The ability to listen to almost any song a user might want with a quick search and
+the click of a button is a great benefit streaming services have over regular music vendors
+like iTunes. On the other hand, users might quickly get lost or feel overwhelmed by such
+a large collection to choose from.
+To guide users and help them find the music they want to listen to in a certain situations
+Spotify uses a number of methods like premade playlists or categories for specific moods and
+genres. But the biggest part of the user experience might certainly be the personalized
+playlists, radios or artist and song recommendations.
+To be able to have such a robust recommendation system, Spotify needs to understand each users
+listening behaviour and have methods to predict, which music a user might also like depending
+on their past usage.
+Not just user data is important to gain this knowledge, but Spotify also needs to understand
+how to categorize music itself and find ways to tell, which songs are alike and how they
+relate to each other.
+Big Data is essential to achieve this goal. Machine learning is used 
+to analyze the music in their catalogue and create characteristics about it.
+Spotify offers this data to the public, which is the basis for this project.
 
-The final goal of this paper is to apply a gradient boosting algorithm to a dataset collected from Spotify. 
-This algorithm should be trained during the course of the project and be able to assign songs to selected genres in the final product. 
-Along the way, the basics of Big Data itself, but also the working models and processes used in the project/model should be presented 
-in their theoretical form and explained clearly. Since not explicitly given, the individual collection of data by means of a given API (written out) 
-in combination with own coding shall find place as part of the model in an extra step. 
-Additionally, this paper should cover all the steps of the \ac{CRISP DM} model, and furthermore be an example of how Big Data projects can be approached 
-and performed in this style of work. Besides the Coding, the mechanisms of the Spotify algorithm and the mechanisms inside Spotify as a company are 
-explicitly explained to guarantee an overall good understanding of the whole project.
+\subsection{Problem Definition and Goal}
+
+The paper is set in the context of Big Data Analytics and is supposed to explain and implement
+many concepts and processes found here.
+The basic goal of the project is to develop a machine learning model based on a dataset.
+During this process, general data mining stages, as layed out in the \ac{CRISP DM} standard,
+must be theoretically explored, understood and practically implemented. This includes steps like data
+preparation, model creation, or evaluation. Creating a model with a high accuracy is only a secondary
+concern in this project. Instead gaining a solid understanding of data mining concepts is paramount.
+
+To achieve this goal, Spotify song data is collected and an attempt is made to build a gradient boosting
+algorithm, which is able to classify songs into different genres based on audio features.
 
 \subsection{Structure and Methodology of the Assignment}
+
 The paper is divided into four main sections, starting with the introduction, containing the problem statement, goal and overall structure.
-The second section discusses fundamental concepts. This includes placing the 
-which contains the basics of Big Data as a whole with focus on the concepts used in the project as well as basics of music theory. 
-The practical part, which explains the coding and procedure used in the project in more detail and finally
-a conclusion part with summary and conclusion of the project and the work. 
-The basic part deals with the concepts of Big Data as a whole, including the relevance of data, the 4V matrix, the storage of data and the associated data formats, 
-Big Data analytics and methods of learning algorithms. Further, this chapter explains in more detail how gradient boosting algorithms work, 
-since such an algorithm was used in the project. In addition, the functionality of CRISP DM as the modeling process used is explained. 
-Since a separate data set was produced for the data collection, the principles of so-called API's are presented in the theoretical form. 
-The basics of music conclude this chapter. These are important to get a perspective for the facts of the project. 
-All of these points will be referred to further in the rest of the thesis, so it is important to build this foundation first.
-The practical part follows the steps of the CRISP DM model. Business Understanding can be omitted as a part here, because the model was developed in the course of a project work. 
-Therefore, this chapter starts with the Data Collection, in this case the development of the API to collect the used data set. 
-It continues with the so-called Data Understanding, where both the origin of the data (Spotify algorithm) and the meaning of the individual labels are explained, 
-and finally put in relation to each other. It continues with the Data Preparation, the preparation of the data for the algorithm, followed by the modeling itself. 
-At the end an evaluation of the whole project and the result follows.
-The basics of Big Data concepts explained in this thesis are derived from renowned book sources. 
-Further numbers, data and facts, which cannot be read out of reference books (e.g. information about Spotify as a company) 
-are proven with the help of suitable sources from the internet. Everything else is covered by own coding and with the help of the concepts introduced in the basic part 
-understandably reinforced and explained. 
+
+The second section discusses fundamental concepts. This includes sorting this project into the larger context of Big Data,
+explaining the algorithms used on a theoretical level and introducing further concepts which are used for data preparation and modeling.
+Additionally, the \ac{CRISP DM} model is explained, which is the basic structure that implementation is based on.
+Concluding the second section is an introduction to the use cases and funcionality of Web \acp{API} and a discussion of basic concepts
+in music theory.
+
+The third section begins with the data collection process and continues on with the practical implementation steps 
+of understanding the dataset's features and labels in the context of Spotify's analysis, preparing and analyzing the data for modeling, creating a
+gradient boosting classifier and finally evaluating the project results. This process is fundamentally based on the CRISP DM model.
+
+The paper concludes with a summary of the insights gained and embedding the project into a broader context.
+
+Facts presented as part of the paper's fundamental sections are derived from literature research using renowned book sources and
+scientific papers. Additionally online articles were used to round out the research.
+Most visualizations in this paper are made by hand using Python libraries such as seaborn and matplotlib.
+The general approach during implementation is derived from the CRISP DM model also explained in literature.
+For data collection and understanding Spotify's developer resources are used as a reference.
+Documentation from Python libraries such as scikit learn is used extensively during the preparation, modeling and evaluation parts
+of the project.
+
+%Large amounts of data are collected from everyday activities on the platform, stored and
+%finally analyzed using machine learning algorithms, to power the recommendation and
+%classification process. 
+
+
+%This Premium
+%service comes at a subscription cost of nowadays 12,99C per month, giving the opportu-
+%nity to listen to every song that is available at Spotify - this being ca. 70 million tracks from
+%over 1,2 million Artists. [54]
+
+
+
+
+%  Based on an existing framework for data science projects. Starts with selection of dataset ...
+%- Task: Model development and evaluation using Spotify audio features to classify genres 
+%- Simplification: Genre classification instead of specific user recommendations
+%- Dataset could be freely chosen and Spotify data was selected
+%- Goal is to gain a good understanding about data mining processes, the problems involved
+%and possible solutions. The final accuracy of the model is only secondary. 
+%
+%
+%
+%
+%
+%The amount of data collected every day is growing uncompromisingly. Further Proliferation of the Internet, Social Networks, 
+%Search queries and increasing networking of IoT devices and sensors means that the amount of data is growing exponentially. 
+%To remain competitive in their respective markets, companies must be able to extract value from the large amount of data.
+%A conzept that decisively supports companies in exactly this task is Big Data. Big Data encompasses the entire process of data collection to analyzing it
+%When combined with machine learning, Big Data unfolds its full potential. The combination allows very large data sets to be processed, 
+%which is incredibly valuable for companies. This enables companies to capture their macro and microenvironment in data and create deciding business value. 
+%Due to its wide range of applications, this field offers opportunities for improvement for companies of all kinds. 
+%Even companies from the entertainment industry, such as Spotify, Netflix or Disney are already using these practices to improve the services they offer, 
+%to differentiate themselves from the competition and to make the customer experience unique. 
+%Spotify for example uses Big Data to give its users an individual Discover Weekly Playlist which consists of thirty recommended songs for that user. 
+%This project has the purpose to illustrate and solve a real-world big data-related problem that could also occur in a company's Value creation process. 
+%For this purpose, algorithms are applied to the solution within a controlled framework. Based on the \ac{CRISP DM} process, the data used was first collected, analyzed, 
+%and finally evaluated. The problem to be solved is classifying songs using pre-generated features provided by Spotify for each music track on their platform. 
+%For the classification, predefined genres by Spotify are taken as categories.
+%
+%The final goal of this paper is to apply a gradient boosting algorithm to a dataset collected from Spotify. 
+%This algorithm should be trained during the course of the project and be able to assign songs to selected genres in the final product. 
+%Along the way, the basics of Big Data itself, but also the working models and processes used in the project/model should be presented 
+%in their theoretical form and explained clearly. Since not explicitly given, the individual collection of data by means of a given API (written out) 
+%in combination with own coding shall find place as part of the model in an extra step. 
+%Additionally, this paper should cover all the steps of the \ac{CRISP DM} model, and furthermore be an example of how Big Data projects can be approached 
+%and performed in this style of work. Besides the Coding, the mechanisms of the Spotify algorithm and the mechanisms inside Spotify as a company are 
+%explicitly explained to guarantee an overall good understanding of the whole project.
