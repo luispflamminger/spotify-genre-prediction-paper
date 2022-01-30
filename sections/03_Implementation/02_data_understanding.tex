@@ -6,7 +6,7 @@ Since their launch in 2006, the company has gained over \(365\) million users, o
 are subscribed to the chargeable premium service. 
 This Premium service comes at a subscription cost of nowadays \(12,99\)€ per month,
 giving the opportunity to listen to every song that is available at Spotify - this being
-ca. \(70\) million tracks from over \(1,2\) million Artists.
+ca. \(70\) million tracks from over \(1,2\) million Artists. \cite[]{L.Rabe2021}
 
 Similar to other streaming services, Spotify also generates a lot of data.
 The question here is how to filter out data from music in order to personalize user accounts. 
@@ -15,7 +15,7 @@ patterns and certain structures within different genres.
 The results of the algorithm can be seen above all in the "Discovery Weekly Playlist". 
 Users are presented with thirty songs that match their tastes here every Monday.
 At the moment, the Spotify algorithm, which to this day goes by the name Echo Nest,
-works because of three main components. 
+works because of three main components. \cite[]{Stephenson2021}
 
 First of all, it creates an individual Taste Profile for each Spotify user. 
 There, it is recorded which artists, songs, albums, playlists and also podcast and audio books the
@@ -25,7 +25,7 @@ This data is then compared with the Taste Profiles of other users.
 For example, if another user has a large overlap in musical taste with your own playlists,
 you will be shown songs in the Discovery Weekly playlist that the other user already listens to regularly.
 Playlists with more followers end up in the Discovery Weekly folders more often than those with
-fewer followers. 
+fewer followers. \cite[]{Stephenson2021}
 
 In addition, the algorithm analyzes the individual components of the music tracks. 
 It breaks down each song available on Spotify by tempo, instruments, duration, highs and lows,
@@ -34,7 +34,7 @@ Based on the large amount of data, the Spotify algorithm divides the songs into 
 different genres so far. 
 However, in addition to many regional differences in music genres, "nonsensical" genres keep
 coming out in the AI's analysis. While it might be able to imagine something under deep power pop punk,
-genres like djent are not really close to reality. 
+genres like "djent" are not really close to reality. \cite[]{Boyd2019}
 
 This analysis step also includes the classification of songs into happy, sad,
 melancholic or other types of music, so the classification according to feelings.
@@ -42,19 +42,19 @@ However, this feature is also controversial among experts, because there is no a
 That always depends on the individual listener and his mood. To support the AI at this point,
 it reads the titles of the playlists of the users. 
 If a song often lands in playlists with titles like love songs or romantic music,
-the AI assumes that the song is to be rated as a love song. 
+the AI assumes that the song is to be rated as a love song. \cite[]{Boyd2019}
 
 At last, the Echo Nest algorithm searches the entire web daily for blog posts, comments on websites,
 articles, YouTube videos, Facebook postings and comments and tweets, 
 evaluates them, and uses them to create an opinion about a particular song.
 Thus, within a few days, the algorithm notices how a song is received overall.  
 This quickly creates a specific rating for each track, which in turn influences the
-Discover function and other recommendation formats within the platform. 
+Discover function and other recommendation formats within the platform. \cite[]{Boyd2019}
 
 \subsubsection{Feature analysis}
 In the course of the analysis carried out here, three different genres were selected in order
 to subsequently assign songs to the correct genre on the basis of the underlying data. 
-The genres selected here are \emph{\emph{rock}}, \emph{\emph{hiphop}} and \emph{\emph{jazz}}. The selection was made under the original, 
+The genres selected here are \emph{rock}, \emph{hiphop} and \emph{jazz}. The selection was made under the original, 
 subjective assumption that these genres differ particularly strongly in their characteristics and style. 
 The assumption focused primarily on characteristics such as vocals, the general use of instruments,
 the instruments used, or the energy of the songs of the respective genre.
@@ -62,7 +62,7 @@ the instruments used, or the energy of the songs of the respective genre.
 The important insight for further consideration of the analysis is here:
 Each genre that is considered, each song feature that is evaluated does not reflect reality, 
 but only reflects the results of the Spotify algorithm. The analysis can,
-according to subjective opinion, assign a \emph{\emph{hiphop}} song to the category, 
+according to subjective opinion, assign a \emph{hiphop} song to the category, 
 or the genre \emph{rock} without being wrong - since the assignment makes sense based on the Spotify evaluations. 
 Since the categories in the selected genres are very accurate due to their popularity,
 the analysis is performed under the assumption that the two are congruent. 
@@ -83,7 +83,7 @@ If no key was detected, the value is \(-1\).
 \emph{mode} is an integer (either \(0\) or \(1\)) and indicates the modality (major or minor) of a track. Major is represented by \(1\) and minor is \(0\). 
 At last, the feature \emph{time signature} is measured in an integer between \(3\) and \(7\).
 It is a notational convention to specify how many beats are in each bar (or measure). 
-The time signature ranges from \(3\) to \(7\) indicating time signatures of "3/4", to "7/4".
+The time signature ranges from \(3\) to \(7\) indicating time signatures of "3/4", to "7/4". \cite[]{Features}
 
 \textbf{Mood}
 
@@ -102,7 +102,7 @@ while tracks with low valence sound more negative (e.g. sad, depressed, angry).
 A value near \(1.0\) indicates high energy, while tracks near \(0.0\) indicates low Values in this Feature. 
 At last, \emph{tempo} holds the information about the overall estimated tempo of a track in beats per
 minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the
-average beat duration.
+average beat duration. \cite[]{Features}
 
 \textbf{Properties}
 
@@ -120,7 +120,7 @@ Values above \(0.66\) describe tracks that are probably made entirely of spoken 
 \emph{instrumentalness}, measured in a float between \(0\) and \(1\) as well, plays the counterpart to \emph{speechiness}.
 It predicts whether a track contains no vocals at all. "Ooh" and "aah" sounds are treated as instrumental in this context.
 The closer the \emph{instrumentalness} value is to \(1.0\), the more likely the track contains no vocal content. 
-Values above \(0.5\) are intended to represent instrumental tracks, but confidence is higher as the value approaches \(1.0\).
+Values above \(0.5\) are intended to represent instrumental tracks, but confidence is higher as the value approaches \(1.0\). \cite[]{Features}
 
 \textbf{Context}
 
@@ -139,9 +139,9 @@ A correlation matrix is used for this purpose. This shows on a scale between \(1
 features correlate with each other. Since every song uses every feature,
 a high correlation here does not mean that the features often appear together,
 but how similar the values per song are. To start with an overall look over the data,
-fig. 1  shows a genre independent matrix.
+fig. \ref{fig:du_cm_overall}  shows a genre independent matrix.
 This means that the features of all songs that could be gathered in the step of data
-collection were analyzed to create this figure. 
+collection were analyzed to create this figure. \cite[]{Features}
 
 \begin{figure}[H]
     \centering
@@ -171,11 +171,11 @@ in the positive \emph{speechiness} and \emph{energy} at a value of approx. \(0.3
 
 \begin{figure}[H]
     \centering
-    \subfloat[\centering Correlation matrix: categorie \emph{rock}]{{\includegraphics[width=4cm]{output_\emph{rock}.png} }}%
+    \subfloat[\centering Correlation matrix: categorie \emph{rock}]{{\includegraphics[width=4cm]{output_rock.png} }}%
     \qquad
     \subfloat[\centering Correlation matrix: categorie \emph{hiphop}]{{\includegraphics[width=4cm]{output_Hip_Hop.png} }}%
     \qquad
-    \subfloat[\centering Correlation matrix: categorie \emph{jazz}]{{\includegraphics[width=4cm]{output_\emph{jazz}.png} }}%
+    \subfloat[\centering Correlation matrix: categorie \emph{jazz}]{{\includegraphics[width=4cm]{output_jazz.png} }}%
     \caption{Correlations inside categories}%
     \label{fig:du_cm_categorie_dependent}%
 \end{figure}
@@ -184,7 +184,7 @@ These correlations above now show the matrix on a category-specific basis.
 It can be seen that the patterns described above also appear there.
 However, the average correlation changes depending on the category.
 For example, \emph{\emph{hiphop}} has the same characteristics as the independent matrix category but shows
-fundamentally more negative correlations (cf. Fig. 1 with Fig. 2 ).
+fundamentally more negative correlations (cf. Fig. \ref{fig:du_cm_categorie_dependent}).
 
 \subsubsection{Correlation Music theorie - Data}
 In the final step of Data Understanding,
@@ -213,7 +213,7 @@ with a minimum value of \(-32.06\) and a maximum value of \(2.044\).
     \label{fig:du_dp_bp_ln_categorie_dependent}%
 \end{figure}
 
-Figure 1  shows a so-called distribution plot.
+Figure \ref{fig:du_dp_bp_ln_categorie_dependent} shows a so-called distribution plot.
 The X-axis contains the scale of the feature used (in this case \emph{loudness}).
 The Y-axis reflects the density of the respective category, meaning the more songs are found in the respective value, the higher the density.
 As can be seen in the figure, all categories offer a very wide range of volume levels.
@@ -238,10 +238,10 @@ The lowest value overall is \(0.0\) while the highest goes up to \(0.989\).
     \qquad
     \subfloat[\centering Boxplot: \emph{instrumentalness}]{{\includegraphics[width=4cm]{output_instumentelness_boxplot.png} }}%
     \caption{\emph{instrumentalness} compared in the different categories}%
-    \label{du_dp_bp_instr_categorie_dependent}%
+    \label{fig:du_dp_bp_instr_categorie_dependent}%
 \end{figure}
 
-For a better understanding, Figure x  also shows a distribution plot,
+For a better understanding, Figure \ref{fig:du_dp_bp_instr_categorie_dependent}  also shows a distribution plot,
 but adapted to the current feature.
 It shows that both \emph{\emph{hiphop}} and \emph{rock} are almost exclusively found in the \(0.0\) to \(0.1\) range.
 This means that songs in these categories almost only contain vocals.
@@ -265,10 +265,10 @@ This is clearer for \emph{rock} with an average value of \(0.7531\).
     \qquad
     \subfloat[\centering Boxplot: \emph{energy}]{{\includegraphics[width=4cm]{output_energy_boxplot.png} }}%
     \caption{\emph{energy} compared in the different categories}%
-    \label{du_dp_bp_enrg_categorie_dependent}%
+    \label{fig:du_dp_bp_enrg_categorie_dependent}%
 \end{figure}
 
-If we now look at the data in a distribution plot (Figure x),
+If we now look at the data in a distribution plot (\ref{du_dp_bp_enrg_categorie_dependent}),
 we see clear differences between the categories.
 \emph{jazz} spreads over the whole graph but has no high point.
 This can be attributed to the different types of \emph{jazz} (slow \emph{jazz}, free \emph{jazz}),
@@ -283,22 +283,37 @@ explain the characteristics of the individual genres.
 
 \begin{figure}[H]
     \centering
-    \subfloat[\centering Distribution plot: Speechiness]{{\includegraphics[width=4cm]{output_Speechiness.png} }}%
+    \subfloat[\centering Distribution plot: \emph{Speechiness}]{{\includegraphics[width=4cm]{output_Speechiness.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Speechiness]{{\includegraphics[width=4cm]{output_Speechiness_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{Speechiness}]{{\includegraphics[width=4cm]{output_Speechiness_Boxplot.png} }}%
     \qquad
-    \subfloat[\centering Distribution plot: Danceability]{{\includegraphics[width=4cm]{output_Danceability.png} }}%
+    \label{fig:du_ds_bp_speechiness}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: \emph{danceability}]{{\includegraphics[width=4cm]{output_Danceability.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Danceability]{{\includegraphics[width=4cm]{output_Danceability_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{danceability}]{{\includegraphics[width=4cm]{output_Danceability_Boxplot.png} }}%
     \qquad
-    \subfloat[\centering Distribution plot: Accousticness]{{\includegraphics[width=4cm]{output_accousticness.png} }}%
+    \label{fig:du_ds_bp_danceability}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: \emph{accousticness}]{{\includegraphics[width=4cm]{output_accousticness.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Accousticness]{{\includegraphics[width=4cm]{output_accousticness_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{accousticness}]{{\includegraphics[width=4cm]{output_accousticness_Boxplot.png} }}%
     \qquad
-    \subfloat[\centering Distribution plot: Valence]{{\includegraphics[width=4cm]{output_valence.png} }}%
+    \label{fig:du_ds_bp_accousticness}%
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering Distribution plot: \emph{valence}]{{\includegraphics[width=4cm]{output_valence.png} }}%
     \qquad
-    \subfloat[\centering Boxplot: Valence]{{\includegraphics[width=4cm]{output_valence_Boxplot.png} }}%
+    \subfloat[\centering Boxplot: \emph{valence}]{{\includegraphics[width=4cm]{output_valence_Boxplot.png} }}%
     \qquad
     \caption{Different features visualized in distribution- and boxplots}%
-    \label{fig:du_ds_bp_comparison}%
+    \label{fig:du_ds_bp_valence}%
 \end{figure}
