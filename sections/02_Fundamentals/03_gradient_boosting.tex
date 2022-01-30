@@ -73,7 +73,7 @@ samples.
             jazz &    j3 &                 0.234 &                 0.341 &      0 \\
         \bottomrule
         \end{tabular}        
-    \caption{Theory: Input Data}%
+    \caption{Input dataset}%
     \label{tbl:theory_input_data}%
   \end{table} 
 
@@ -134,7 +134,7 @@ homogenous. \(p_{i}\) represents that probability that a sample belongs to the c
 
 \begin{figure}[H]
     \centering
-    \caption[]{Coordinate System}
+    \caption[]{Gini graph}
 	\label{fig:coordinate_system_initial_dataset}
     \includegraphics[width=0.5\textwidth]{coordinate_system_gini_index.jpeg}
 \end{figure}
@@ -175,7 +175,7 @@ will start with each leaf as its input. The second iteration will split the node
     \subfloat[\centering Decision Tree]{{\includegraphics[width=6cm]{dt_first_split.svg.pdf} }}%
     \qquad
     \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{coordinate_system_id_first_split.png} }}%
-    \caption{Theory: Decision Tree first Split}%
+    \caption{Decision tree first split}%
     \label{fig:theory_first_split}%
 \end{figure}
 
@@ -208,7 +208,7 @@ takes place again.
             jazz &    j3 &                 0.234 &                 0.341 &      0 \\
         \bottomrule
         \end{tabular}       
-    \caption{Theory: Input Data of second Split}%
+    \caption{Input data of second split}%
     \label{tbl:theory_input_data_second_step}%
   \end{table} 
 
@@ -238,7 +238,7 @@ classified correctly. The second split looks like the following with the total c
 
 \begin{figure}[H]
     \centering
-    \caption[]{Theory: Final Classification Tree}
+    \caption[]{Final classification tree}
 	\label{fig:dt_final_decision_tree}
     \includegraphics[width=0.58\textwidth]{dt_final_decision_tree.svg.pdf}
 \end{figure}
@@ -281,17 +281,17 @@ model but an ensemble approach. Ensemble algorithms contain multiple weak learne
 committee to create a strong prediction. Weak learners are often very simple forms of traditional 
 algorithms, like decision trees, and must just be able to predict parts of the dataset correctly. 
 Only the combination of many weak learners allows the model to perform overall accurate 
-predictions \cite{parr2022gb_explained_dtt}. The most common form of ensemble algorithms are bagging algorithms with random 
+predictions \cite{parr2022gb_explained_dtt} \cite[p.1f]{Buhlmann2004Bagging}. The most common form of ensemble algorithms are bagging algorithms with random 
 forests as an example. Bagging, in essence, is the combination of multiple unique models. The 
 prediction is formed by aggregating the outputs from all models into a single representative 
 value. Typically, all models are derived from a single algorithm, like decision trees for random 
 forests, but technically there is no limitation to aggregate outputs from different algorithms. 
-Which is also true for other ensemble algorithms. 
+Which is also true for other ensemble algorithms \cite[p.2]{Buhlmann2004Bagging}. 
 
 Boosting, on the other hand, follows a different principle and does not rely on independent 
 models with an aggregation function. Boosting fits new models sequentially and can thereby use 
 earlier acquired knowledge for further iterations. This allows GBMs to train specific areas of 
-the dataset where it has previously performed poorly \cite[p.345f]{James2021}.  
+the dataset where it has previously performed poorly \cite[p.11]{Buhlmann2004Bagging} \cite[p.345f]{James2021}.  
 
 \subsubsection{Gradient Boosting Algorithm}
 \label{sec:Gradient Boosting Algorithm}
@@ -364,7 +364,7 @@ It again consists out of eight samples with two features and two categories as t
             jazz &    j3 &                 0.234 &                 0.341 &      0 \\
         \bottomrule
         \end{tabular}        
-    \caption{Theory: Input Data}%
+    \caption{Input dataset}%
     \label{tbl:theory_input_data}%
   \end{table} 
 
@@ -390,7 +390,7 @@ as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)
 
 \begin{figure}[H]
     \centering
-    \caption[]{Theory: Gradient Boosting Minimum for first Prediction}
+    \caption[]{Gradient boosting minimum for first prediction}
 	\label{fig:gb_turning_point-loss_function}
     \includegraphics[width=0.5\textwidth]{TurningPoint-LossFunction.jpeg}
 \end{figure}
@@ -466,7 +466,7 @@ every leaf \cite[p.1195]{Friedman_2001}.
 
 \begin{figure}[H]
     \centering
-    \caption[]{Theory: Regression Tree for first Iteration}
+    \caption[]{Regression tree for first iteration}
 	\label{fig:gb_1_regression_tree}
     \includegraphics[width=0.5\textwidth]{gb_1_regression_tree.svg.pdf}
 \end{figure}
@@ -510,7 +510,7 @@ dataset are displayed in table \ref{tbl:theory_output_values_1_iteration}.
             jazz &    j3 &      0 & 0.510826 &           -0.624988 &       -1.599926 \\
         \bottomrule
         \end{tabular}
-    \caption{Theory: Output Values for first Iteration}%
+    \caption{Output values for first iteration}%
     \label{tbl:theory_output_values_1_iteration}%
   \end{table} 
 
@@ -552,7 +552,7 @@ F_{1}(x) = 0.51 + 0.6 * 1.6 = 1.47
             jazz &    j3 &      0 & 0.510826 &         0.624988 & -0.449130 &         0.389579 \\
         \bottomrule
         \end{tabular}
-    \caption{Theory: Output Values for first Iteration}%
+    \caption{Gradient boosting complete}%
     \label{tbl:theory_output_values_1_iteration}%
   \end{table} 
 
@@ -577,7 +577,7 @@ It marks the end for this example.
 
     \begin{figure}[H]
         \centering
-        \caption[]{Gradient Boosting: Second Regression Tree}
+        \caption[]{Regression tree for second iteration}
         \label{gb_2_regression_tree}
         \includegraphics[width=0.5\textwidth]{gb_2_regression_tree.svg.pdf}
     \end{figure}
@@ -632,7 +632,7 @@ classification potential. Also the dataset would be very different with more sam
             jazz &    j3 &         0.624988 & -0.449130 &         0.389579 & -0.918064 &                          0.285372 \\
         \bottomrule
         \end{tabular}           
-    \caption{Theory: Gradient Boosting final Output}%
+    \caption{Gradient boosting final output}%
     \label{tbl:theory_gb_final_output}%
   \end{table} 
 
@@ -644,7 +644,7 @@ the sample using the predefined threshold.
 
 Gradient boosting is a very powerful method as it can effectively capure complex dependencies for various machine 
 learning problems. \ac{GBM}s improve many existing algorithms, such as decision trees, because many problems associated 
-with single large models are (partially) solved by the iterative ensemble approach. QUELLE
+with single large models are (partially) solved by the iterative ensemble approach.
 
 The main benefit over Decision Trees is the stability of gradient boosting. While large trees always have to make tradeoffs 
 between detail and overcategorization, gradient boosting can gradually get to a deeper and deeper level of detail thanks to 
@@ -654,4 +654,4 @@ as it only represents the framework with many parameters to adapt the algorithm 
 The drawbacks of gradient boosting often arise in practice. Gradient boosting has a significantly higher memory consumption and 
 build time as the model must be constructed sequentially. Also the evalutation is more time consuming as the sample must be processed 
 by each model. From a business perspective gradient boosting also has its disadvantages. While the prediciton is better, it is much 
-more complex to evaluate the model and explain the results \cite[7.2]{Natekin2013}. 
+more complex to evaluate the model and explain the results \cite[7.2]{Natekin2013} \cite[p.27]{Buhlmann2004Bagging}. 
