@@ -98,20 +98,19 @@ There are many status codes defined in the HTTP standard,
 some of the most common ones are shown in table \ref{tbl:Common status codes}.
 
 \begin{table}[H]
- \caption{Common status codes}
- \label{tbl:Common status codes}
-\begin{tabular}{|| c | c | c ||} 
- \hline
- Status code & Reason phrase & Meaning \\ [0.5ex]
- \hline\hline
- 200 & OK & Successful transaction. Any requested data is in the response body \\ [1ex]
- \hline
- 401 & Unauthorized & The response needs to contain credentials to access the requested resource. \\ [1ex]
- \hline
- 404 & Not Found & The server cannot find a resource for the requested URL. \\ [1ex]
- \hline
-\end{tabular}
-Source: \cite[50]{gourley2002http}
+    \centering
+    \caption{Common status codes}
+    \label{tbl:Common status codes}
+    \begin{tabular}{ccl} 
+        \toprule
+        Status code & Reason phrase & Meaning \\ [0.5ex]
+        \midrule
+        200 & OK & Successful transaction.\\ & & Any requested data is in the response body \\ [1ex]
+        401 & Unauthorized & The response needsto contain credentials\\ & & to access the requested resource. \\ [1ex]
+        404 & Not Found & The server cannot find\\ & & a resource for the requested URL. \\ [1ex]
+        \bottomrule
+    \end{tabular}
+\\Source: \cite[50]{gourley2002http}
 \end{table}
 
 

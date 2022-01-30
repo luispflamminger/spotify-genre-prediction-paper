@@ -1,4 +1,5 @@
 \subsection{Data Preparation}
+\label{sec:Data Preparation}
 
 In the following section the data is prepared and cleaned up for training the model.
 
@@ -71,10 +72,43 @@ It takes a dataframe and the label column's name, than adds a "target" column wi
 The head of the resulting dataframe is shown in table \ref{tbl:Dataframe after cleanup}.
 The category to target integer mapping is shown in table \ref{tbl:Category to target integer mapping}.
 
-\textbf{Hier Dataframe head von df}
-\label{tbl:Dataframe after cleanup}
+\begin{table}[H]
+    \centering
+    \caption{Dataframe after cleanup}
+    \label{tbl:Dataframe after cleanup}
+%    \begin{tabular}{llrrrrrr}
+%    \toprule
+%    {} & category &  target &  feature\_danceability &  feature\_energy &  feature\_key &  feature\_loudness & ...\\ 
+%    \midrule
+%    0 &   hiphop &       0 &                 0.649 &           0.508 &            8 &           -10.232 & ...     \\ 
+%    1 &   hiphop &       0 &                 0.849 &           0.631 &            3 &            -4.241 & ...     \\ 
+%    2 &   hiphop &       0 &                 0.793 &           0.481 &            9 &            -9.258 & ...     \\ 
+%    3 &   hiphop &       0 &                 0.875 &           0.478 &            7 &           -10.562 & ...     \\ 
+%    4 &   hiphop &       0 &                 0.684 &           0.624 &            2 &            -7.414 & ...     \\ 
+%    5 &   hiphop &       0 &                 0.762 &           0.649 &           11 &            -5.624 & ...     \\ 
+%    \bottomrule
+%    \toprule
+%    ... & feature\_mode &  feature\_speechiness &  feature\_acousticness &  feature\_instrumentalness &  feature\_liveness &  feature\_valence &  feature\_tempo \\
+%    \midrule
+%    1 &               0.0959 &               0.03450 &                  0.000036 &            0.0736 &            0.405 &        157.975 &         
+%    0 &               0.0637 &               0.17100 &                  0.000000 &            0.1490 &            0.550 &        135.997 &         
+%    1 &               0.1240 &               0.01900 &                  0.000001 &            0.1390 &            0.395 &        132.202 &         
+%    1 &               0.2180 &               0.00717 &                  0.000000 &            0.1470 &            0.409 &        128.990 &         
+%    0 &               0.3470 &               0.23900 &                  0.000000 &            0.1120 &            0.708 &        146.925 &         
+%    0 &               0.0527 &               0.58000 &                  0.000017 &            0.0971 &            0.501 &        145.090 &         
+%\bottomrule
+%
+%      194051 &                       4 \\
+%      215304 &                       4 \\
+%      204626 &                       4 \\
+%      200959 &                       4 \\bular}
+%      156735 &                       4 \\
+%      239146 &                       4 \\
 
+%    \end{tabular}
+\end{table}
 \textbf{Hier Category/target mapping table}
+
 \label{tbl:Category to target integer mapping}
 
 Looking at the number of samples per category (tabel \ref{tbl:Samples per category} reveals, that the dataset
