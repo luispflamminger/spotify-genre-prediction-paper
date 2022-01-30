@@ -33,28 +33,35 @@
     - Teamarbeit zwar teilweise anstrengend und komplexer war, aber auch mehr Ideen, Input und allgemein bessere Ergebnisse hervorbrachte 
         - keiner hatte bisher Erfahrung mit Machine Learning -> Unterstützung  + Zusammenarbeit (über eigene Teile hinweg)
 
-        Since the problems and the assessment of the project work have already been described to a large extent in the evaluation, 
-        this chapter focusses more on the organizational and personal conclusions we experienced. 
+        %Since the problems and the assessment of the project work have already been described to a large extent in the evaluation, 
+        %this chapter focusses more on the organizational and personal conclusions we experienced. 
 
         The project had the purpose to classify a dataset with the help of a machine learning algorithm. With no restrictions on the choice of dataset and algorithm given, 
-        we quickly unionized over the idea to implement a classification of genres based on Spotify Music data. After an extended search, 
+        a classification of genres based on Spotify Music data was selected as a project task. After an extended search, 
         no sufficient existing dataset was found and thus a new dataset had to be created. Even though the data collection was complex at times, 
-        it proofed to be a good decision and convinces with its novelty. After testing and debating over various algorithms, Gradient Boosting with 
-        a pre-classification done via a decision tree as its basis turned out to be the most suitable algorithm for the goal of the project.
-        Overall, the model works successful, delivering a confidence of nearly 90 percent. Beginning with Decision Trees to gain insides and a feeling of the data came in very handy. 
-        On this basis the gradient boosting algorithm could be implemented more easily and achieve better results. Interestingly, except Standardization, 
-        no optimization method led to a better result in the end. This could indicate a high quality of the dataset. 
-        
-        Weitere Ausführungen
+        it proofed to be a good decision and convinces with its novelty. After testing and debating over various algorithms, gradient boosting was
+        selected as the machine learning algorithm. Additionally, a classification tree was implemented as a reference point.
 
-        Personally, several lessons were learned out of this project. On the one hand, we tended to reach the formal and organizational limits. 
-        For example, in terms of time, since the algorithm was sometimes worked on too precisely, we lost scope of the main goal, focusing too much on incidentals. 
-        In the future, it will be worthwhile to set the framework more precisely and, above all, more appropriately. Although implementation often is a lot of fun, 
-        the goal has to be be achieved in time and to the extent intended. Teamwork certainly also plays an important role here. As expected, due to teamwork, 
-        problems often occur cause of different approaches. But for us, the thematic cooperation is particularly noteworthy. The topics and chapters were divided up in advance, 
-        but there was still a constant exchange of information on different issues in the various chapters. This makes the topics more complex, but also the introduction and explanations more rounded.
+        Overall the result was successful, with an accuracy of nearly 87 percent, with all other evaluation metrics indicating to a similar positive performance.
+        Interestingly, despite high optimization efforts, only standardization led to a better result with no other optimization method improving the quality of the model. 
+        This could indicate either that these methods were implemented incorrectly, or that the quality of the dataset was very high from the beginning. 
+        The latter is supported by the fact that both algorithms classified the songs according to similar features as stated in theory to distinguish between genres.
 
-        In conclusion, Spotify is just one example of many modern applications that use Big Data to capture and attempt to reflect the often subjective world in numbers. 
+        Personally, several lessons were learned from this project. The first lesson is, that despite only focussing on a 
+        simple machine learning algorithm, the limits of the project framework were reached. Both in terms of the scope and size of the
+        paper itself and from a algorithm implementation perspective, as mulitple optimization possibilites and design choices were 
+        discovered while implementing and had to be addressed further. This goes hand in hand with the fact that the project execution was not straight-forward.
+        With multiple changes and additions to the paper as well as implementations made along the way which shaped the 
+        project into its final form. However, all changes should in no way be seen as negative, as they have led to the desired result and 
+        are part of the learning process.
+        Secondly, teamwork was required to manage a project of this size. The topics and chapters were assigned in advance, with constant exchange 
+        of information on different issues and collaboration on topics such as data collection and model implementation.
+        Thirdly, the overall learning curve was very steep. No participant of this group had previous experience in machine learning.
+        Nevertheless, it was possible to create a well working classification model which meets the pre-set conditions of the overall task.
+
+        - mittlerweile unglaublich einfach sowas zu selbst ohne großen Aufwand zu erstellen
+
+        In conclusion, Spotify is just one example of many modern applications that use Big Data analytics to capture and attempt to reflect the often subjective world in numbers. 
         What is particularly interesting here is how this is attempted, and to what extent it works. The success of the company, or the widespread use of the app, 
         show how well the Echo Nest works. Still, like the model shown here, the deciding attributes are the ones closer to numbers, like Accousticness or Speechiness. 
         Attributes such as Valence, which attempts to measure mood, plays a small role in genre assignment. However, this can, and will, change in the future. 
