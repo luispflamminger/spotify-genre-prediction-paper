@@ -15,7 +15,7 @@ fundamental basis for evaluating the overall performance with many unknowns that
 
 The first step of a deeper analysis is to create a confusion matrix for all categories. Confusion matrices are an approach of 
 visualizing the performance by clustering the the output. The \(x1\)-axis represents the predicted values for the classes 
-while the \(x2\)-axis stands of actual (correct) values \cite[p.235]{Davis_2006}. The confusion matrix reveals four combinations of predicted 
+while the \(x2\)-axis stands of actual (correct) values \cite[p. 235]{Davis_2006}. The confusion matrix reveals four combinations of predicted 
 and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting the confusion matrix is displayed in table \ref{tbl:gb_confusion_matrix}.
 
 \begin{table}[H]
@@ -55,7 +55,7 @@ between \emph{hiphop} and \emph{jazz}. This result however has little significan
 \(1400\), is significantly larger than the amount of both \emph{hiphop} and \emph{jazz} tracks. An evaluation based on absolute numbers would lead to 
 misleading results partly due to the imbalance of the dataset. 
 
-A better approach is to look at the following metrics which can be derived form the confusion matrix for every category \cite[p.235]{Davis_2006} \cite[p.862]{fawcett2006introduction}(\ref{tbl:gb_classification_Report}). 
+A better approach is to look at the following metrics which can be derived form the confusion matrix for every category \cite[p. 235]{Davis_2006} \cite[p. 862]{fawcett2006introduction}(\ref{tbl:gb_classification_Report}). 
 
 \begin{equation*}
   \begin{aligned}
@@ -104,7 +104,7 @@ Another measure to evaluate a models performance is to plot its \ac{ROC}. The \a
 rate for the \(x1\)-axis and the false-positive rate on the \(x2\)-axis for every possible threshold. The benefit of \ac{ROC} is that it plots the 
 misclassification for every threshold while other metrics rely on a single threshold. A model whose results are close to the diagonal classifies data worse than a 
 model whose curve is as close as possible to the point \((0/1)\) in the coordinate system. This performance is often measured by means of 
-the \ac{AUC}, which is directly derived from the \ac{ROC}. With help of the \ac{AUC} comparability between models is possible \cite[p.862f]{fawcett2006introduction} \cite{scikit-roc_and_auc}. 
+the \ac{AUC}, which is directly derived from the \ac{ROC}. With help of the \ac{AUC} comparability between models is possible \cite[p. 862f]{fawcett2006introduction} \cite{scikit-roc_and_auc}. 
 The \ac{ROC} and \ac{AUC} for the project are shown in figure \ref{fig:roc_and_auc_for_gb_and_dt}. 
 
 %The categories are 
