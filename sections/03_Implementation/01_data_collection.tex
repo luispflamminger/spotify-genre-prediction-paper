@@ -82,15 +82,15 @@ all of the requirements listed above, be it because of unclear methodology or an
 To get around this, a dataset was specifically created for this paper using the Spotify Web API.
 
 The \ac{API} offers a number of endpoints, which return \ac{JSON} metadata
-directly from the Spotify Data Catalogue\cite{SpotifyWebAPI}.
+directly from the Spotify Data Catalogue \cite{SpotifyWebAPI}.
 Requests are made via HTTP GET or POST methods.
 The \ac{API} can be used by anyone, but authorization via the OAuth protocol is required to access data.
 To explore the \ac{API} and find endpoints to use, Spotify provides a developer console, which can be used to 
-send requests and see what kind of responses come back. This is not suitable for saving the data or making multiple
+send requests and see what kind of responses come back \cite{SpotifyDevConsole}. This is not suitable for saving the data or making multiple
 requests programmatically, but is helpful for API exploration. As there is not one single endpoint that delivers all
-required fields, multiple queries that build on top of each other have to be made.
+required fields, multiple queries that build on top of each other have to be created.
 
-The approach began with using the \ac{API} reference to get an overview over the endpoints and their responses.
+The approach begins with using the \ac{API} reference to get an overview over the endpoints and their responses.
 The specific endpoints that might return interesting data were queried using the Spotify Web Console to see
 a response with live data and which exact fields are returned.
 %Beyond the Web Console, the tool "Postman" was used to explore the \ac{API}.
@@ -99,10 +99,10 @@ a response with live data and which exact fields are returned.
 %and enabled the research team to explore endpoints together, easily make \ac{API} calls without having to
 %authenticate manually, and save the endpoints and required input parameters in a shared workspace.
 Once exploration was complete, a data collection workflow was implemented in Python 3, mainly using the
-libraries http, json and requests. The final result was saved as a CSV file to be used for data exploration
+libraries \emph{http}, \emph{json} and \emph{requests}. The final result was saved as a CSV file to be used for data exploration
 and further processing.
 
-Many API endpoints give the option to specify a country and language the results should be returned for.
+Many API endpoints give the option to specify a country and language the results should be returned for \cite{SpotifyAPIRef}.
 This was set to english and the United States wherever possible, to get a dataset able to be used
 in applications beyond this project.
 %Whenever possible these values were explicitly specified to eliminate the risk of receiving data for multiple different
@@ -210,7 +210,7 @@ The typical request/response pattern for the audio-feature request endpoint is s
 \end{apiRoute}
 \end{figure}
 
-With the exception of \emph{type}, \emph{id}, \emph{uri}, \emph{track\_href} and \emph{analysis\_url}, all of the fields included in this response
+With the exception of \emph{type}, \emph{id}, \emph{uri}, \emph{track\_href} and \emph{analysis\_url}, all fields included in this response
 can be used as features in the dataset. However, this api call expects a track id, which needs to be retrieved using
 other api calls first. This could be a search endpoint, getting all tracks in a playlist, etc.
 Also, it does not give the track or artist names and doesn't include a genre.
@@ -315,7 +315,7 @@ requests needed without having to write complicated code.
 %This prevents sensitive credentials from being committed into version control, which is hosted in a public GitHub repository.
 The \emph{json} library is used for transforming Python dictionaries into json data, \emph{math} for access to rounding functions,
 \emph{os} for managing system paths and access to files, \emph{http} to define retry and timeout behaviour and \emph{csv}
-to finally transform the json data into a CSV file.
+to finally transform the JSON data into a CSV file.
 
 After importing all necessary libraries, the credentials are read and a method is defined for authenticating to the API.
 The http library is configured to minimize errors and exceptions due to late responses or failed requests.
@@ -382,7 +382,40 @@ This JSON contains all the necessary fields needed for continuing with the CRISP
 To prepare the dataset for data analysis, the JSON data is transformed into a flat structure and stored in a CSV file.
 The final structure of the data is shown in table \ref{tbl:Data after Import}.
 
-\textbf{Tabelle hier einfügen}
+\begin{table}[H]
+    \centering
+    \caption{Data Structure after Data Collection}
+    \label{tbl:Data after Import}
+    \begin{tabular}{lr} 
+        \toprule
+        Column Name & Type \\ [0.5ex]
+        \midrule
+        categories.id & String\\ [1ex]
+        categories.name & String \\ [1ex]
+        categories.playlists.id & String \\ [1ex]
+        categories.playlists.name & String \\ [1ex]
+        categories.playlists.tracks.id & String \\ [1ex]
+        categories.playlists.tracks.name & String \\ [1ex]
+        categories.playlists.tracks.album.id & String \\ [1ex]
+        categories.playlists.tracks.album.name & String \\ [1ex]
+        categories.playlists.tracks.artists & String \\ [1ex]
+        categories.playlists.tracks.features.danceability & Float \\ [1ex]
+        categories.playlists.tracks.features.energy & Float \\ [1ex]
+        categories.playlists.tracks.features.key & Integer \\ [1ex]
+        categories.playlists.tracks.features.loudness & Float \\ [1ex]
+        categories.playlists.tracks.features.mode & Integer \\ [1ex]
+        categories.playlists.tracks.features.speechiness & Float \\ [1ex]
+        categories.playlists.tracks.features.acousticness & Float \\ [1ex]
+        categories.playlists.tracks.features.instrumentalness & Float \\ [1ex]
+        categories.playlists.tracks.features.liveness & Float \\ [1ex]
+        categories.playlists.tracks.features.valence & Float \\ [1ex]
+        categories.playlists.tracks.features.tempo & Float \\ [1ex]
+        categories.playlists.tracks.features.duration\_ms & Integer \\ [1ex]
+        categories.playlists.tracks.features.time\_signature & Integer \\ [1ex]
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 %
 %\begin{table}[H]
 %    \centering
