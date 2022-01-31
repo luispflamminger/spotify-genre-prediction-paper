@@ -5,8 +5,10 @@ as standalone solutions or in combination with enhancement approaches like boost
 They allow for a very flexible construction and can be utilized for various machine learning problems
 such as classification and regression.
 
-Decision trees “predict an unknown value of a target variable by learning decision rules from 
-data features” to reconstruct the dependence between the features and the respective labels for 
+%Decision trees “predict an unknown value of a target variable by learning decision rules from 
+%data features”  
+Decision trees predict "the value of a target variable by learning simple decision rules inferred 
+from the data features" \cite{scikit-decision_tree} to reconstruct the dependence between the features and the respective labels for
 each sample. To perform classification or regression, Decision Trees rely on recursive 
 splitting of the dataset into multiple subgroups. As the number of iterations increases, the 
 subgroups become more and more homogeneous \cite[p.330]{James2021}. The ideal result is that each subgroup is fully 
@@ -91,7 +93,7 @@ the impurity of both subgroups for each split. The goal for every split is to di
 more homogeneous than the origin and maximize the overall homogenity. The division of the data is 
 always performed using a feature, on the basis of which the samples can be divided either by a threshold for 
 nominal values or an is-equal-to query for categorical values. The split is mathematically described as the 
-following equation \ref{equ:dt_split}. It consists of the the feature \(j\) and a criteria \(t_{m}\) \cite{scikit-decision_tree}.
+following equation (\ref{equ:dt_split}). It consists of the the feature \(j\) and a criteria \(t_{m}\) \cite{scikit-decision_tree}.
 
 \begin{equation}
     \theta = (j, t_{m})
@@ -482,7 +484,7 @@ recently predicted probabilities \(p\) for all samples in the leaf.
 
 \begin{equation}
     \begin{aligned}
-        \gamma_{jm} &= \arg \min_{\gamma}\sum_{x_{i} in R_{jm}} L(y_{i},F_{m-1}(x_{i}) + \gamma)
+        \gamma_{jm} &= \arg \min_{\gamma}\sum_{x_{i} \in R_{jm}} L(y_{i},F_{m-1}(x_{i}) + \gamma)
         \\
         \gamma_{jm} &= \frac{ \sum r_{im}}{\sum p_{i} * (1 - p_{i})}
         \label{equ:gb_output_value_theory}
@@ -525,7 +527,7 @@ the changes. In practice a \(\nu \) in the order of \(0.1\) is common as a small
 give better results but also requires much more iterations \cite[p.1206]{Friedman_2001}. 
 
 \begin{equation}
-    F_{m}(x) = F_{m}(x- 1) + \nu * \sum_{j = 1}^{J_{m}} \gamma_{jm}I(x in R_{jm})
+    F_{m}(x) = F_{m}(x- 1) + \nu * \sum_{j = 1}^{J_{m}} \gamma_{jm}I(x \in R_{jm})
     \label{equ:gb_new_prediction_theory}
 \end{equation}
 

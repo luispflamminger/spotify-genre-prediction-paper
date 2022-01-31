@@ -15,8 +15,7 @@ fundamental basis for evaluating the overall performance with many unknowns that
 
 The first step of a deeper analysis is to create a confusion matrix for all categories. The confusion matrix is an approach of 
 visualizing the performance by clustering the the output. The \(x1\)-axis represents the predicted values for the classes 
-while the \(x2\)-axis stands of actual (correct) values \cite[p.235]{Davis_2006}. For this analysis three numbered classes \(1\) to \(1\) are necessary that 
-typify the categories hiphop, rock and jazz in the stated order. The confusion matrix reveals four combinations of predicted 
+while the \(x2\)-axis stands of actual (correct) values \cite[p.235]{Davis_2006}. The confusion matrix reveals four combinations of predicted 
 and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting the confusion matrix is displayed in table \ref{tbl:gb_confusion_matrix}.
 
 \begin{table}[H]
@@ -38,7 +37,7 @@ and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting
   \centering
   \begin{tabular}{lrrrr}
     \toprule
-    predicted & hiphop & rock & jazz &   all \\
+    predicted & hiphop (1) & rock (2) & jazz (3) &   all \\
     actual &      &       &      &       \\
     \midrule
     hiohop &  438 &    68 &   19 &   525 \\
@@ -108,7 +107,10 @@ models in which the overall accuracy plays a subordinate role, such as that all 
 to visualize such problems to find optimal solutions. A model whose results are close to the diagonal classifies data worse than a 
 model whose curve is as close as possible to the point \((0/1)\) in the coordinate system. This performance is often measured by means of 
 the \ac{AUC}, which is derived directly from the \ac{ROC}. With help of the \ac{AUC} comparability between models is possible. The \ac{ROC} and \ac{AUC} for 
-the project are shown in figure \ref{fig:roc_and_auc_for_gb_and_dt} \cite[p.862f]{fawcett2006introduction} \cite{scikit-roc_and_auc}.
+the project are shown in figure \ref{fig:roc_and_auc_for_gb_and_dt} \cite[p.862f]{fawcett2006introduction} \cite{scikit-roc_and_auc}. 
+
+%The categories are 
+%replaced by numbers from \(0\) tot \(2\) which label the classes \emph{hiphop}, \emph{rock} and \emph{jazz} in the following order. 
 
   \begin{figure}[H]
     \centering
