@@ -44,6 +44,16 @@ A very high training score could be a sign of overfitting.
 The cross-validation score (cv score) is the mean accuracy achieved during 5-fold cross validation and is a good measure
 of the actual performance of the model.
 
+\begin{figure}[H]
+    \centering
+    \subfloat[\centering learning\_rate]{{\includegraphics[width=0.45\textwidth]{validation_curve_learning_rate} }}%
+    \qquad
+    \subfloat[\centering n\_estimators]{{\includegraphics[width=0.45\textwidth]{validation_curve_n_estimators} }}%
+    \qquad
+    \subfloat[\centering max\_depth]{{\includegraphics[width=0.45\textwidth]{validation_curve_max_depth} }}%
+    \caption{Validation Curves modulating three Hyperparameters}%
+    \label{fig:Validation Curves modulating 3 hyperparameters}%
+\end{figure}
 
 Figure \ref{fig:Validation Curves modulating 3 hyperparameters} shows the curves for each hyperparameter. The shaded
 areas around the graph are the standard deviation, while the graph itself represents the mean score between 5 folds.
@@ -62,17 +72,6 @@ a range between $50$ and $200$ is used for optimization.
 For \emph{max\_depth}, the cv score stays relatively flat between $2$ and $13$ (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
 The training score, on the other hand, increases rapidly from $0$ to $7.5$, where it reaches its maximum.
 Because of this, a range between $2$ and $6$ is used for hyperparameter tuning.
-
-\begin{figure}[H]
-    \centering
-    \subfloat[\centering learning\_rate]{{\includegraphics[width=0.45\textwidth]{validation_curve_learning_rate} }}%
-    \qquad
-    \subfloat[\centering n\_estimators]{{\includegraphics[width=0.45\textwidth]{validation_curve_n_estimators} }}%
-    \qquad
-    \subfloat[\centering max\_depth]{{\includegraphics[width=0.45\textwidth]{validation_curve_max_depth} }}%
-    \caption{Validation Curves modulatng 3 hyperparameters}%
-    \label{fig:Validation Curves modulating 3 hyperparameters}%
-\end{figure}
 
 \subsubsection{Hyperparameter Tuning and Fitting a Model}
 
@@ -165,5 +164,6 @@ Even though a broad spectrum of values was given in the search grid, the optimal
 are equal to the default parameters for the estimator set by \emph{sklearn}.
 This might suggest that the developers set the default values using a similar dataset to the one used in this project.
 
-Although many combinations were evaluated, there is still a possibility, that the best result is still only a local 
-maximum and a set of hyperparameters, that is far different from the ones tested here, would result in a global maximum. 
+Although many combinations were evaluated, there is still a possibility, that the best result found using the methods
+explained in this section is only a local maximum and not actually the best solution.
+A set of hyperparameters far different from the ones tested here, might lead to even better results.

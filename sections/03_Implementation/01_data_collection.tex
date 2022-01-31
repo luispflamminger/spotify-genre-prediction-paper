@@ -2,14 +2,14 @@
 \label{sec:Data Collection}
 
 In this section the approach and implementation of data collection for this project is 
-examined. First, the basic requirements for the dataset are given and some existing datasets
-are evaluated. Then the resources used are presented and the general approach to data collection
-is explained, including authorization and how features and labels are collected.
+examined. First, the basic requirements for the dataset are given.
+Then the resources used are presented and the general approach to data collection
+is explained.
 Lastly, the concrete implementation in Python is explained.
 
 \subsubsection{Requirements for the Dataset}
 
-Basic requirements the dataset should fulfill are:
+Basic requirements the dataset should fulfil are:
 
 \begin{itemize}
     \item \textbf{Includes Spotify song features}
@@ -26,13 +26,13 @@ Basic requirements the dataset should fulfill are:
     In order to train the model well, a sufficient sample size is needed per genre.
     It was not known before collecting the data, how many samples are enough to get a decent result,
     which is why the dataset with the highest sample size is preferred, without compromising too
-    much on the other criteria. 
+    much on other criteria. 
 
     \item \textbf{Song and Artist name}
 
     The best way to filter out duplicates is to use the song and artist names.
     Spotify does provide a track id for each song, however, if a song is released twice
-    (e.g. as a single and later in an album), these track ids will differ which will lead
+    (e.g. as a single and later in an album), these track ids will differ, which will lead
     to a duplicate entry.
 \end{itemize}
 
@@ -70,14 +70,14 @@ publish the dataset and enable others to use it for different applications.
 %As no optimal dataset for this research paper could be found using our search criteria,
 %a dataset was specifically created for this paper using the Spotify Web API.
 
-\subsubsection{Ressources and Approach}
+\subsubsection{Resources and Approach}
 
 Spotify provides extensive documentation for developers on their developer website \cite{SpotifyDev}.
 This includes a developer dashboard and the Web API documentation, which is the main resource
 for data collection from Spotify.
 
 There are a number of pre-made datasets available online containing song data from Spotify,
-which were examined for this project. In conclusion, none of them were able to fulfill
+which were examined for this project. In conclusion, none of them are able to fulfill
 all of the requirements listed above, be it because of unclear methodology or an insufficient sample size.
 To get around this, a dataset was specifically created for this paper using the Spotify Web API.
 
@@ -90,20 +90,20 @@ send requests and see what kind of responses come back \cite{SpotifyDevConsole}.
 requests programmatically, but is helpful for API exploration. As there is not one single endpoint that delivers all
 required fields, multiple queries that build on top of each other have to be created.
 
-The approach began with using the \ac{API} reference to get an overview over the endpoints and their responses.
-The specific endpoints that might return interesting data were queried using the Spotify web console to see
+The approach begins with using the \ac{API} reference to get an overview over the endpoints and their responses.
+The specific endpoints that might return interesting data are queried using the Spotify web console to see
 a response with live data and which exact fields are returned.
 %Beyond the Web Console, the tool "Postman" was used to explore the \ac{API}.
 %It is a platform that can be used to make HTTP requests to an API and store these requests in
 %a collaborative environment.\cite{PostmanWhatIs} It supports the required authorization workflows
 %and enabled the research team to explore endpoints together, easily make \ac{API} calls without having to
 %authenticate manually, and save the endpoints and required input parameters in a shared workspace.
-Once exploration was complete, a data collection workflow was implemented in Python 3, mainly using the
-libraries \emph{http}, \emph{json} and \emph{requests}. The final result was saved as a CSV file to be used for data exploration
+Once exploration is complete, a data collection workflow is implemented in Python 3, mainly using the
+libraries \emph{http}, \emph{json} and \emph{requests}. The final result is saved as a CSV file to be used for data exploration
 and further processing.
 
-Many API endpoints give the option to specify a country and language the results should be returned for \cite{SpotifyAPIRef}.
-This was set to english and the United States wherever possible, to get a dataset able to be used
+Many API endpoints give the option to specify a country and language, the results should be returned for \cite{SpotifyAPIRef}.
+This is set to english and the United States wherever possible, to get a dataset able to be used
 in applications beyond this project.
 %Whenever possible these values were explicitly specified to eliminate the risk of receiving data for multiple different
 %countries or languages, which would have made the dataset incoherent.
@@ -165,7 +165,7 @@ in applications beyond this project.
 \subsubsection{Getting Features}
 
 In order to predict the genre of a track based on audio features, these features have to be requested
-for every track. Spotify provides an endpoint to get audio features for up to 99 tracks at a time.
+for every track. Spotify provides an endpoint to get audio features for up to $99$ tracks at a time.
 The typical request/response pattern for the audio-feature request endpoint is shown in figure \ref{fig:Audio Feature Request}.
 
 \begin{figure}[H]
@@ -213,14 +213,14 @@ The typical request/response pattern for the audio-feature request endpoint is s
 With the exception of \emph{type}, \emph{id}, \emph{uri}, \emph{track\_href} and \emph{analysis\_url}, all of the fields included in this response
 can be used as features in the dataset. However, this api call expects a \emph{track id}, which needs to be retrieved using
 other api calls first. This could be a search endpoint, getting all tracks in a playlist, etc.
-Also, it does not give the track or artist names and doesn't include a genre.
+Also, it does not give the track or artist names and does not include a genre.
 
 \subsubsection{Getting Track IDs and Labels}
 
 There is no simple endpoint that takes one or more \emph{track ids} and returns  a "genre" field
 in its response. The exploration of the API revealed two ways of getting the genre of a track. 
 
-The first way is using the artist of a track. Given a \emph{track id}, the artists of the track and their corresponding
+The first way is using the artist. Given a \emph{track id}, the artists of the track and their corresponding
 ids can be requested by using the \emph{/tracks/{id}} endpoint. Then, using the \emph{artist id}, the \emph{genres} that an
 artist is known for are returned, as shown in figure \ref{fig:Artist Request}.
 
@@ -266,15 +266,15 @@ The examplary API response shows a problem with this approach. One artist can be
 into multiple genres.
 A given track might be associated with either of the artist's genres, but the data does
 not show, which one exactly.
-Additionally a track might have multiple artists which further complicates this.
+Additionally a track might have multiple artists, which further complicates this.
 Given these circumstances, this approach is problematic.
 
-The second approach is possible via Spotifys "categories" feature. The app's search tab provides a number of
+The second approach is possible via Spotify's "categories" feature. The app's search tab provides a number of
 categories that a user can browse to find new music in their preferred genre or style.
-In figure \ref{fig:Categories and Playlists in Spotify App}a an overview over some of the categories
-that are available in the Spotify app is shown. There are categories of multiple types like
-places and activities, but also for all major genres. In the app screenshot
-for example "Classical", "Jazz or "Soul".
+In figure \ref{fig:Categories and Playlists in Spotify App}a an overview over some of the categories,
+that are available in the Spotify app, is shown. There are categories of multiple types like
+places and activities, but also for all major genres. The app screenshot,
+depicts examples like "Classical", "Jazz or "Soul".
 These categories can be used to get tracks that belong in each specific category. When a user taps on
 one of the categories, playlists that contain tracks of the respective category are shown to the user
 (figure \ref{fig:Categories and Playlists in Spotify App}b).
@@ -304,8 +304,8 @@ refered to for further details.
 
 The script was implemented in a way that lets anyone with a Spotify
 developer account run it to gather their own data.
-It supports filtering for certain genres to speed up the process and exporting the current data after each step
-to be able to pause the data collection and check the current results or continue later.
+It supports filtering for certain genres to speed up the process and exporting the current data after each step,
+to be able to pause the data collection to check the current results or continue later.
 %The details of these functions are explained in this section using code snippets.
 
 The Python \emph{requests} library is used to execute the requests, as it supports the features needed to send the GET and POST
@@ -319,7 +319,7 @@ to finally transform the JSON data into a CSV file.
 
 After importing all necessary libraries, the credentials are read and a method is defined for authenticating to the API.
 The \emph{http} library is configured to minimize errors and exceptions due to late responses or failed requests.
-A filter is implemented to limit the categories the data should be retrieved for using \emph{ategory ids}.
+A filter is implemented to limit the categories the data should be retrieved for using \emph{category ids}.
 Next, the four main steps of data collection are executed:
 
 \begin{enumerate}
@@ -329,11 +329,11 @@ Next, the four main steps of data collection are executed:
     \item Getting audio features
 \end{enumerate}
 
-For each step, a method was implemented, which takes data from the previous step and uses it to request further data from the
-API. \emph{Category ids} are used to get a playlists category, \emph{playlist ids} are used to get a playlists tracks and finally \emph{track ids}
+For each step, a method is implemented, which takes data from the previous step and uses it to request further data from the
+API. \emph{Category ids} are used to get a category's playlists, \emph{playlist ids} are used to get a playlist's tracks and finally \emph{track ids}
 are used to request audio features.
 
-After going through all stages of data retrieval, the following JSON datastructure has been built:
+After going through all stages of data retrieval, the following JSON datastructure is built:
 
 \begin{lstlisting}[language=Python]
 {

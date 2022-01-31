@@ -39,12 +39,12 @@ contribute to a better model, are simply removed \cite[55]{Subasi2020}.
 New features can be constructed by using data from different original features and
 combining it into one, also reducing dimensionality.
 Another approach is \ac{PCA}. Here, features are constructed by finding
-principal components in a dataset \cite[62f]{Subasi2020}. This is done by projecting the data into m-dimensional space,
+principal components in a dataset \cite[p. 62f]{Subasi2020}. This is done by projecting the data into m-dimensional space,
 where each feature is contained in one spatial dimension.
 The first principal component is found by rotating the feature space to find the direction
 which offers the highest variance in the whole dataset.
 The second component must be orthogonal to the first one and again have the highest variance
-of all possible directions. This can be repeated to create as many principal components as are benefitial to the model \cite[62f]{Subasi2020}.
+of all possible directions. This can be repeated to create as many principal components as are benefitial to the model \cite[p. 62f]{Subasi2020}.
 Dimension reduction using \ac{PCA} was attempted as part of this project,
 but is not explained deeper as it didn't yield great result for the dataset.
 
@@ -87,7 +87,7 @@ representation of the overall performance of the estimator.
 The benefit of this is, that test data is kept completely seperate from training data, but there
 is still a good way of evaluating the performance of an estimator trained with a given set
 of hyperparameters. This is crucial during hyperparameter optimization, as the best parameters
-can not be found without a good way to score each model \cite[24f]{Raschka2018} \cite{scikit-cross-validation}.
+can not be found without a good way to score each model \cite[p. 24f]{Raschka2018} \cite{scikit-cross-validation}.
 Figure \ref{fig:cross validation workflow} shows a typical workflow when using cross validation
 and hyperparameter tuning to create a model. Figure \ref{fig:cv data segmentation} shows,
 how the data is segmented when using 5-fold cross validation on the training set.

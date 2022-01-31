@@ -1,7 +1,7 @@
 \subsection{Data Understanding}
 
 In this chapter, the collected data is analyzed in detail.
-This process starts at the data source, meaning how and why spotify collects the data.
+This process starts at the data source, meaning how and why Spotify collects data.
 Then the features, the Spotify algorithm uses, are covered in detail.
 This includes a theoretical explanation of each feature and its format and numerical representation.
 The most important features are finally compared visually using appropriate graphs and plots.
@@ -13,47 +13,47 @@ The most important features are finally compared visually using appropriate grap
 %This Premium service comes at a subscription cost of nowadays \(12,99\)€ per month,
 %giving the opportunity to listen to every song that is available at Spotify - this being
 %ca. \(70\) million tracks from over \(1,2\) million Artists. \cite[]{L.Rabe2021}
-As stated in the introduction, Spotify is the leading streaming service.
-Their extensive catalogue of about \(70\) million tracks from over \(1,2\) million Artists
+As stated in the introduction, Spotify is the world's leading streaming service.
+Their extensive catalogue of about \(70\) million tracks from over \(1,2\) million artists
 necessitates Spotify to focus on Big Data Analytics to generate business value and a competitive advantage.
 The main objective here is to understand the music itself and their user's behavior and interests,
 in order to offer personalized recommendations and curated playlists.
 The company evaluates millions of songs and and uses AI to independently recognize
 patterns and structures within different genres. 
 A good example for personalized content is the "Discover Weekly" playlist, which recommends 30 new songs
-to each user on a weekly basis. 
+to each user on a weekly basis \cite{L.Rabe2021}. 
 
 At the moment, the Spotify algorithm, which goes by the name Echo Nest,
 consists of three main components \cite{Stephenson2021}.
-First of all, it creates an individual taste profile for each individual user. 
-Data is collected about which artists, songs, albums, playlists, podcast and audio books the
+First, it creates an individual taste profile for each user. 
+Data is collected about which artists, songs, albums, playlists, podcasts and audio books the
 respective user listens to. The listening duration, frequency and listening location is also recorded.
 Different users can then be compared against each other using these metrics, to find matching 
 taste profiles among them.
 For example, if \emph{user a} has a large overlap in musical taste with \emph{user b}'s playlists,
 songs from \emph{user b}'s playlists will end up in \emph{a}'s weekly recommendation.
-Furthermore, popular playlists with a large amount of followers are considered more often for recommendation puposes \cite[]{Stephenson2021}.
+Furthermore, popular playlists with a large amount of followers are considered more often for recommendation purposes \cite[]{Stephenson2021}.
 
 In addition, the algorithm analyzes the individual components of the music itself. 
 It breaks down each song by tempo, instruments, duration, highs and lows, timbre, and other metrics. 
 Based on the large amount of data, the Spotify algorithm divides the songs into more than 1500 unique genres. 
 In addition to many regional differences in music genres, the AI also comes up with "nonsensical" genres.
-While it might be able to imagine something under "deep power pop punk",
-genres like "djent" are not really close to reality. \cite[]{Boyd2019}
+While one might be able to imagine something under "deep power pop punk",
+genres like "djent" are not really close to reality \cite[]{Boyd2019}.
 
 This analysis step also includes the classification into emotional categories, for example happy, sad or
 melancholic. However, this categorization is controversial among experts, as it is not based on predefined concepts in music
 theory and is highly subjective.
-To support this classification, the AI reads the titles of the users' playlists using natural language processing algorithms.
+To support this classification, the AI reads titles of the users' playlists using natural language processing algorithms.
 If a song is often put into playlists with titles like "love songs" or "romantic music",
-the AI predicts a song be related to "romance". \cite[]{Boyd2019}
+the AI predicts a song to be related to the theme "romance" \cite[]{Boyd2019}.
 
 Additionally, the Echo Nest algorithm scrapes publicly available information from websites like blogs, social media platforms,
 and news sites to gather data from user comments, videos, articles or posts.
 It evaluates the results and uses them to understand the public opinion of the song,
 and how it is received overall.
 This quickly creates a specific rating for each track, which in turn influences the
-discover function and other recommendation formats within the platform. \cite[]{Boyd2019}
+discover function and other recommendation formats within the platform \cite[]{Boyd2019}.
 
 \subsubsection{Feature Analysis}
 
@@ -61,11 +61,11 @@ In the course of the analysis carried out here, three different genres are selec
 to attempt to assign songs to the correct genre on the basis of the underlying data. 
 The genres selected here are \emph{rock}, \emph{hiphop} and \emph{jazz}. The selection was made under the
 subjective assumption that these genres differ particularly strongly in their characteristics and style. 
-This assumption was primarily focused on characteristics such as vocals, the general use of instruments,
-the instruments used, or the energy of the songs of the respective genre.
+This assumption was primarily focused on characteristics such as vocals, the general use of instruments
+or the energy of the songs in a respective genre.
 
 Some important insights for further consideration of the analysis are as follows.
-Each song feature that is evaluated does not reflect metrics found in classical music theory, 
+Each song feature, that is evaluated, does not reflect metrics found in classical music theory, 
 but is exclusively based on the results of Spotify's algorithms.
 As Spotify uses their own metrics to define the very categories in which songs are classified,
 the analysis could sort a song, which would be considered to belong into the genre \emph{hiphop} by theoretical
@@ -90,6 +90,7 @@ The feature \emph{time signature} is measured in an integer with a value range o
 It is a notational convention to specify how many beats are in each bar (or measure). 
 A value of $3$ indicates a time signatures of "3/4" for example \cite[]{Features}.
 
+\newpage
 \textbf{Mood}
 
 This cluster lists features that measure the emotional aspects of songs, 
@@ -108,7 +109,7 @@ Typically, energetic tracks feel fast, loud, and noisy.
 A value near \(1.0\) indicates high energy, while tracks near \(0.0\) are calm.
 \emph{tempo} holds information about the overall estimated tempo of a track in \ac{BPM}.
 In musical terminology, tempo is the speed or pace of a given piece and is derived directly from the
-average beat duration \cite[]{Features}
+average beat duration \cite[]{Features}.
 
 \textbf{Properties}
 
@@ -125,7 +126,7 @@ Values below \(0.33\) most likely represent music and other non-speech-like trac
 \emph{instrumentalness} plays the counterpart to \emph{speechiness} and is represented in the same way.
 It predicts whether a track contains no vocals at all. Sounds like "ooh" and "aah" are treated as instrumental in this context.
 The closer the \emph{instrumentalness} value is to \(1.0\), the more likely the track contains no vocal content. 
-Values above \(0.5\) are intended to represent instrumental tracks, but confidence becomes higher as the value approaches \(1.0\). \cite[]{Features}
+Values above \(0.5\) are intended to represent instrumental tracks, but confidence becomes higher as the value approaches \(1.0\) \cite[]{Features}.
 
 \textbf{Context}
 
@@ -135,7 +136,7 @@ These capture the setting of a song, for example if it is played in front of a l
 Both features are represented as float values between \(0.0\) and \(1.0\).
 \emph{accousticness} indicates whether a track is acoustic. \(1.0\) represents high confidence that the track is acoustic. 
 \emph{liveness} detects the presence of an audience in the recording. 
-Higher \emph{liveness} values (above $0.8$) indicate an increased probability that the track was performed live.
+Higher \emph{liveness} values (above $0.8$) indicate an increased probability that the track was performed live \cite{Features}
 
 \subsubsection{Correlation between Features}
 \label{sec:correlation between features}
@@ -201,7 +202,7 @@ which is why a clear delineation is important here.
 For this comparison, three features are chosen and discussed more deeply.
 Subsequently, a better picture can be obtained with the help of further representations.
 
-According to music theory a distinct property for rock songs is that they are very loud.
+According to music theory a distinct property for Rock songs is that they are very loud.
 The characteristic is also present in the features created by Spotify in the feature \emph{loudness}
 which is discussed here.
 %In the category \emph{rock} one feature stands out: The songs are mostly loud.
@@ -273,7 +274,7 @@ Therefore, one would expect similar results to the plots shown above.
     \subfloat[\centering Distribution Plot \emph{energy}]{{\includegraphics[width=0.45\textwidth]{output_energy.png} }}%
     \qquad
     \subfloat[\centering Boxplot \emph{energy}]{{\includegraphics[width=0.45\textwidth]{output_energy_boxplot.png} }}%
-    \caption{A comparison of \emph{energy} between the Categories}%
+    \caption{A Comparison of \emph{energy} between the Categories}%
     \label{fig:du_dp_bp_enrg_categorie_dependent}%
 \end{figure}
 
@@ -291,9 +292,9 @@ to give further insights about the characteristics of the individual genres.
 
 \begin{figure}[H]
     \centering
-    \subfloat[\centering Distribution Plot \emph{Speechiness}]{{\includegraphics[width=0.4\textwidth]{output_Speechiness.png} }}%
+    \subfloat[\centering Distribution Plot \emph{speechiness}]{{\includegraphics[width=0.4\textwidth]{output_Speechiness.png} }}%
     \qquad
-    \subfloat[\centering Boxplot \emph{Speechiness}]{{\includegraphics[width=0.4\textwidth]{output_Speechiness_Boxplot.png} }}%
+    \subfloat[\centering Boxplot \emph{speechiness}]{{\includegraphics[width=0.4\textwidth]{output_Speechiness_Boxplot.png} }}%
     \qquad
     \subfloat[\centering Distribution Plot \emph{danceability}]{{\includegraphics[width=0.4\textwidth]{output_Danceability.png} }}%
     \qquad

@@ -1,14 +1,14 @@
 \subsection{Decision Trees}
 \label{sec:decision trees}
 
-Decision trees are one of the most widely used Supervised Machine Learning Algorithms either 
+Decision Trees are one of the most widely used supervised machine learning algorithms either 
 as standalone solutions or in combination with enhancement approaches like boosting. 
 They allow for a very flexible construction and can be utilized for various machine learning problems
 such as classification and regression.
 
 %Decision trees “predict an unknown value of a target variable by learning decision rules from 
 %data features”  
-Decision trees predict "the value of a target variable by learning simple decision rules inferred 
+Decision Trees predict "the value of a target variable by learning simple decision rules inferred 
 from the data features" \cite{scikit-decision_tree} to reconstruct the dependence between the features and the respective labels for
 each sample. To perform classification or regression, Decision Trees rely on recursive 
 splitting of the dataset into multiple subgroups. As the number of iterations increases, the 
@@ -23,7 +23,7 @@ as previously discussed, is to create a split that results in the overall most h
 distribution for all subgroups \cite[p.6]{lewis2000introduction}. Nodes can be subclassified into three kinds. The top-node, 
 from which the classification starts, is called a root node. Nodes that are located at the 
 very end of a Decision Tree are referred to as leaves. Leaves do not split data any further and 
-only mark the end of a decision tree. When reached, leaves categorize or predict a final output 
+only mark the end of a Decision Tree. When reached, leaves categorize or predict a final output 
 value depending on the prediction task. Nodes in between the root node and leaves are called 
 internal nodes. Like the root, internal nodes are responsible for the recursive splitting of 
 the data. Branches connect nodes with each other \cite[p.4]{lewis2000introduction}. For classical trees, information only flows from 
@@ -38,11 +38,11 @@ top to bottom of the tree.
 %and dataset. This project uses the python library sklearn to implement a classification tree. 
 %Sklearn is based on the \ac{CART} algorithm \cite[10.10.6]{sklearn Decision Trees}.
 
-In practice, various implementations for computing decision trees exist. Each follows the same 
+In practice, various implementations for computing Decision Trees exist. Each follows the same 
 principle of regressively finding perfect splits to seperate the data, but uses different methods to find 
 the ideal splitting criteria, which strongly influences the structure of the tree, its accuracy and 
 performance. Thus, each implementation has benefits and constraints which have to be taken into account
-when determining the model. This project uses the Python library sklearn to implement a classification tree. 
+when determining the model. This project uses the Python library sklearn to implement a Classification Tree. 
 Sklearn is based on the \ac{CART} algorithm \cite{scikit-decision_tree}.
 
 
@@ -50,7 +50,7 @@ Sklearn is based on the \ac{CART} algorithm \cite{scikit-decision_tree}.
 
 \textbf{Initial Dataset:}
 
-To better visualize the procedure of the decision tree algorithm, a simplified dataset is used, 
+To better visualize the procedure of the Decision Tree algorithm, a simplified dataset is used, 
 on which the individual steps are explained. For this example, a classification problem is chosen. 
 The dataset consists of actual features and labels from the project implementation phase. The 
 features are \emph{acousticness} and \emph{danceability}. Both features are numerical with a value range 
@@ -76,13 +76,13 @@ samples.
             jazz &    j3 &                 0.234 &                 0.341 &      0 \\
         \bottomrule
         \end{tabular}        
-    \caption{Input dataset}%
+    \caption{Input Dataset}%
     \label{tbl:theory_input_data}%
   \end{table} 
 
 \textbf{Recursive Tree Construction:} 
 
-The decision tree algorithm splits the dataset recursively into subsets. At the beginning, the whole dataset is 
+The Tecision Tree algorithm splits the dataset recursively into subsets. At the beginning, the whole dataset is 
 contained within the root node from which the division into subtrees starts. Each node is mathematically described
 as \(Q_{m}\) and contains a subgroup \(N_{m}\) of the input dataset. Nodes split their respective groups of data 
 further or act as a final classifier in the form of a leaf. The split can be 
@@ -170,7 +170,7 @@ Acousticness:
 \end{equation*}
 
 The conclusion is that the feature \emph{danceability} creates a bettter initial prediction than \emph{acousticness} does. It is thus 
-determined to be the inital splitting criterion for the classification tree (figure \ref{fig:theory_first_split}). With the first iteration completed, the next iteration
+determined to be the inital splitting criterion for the Classification Tree (figure \ref{fig:theory_first_split}). With the first iteration completed, the next iteration
 will start with each leaf as its input. The second iteration will split the nodes further if no stop criterion is met. 
 
 \begin{figure}[H]
@@ -178,7 +178,7 @@ will start with each leaf as its input. The second iteration will split the node
     \subfloat[\centering Decision Tree]{{\includegraphics[width=6cm]{dt_first_split.svg.pdf} }}%
     \qquad
     \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{coordinate_system_id_first_split.png} }}%
-    \caption{Decision tree first split}%
+    \caption{Decision Tree first Split}%
     \label{fig:theory_first_split}%
 \end{figure}
 
@@ -188,7 +188,7 @@ The natural stop criterion is a completely homogeneous data-group for a node. If
 class of samples, no further splitting is possible. This is the case for the right node of the example marked in blue. The samples are completely
 homogeneous and only consist of the category \emph{hiphop}. The node therefore automatically becomes a leaf and represents the 
 category of samples. Other stop criteria can be predefined depending on own preference. The most relevant criterion is the 
-definition of a maximum depth of the decision tree. Maximum depth describes a maximum amount of recurrent iterations before 
+definition of a maximum depth of the Decision Tree. Maximum depth describes a maximum amount of recurrent iterations before 
 the algorithm automatically stops and treats the last nodes as leaves \cite[p.7]{lewis2000introduction}. Maximum depth belongs to a set of hyperparameters that
 will be discussed in section \ref{sec:Modeling}.
 
@@ -211,7 +211,7 @@ takes place again.
             jazz &    j3 &                 0.234 &                 0.341 &      0 \\
         \bottomrule
         \end{tabular}       
-    \caption{Input data of second split}%
+    \caption{Input Data for second Split}%
     \label{tbl:theory_input_data_second_step}%
   \end{table} 
 
@@ -226,8 +226,8 @@ takes place again.
 \end{aligned}
 \end{equation*}
 
-This time \emph{acousticness} leads to two fully homogeneous subgroups and therefore marks the end of the classification tree as all samples are 
-classified correctly. The second split looks like the following with the total classification tree displayed in figure \ref{fig:theory_second_split}.
+This time \emph{acousticness} leads to two fully homogeneous subgroups and therefore marks the end of the Classification Tree as all samples are 
+classified correctly. The second split looks like the following with the total Classification Tree displayed in figure \ref{fig:theory_second_split}.
 
 \begin{figure}[H]
     \centering
@@ -259,17 +259,17 @@ classified correctly. The second split looks like the following with the total c
 
 \subsubsection{Evaluation of Decision Trees}
 
-In conclusion, decision trees can be assessed as follows. Starting with the advantages,
-the main benefit is the overall simplicity of decision trees, both from a technical and 
+In conclusion, Decision Trees can be assessed as follows. Starting with the advantages,
+the main benefit is the overall simplicity of Decision Trees, both from a technical and 
 business point of view \cite[p.339]{James2021}. For researchers and developers, trees are easy to construct, require little
 to no data preparation, are almost universally applicable with the possibility of validation. 
 However, the simplicity for business should not be underestimated either. When comparing machine
 learning algorithms, the main comparison is often the accuracy of a model. The areas in which 
-decision trees stand out include visualization and comprehensibility. The decision tree algorithm 
+Decision Trees stand out include visualization and comprehensibility. The Decision Tree algorithm 
 is a white box model that allows complete transparency and explainability \cite[10.10.]{scikit-decision_tree}. 
 
-The disadvantages of decision trees are again closely related to their simplicity. Overfitting and 
-the relative instability of decision trees are the main drawbacks and result in good memorization 
+The disadvantages of Decision Trees are again closely related to their simplicity. Overfitting and 
+the relative instability of Decision Trees are the main drawbacks and result in good memorization 
 but a comparatively weak generalization ability \cite[p.340]{James2021} \cite[10.10.]{scikit-decision_tree}.
 
 \subsection{Gradient Boosting}
@@ -325,7 +325,7 @@ categorizes the sample correctly whereas a high loss implies that the model coul
 the sample well. Given a particular learning task and dataset, different loss functions must 
 be considered as loss functions are only suitable for specific data and task constellations. The most common 
 loss function for binary classification is the so-called bernoulli loss (\ref{equ:gb_bernoulli_loss}). The bernoulli loss 
-can be transformed into a \(log(odds)\)-prediction (\ref{equ:gb_loss_function}) as it is better suited for further calculations \cite[3.1]{Natekin2013} \cite{bischl2022introduction_ml_bernoulli_loss}. 
+can be transformed into a \(log(odds)\)-prediction (\ref{equ:gb_loss_function}) as it is better suited for further calculations \cite[]{Natekin2013} \cite{bischl2022introduction_ml_bernoulli_loss}. 
 Variations of (\ref{equ:gb_loss_function}) will be used in the following section to demonstrate the gradient boosting 
 procedure.
 
@@ -369,8 +369,7 @@ It again consists of eight samples with two features and two categories as targe
             jazz &    j3 &                 0.234 &                 0.341 &      0 \\
         \bottomrule
         \end{tabular}        
-    \caption{Input dataset}%
-    \label{tbl:theory_input_data}%
+    \caption{Input Dataset}%
   \end{table} 
 
 The first step is to set an initial prediction for all samples of the dataset. The initial 
@@ -395,7 +394,7 @@ as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)
 
 \begin{figure}[H]
     \centering
-    \caption[]{Gradient boosting minimum for first prediction}
+    \caption[]{Gradient Boosting Minimum for first Prediction}
 	\label{fig:gb_turning_point-loss_function}
     \includegraphics[width=0.5\textwidth]{TurningPoint-LossFunction.jpeg}
 \end{figure}
@@ -515,7 +514,7 @@ dataset are displayed in table 5.%\ref{tbl:theory_output_values_1_iteration}.
             jazz &    j3 &      0 & 0.510826 &           -0.624988 &       -1.599926 \\
         \bottomrule
         \end{tabular}
-    \caption{Output values for first iteration}%
+    \caption{Output Values for first Iteration}%
     \label{tbl:theory_output_values_1_iteration}%
   \end{table} 
 
@@ -557,7 +556,7 @@ F_{1}(x) = 0.51 + 0.6 * 1.6 = 1.47
             jazz &    j3 &      0 & 0.510826 &         0.624988 & -0.449130 &         0.389579 \\
         \bottomrule
         \end{tabular}
-    \caption{Gradient boosting complete}%
+    \caption{Gradient Boosting complete}%
     \label{tbl:theory_output_values_1_iteration}%
   \end{table} 
 
@@ -637,7 +636,7 @@ classification potential. Also the dataset would be very different with more sam
             jazz &    j3 &         0.624988 & -0.449130 &         0.389579 & -0.918064 &                          0.285372 \\
         \bottomrule
         \end{tabular}           
-    \caption{Gradient boosting Final Output}%
+    \caption{Gradient Boosting Final Output}%
     \label{tbl:theory_gb_final_output}%
   \end{table} 
 
@@ -648,7 +647,7 @@ the sample using the predefined threshold.
 \subsubsection{Evaluation of Gradient Boosting}
 
 Gradient Boosting is a very powerful method as it can effectively capture complex dependencies for various machine 
-learning problems. \ac{GBM}s improve many existing algorithms, such as decision trees, because many problems associated 
+learning problems. \ac{GBM}s improve many existing algorithms, such as Decision Trees, because many problems associated 
 with single large models are (partially) solved by the iterative ensemble approach.
 
 The main benefit over Decision Trees is the stability of Gradient Boosting. While large trees always have to make tradeoffs 

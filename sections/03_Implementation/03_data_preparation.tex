@@ -45,13 +45,13 @@ all track and album information. The \emph{category id} is kept, as it will serv
 The remaining columns are renamed, as the long JSON tree names are no longer needed.
 The field \emph{category.id} is renamed to \emph{category} and each audio feature is renamed for example 
 the danceability column is now called \emph{feature\_danceability}.
-With unnecessary columns removed, a check is done to show any remaining null values.
+With unnecessary columns removed, a check is done to show any remaining \emph{null} values.
 
 \begin{lstlisting}[language=Python]
     df.isnull().sum()
 \end{lstlisting}
 
-In this dataset, there are no null values present.
+In this dataset, there are no \emph{null} values present.
 
 The \emph{GradientBoostingClassifier} used for modeling only supports integer values as label input.
 The category data is therefore encoded with integers using a custom function \emph{encode\_target}.
@@ -249,7 +249,7 @@ Figure \ref{fig:Score for each PCA dimensionality} shows the test accuracy using
 for each number of components.
 
 \begin{figure}[H]
-    \caption{Test accuracy for each dimensionality after PCA}
+    \caption{Test Accuracy for each Dimensionality after PCA}
 	\label{fig:Score for each PCA dimensionality}
     \includegraphics[width=0.6\textwidth]{dimensionality_PCA}
 \end{figure}

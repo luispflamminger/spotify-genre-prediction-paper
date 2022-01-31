@@ -5,15 +5,15 @@ the evaluation of the model itself followed by the evaluation of the overall pro
 
 \subsubsection{Gradient Boosting Evaluation}
 
-In this section the Gradient Boosting algorithm will observed in more detail by the most common metrics. Additionally, it also
-will be compared with the much simpler Classification Tree algorithm to highlight commonalities and different approaches between 
+In this section the Gradient Boosting algorithm will be observed in more detail using the most common metrics. Additionally, it will also
+be compared with the much simpler Classification Tree algorithm to highlight commonalities and different approaches between 
 the two algorithms and create an all-encompassing picture for Gradient Boosting. 
 
 The overall accuracy measured is around \(86\)\%. This result is already positive as the Gradient Boosting Algorithm outperforms 
 the Classification Tree, which achieves an also respectable accuracy of \(80\)\%. However, the accuracy score can only be used as a
 fundamental basis for evaluating the overall performance with many unknowns that need to be worked through.
 
-The first step of a deeper analysis is to create a confusion matrix for all categories. The confusion matrix is an approach of 
+The first step of a deeper analysis is to create a confusion matrix for all categories. Confusion matrices are an approach of 
 visualizing the performance by clustering the the output. The \(x1\)-axis represents the predicted values for the classes 
 while the \(x2\)-axis stands of actual (correct) values \cite[p.235]{Davis_2006}. The confusion matrix reveals four combinations of predicted 
 and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting the confusion matrix is displayed in table \ref{tbl:gb_confusion_matrix}.
@@ -29,7 +29,7 @@ and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting
     class 2   &  false positive &  true negative    \\
     \bottomrule
     \end{tabular}
-  \caption{Confusion matrix}%
+  \caption{Confusion Matrix}%
   \label{tbl:evaluation_confusion_matrix}%
 \end{table} 
 
@@ -50,7 +50,7 @@ and actual values (\ref{tbl:evaluation_confusion_matrix}). For Gradient Boosting
   \label{tbl:gb_confusion_matrix}%
 \end{table} 
 
-Visually, the highest misclassification takes place between classes \emph{jazz} and \emph{rock} while the lowest missclassification occurs
+Visually, the highest misclassification takes place between classes \emph{jazz} and \emph{rock} while the lowest occurs
 between \emph{hiphop} and \emph{jazz}. This result however has little significance, since the number of \emph{rock} tracks, with a total of over 
 \(1400\), is significantly larger than the amount of both \emph{hiphop} and \emph{jazz} tracks. An evaluation based on absolute numbers would lead to 
 misleading results partly due to the imbalance of the dataset. 
@@ -94,7 +94,7 @@ the results are not surpising. \emph{Jazz} performed worst with only \(0.79\) wh
 f1-score. 
 
 In conclusion all scores can be evaluated as positive outputs without any negative and unexplainable abnormalities. Also, in comparison 
-to decision trees, a clear improvement of the results can be seen. The reason that \emph{jazz} is ranked worst while \emph{rock} reaches the 
+to Decision Trees, a clear improvement of the results can be seen. The reason that \emph{jazz} is ranked worst while \emph{rock} reaches the 
 highest values may be due to several reasons. One possible explanation can be found by reviewing the findings from the data 
 understanding chapter. It is recognizable that the value-ranges for the features of \emph{jazz} were significantly more distributed 
 than for both \emph{rock} and \emph{hiphop} and often without any high points. In addition, the value ranges of \emph{rock} were often different from 
@@ -123,12 +123,12 @@ The following matrix shows that the model works well for all classes. Both \ac{R
 in all cases. Interesting is the fact that \emph{rock} has the worst \ac{AUC} while being classified best according to the previous metrics.
 \emph{Hiphop}, on the other hand, has the significantly best \ac{AUC} followed by \emph{jazz}. An explanation for this result is complicated, with a 
 possible reason again being the imbalance of the dataset. The model is focussed classifing \emph{rock} correctly as it constitutes to a large part of the 
-dataset. Therefore, the optimum for both \emph{jazz} and \emph{hiphop} are exchanged for an overall optimum. It should be noted that a well-founded explanation would 
-explanation would require a more in-depth analysis. Regardless, the result is worth including in the analysis and leaves room for 
+dataset. Therefore, the optimum for both \emph{jazz} and \emph{hiphop} are exchanged for an overall optimum. It should be noted that a well-founded explanation
+would require a more in-depth analysis. Regardless, the result is worth including in the analysis and leaves room for 
 further research.   
 
-In addition, a very different evaluation can be performed. It is also interesting to take a closer look on the input data with help of 
-the so-called feature importance. The feature importance is a measure of how much impact a feature had for the classification of the 
+In addition, a very different evaluation can be performed. It is also interesting to take a closer look on the input data with the help of 
+feature importance. The feature importance is a measure of how much impact a feature had for the classification of the 
 dataset and is presented in the following figure \ref{fig:feature_inportance_for_gb_and_dt} for both Gradient Boosting and the Classification Tree algorithm
 \cite{scikit-learn_feature_importance}. 
 
@@ -144,7 +144,7 @@ dataset and is presented in the following figure \ref{fig:feature_inportance_for
 It is clearly visible that both Gradient Boosting and Decision Trees relied on similiar features to similar extends for the classification task with 
 minor differences for features such as \emph{danceability}. Noticeable is that Gradient Boosting is heavily focused on only a few features 
 while the Classification Tree makes more use out of features like \emph{duration}, \emph{valence} and \emph{mode}. One possibility for the difference in weighting  
-could be the overall construction of the algorithms. Gradient Boosting consists out of multiple weak learners while the Classification Tree
+could be the overall construction of the algorithms. Gradient Boosting consists of multiple weak learners while the Classification Tree
 algorithm froms a widely branched and deep tree. For feature importance, an analogy can again be made with data understanding and music theory. 
 The features that theoretically distinguish the genres from another play the most important role for the modeling while musical standards and 
 more subjective featues only play a subordinate role. This result is positive both for theory and the machine learning model as it states 
@@ -162,27 +162,5 @@ The model in combination with preprocessing and evaluation also leaves room for 
 similar machine learning algorithms allows no comparison to completely differnt approaches based on other algorithms and concepts. 
 It can therefore not be ruled out that even better results can be achieved. The pre-processing is intensive with many constallations 
 tested. A possible improvement would be to apply the hyperparametric optimization not only on the standardized data but on all 
-approaches to ensure an overall best result. In addition, there are further hyperparameter constellations which were not tested.
+approaches to ensure an overall best result. In addition, there are further hyperparameter constellations, which were not tested.
 The evaluation may also have reached incorrect conclusions and assumptions for a variety of reasons. 
-
-The overall highest risk is the fact that all participants of the group are not familiar with machine learning and lack 
-experience. For this reason, the result can be considered promising, as both algorithms provide good overall results.
-
-%
-%Daten:
-%s
-%- vorprozessiert von Spotify
-%- oft auch interpretation und subjektiv
-%- keine eindeutige Definition, was Aussagekraft schwierig macht
-%- Datensammlung -> Ungenau, fehleranfällig, jedoch gute und sehr interessante Datenbasis
-%
-%Modelle:
-%
-%- Korrektes Modell gewählt? -> kein Vergleich 
-%
-%Vorprozessierung, Klassifikation und Auswertung: 
-%
-%- hyperparameter nur auf standardized 
-%- Mehr optionen zu hyperparameter
-%- Evaluation und Schlüsse korrekt? -> Daten vielleicht nicht aussagekräftig
-%- Allgemein viel selbstgeschriebenes Coding -> fehleranfällig, da neu in Materie
