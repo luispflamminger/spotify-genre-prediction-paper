@@ -70,13 +70,55 @@ It takes a dataframe and the label column's name, than adds a "target" column wi
 \end{lstlisting}
 
 The head of the resulting dataframe is shown in table \ref{tbl:Dataframe after cleanup}.
-The category to target integer mapping is shown in table \ref{tbl:Category to target integer mapping}.
+The category to target integer mapping is shown in table \ref{tbl:Categories mapped to Integer Targets}.
 
 \begin{table}[H]
-    \centering
+    \begin{tabular}{l|rrrr}
+
+    \toprule
+    row & 0 & 1 & 2 & ... \\
+    \midrule
+    category & hiphop & hiphop & hiphop \\
+    target & 0 & 0 & 0 \\
+    feature\_danceability & 0.649 & 0.849 & 0.793 \\
+    feature\_energy & 0.508 & 0.631 & 0.481 \\
+    feature\_key & 8 & 3 & 9 \\
+    feature\_loudness & -10.232 & -4.241 & -9.258 \\
+    feature\_mode & 1 & 0 & 1 \\
+    feature\_speechiness & 0.0959 & 0.0637 & 0.1240 \\
+    feature\_acousticness & 0.03450 & 0.17100 & 0.01900 \\
+    feature\_instrumentalness & 0.000036 & 0.000000 & 0.000001 \\
+    feature\_liveness & 0.0736 & 0.1490 & 0.1390 \\
+    feature\_valence & 0.405 & 0.550 & 0.395 \\
+    feature\_tempo & 157.975 & 135.997 & 132.202 \\
+    feature\_duration\_ms & 194051 & 215304 & 2046526 \\
+    feature\_time\_signature & 4 & 4 & 4 \\
+    \bottomrule
+%
+%    {} & category &  target &  feature\_danceability &  feature\_energy &  feature\_key &  feature\_loudness &  feature\_mode &  feature\_speechiness & \\
+%    0 &   hiphop &       0 &                 0.649 &           0.508 &            8 &           -10.232 &             1 &               0.0959 &       \\
+%    1 &   hiphop &       0 &                 0.849 &           0.631 &            3 &            -4.241 &             0 &               0.0637 &       \\
+%    2 &   hiphop &       0 &                 0.793 &           0.481 &            9 &            -9.258 &             1 &               0.1240 &       \\
+%    3 &   hiphop &       0 &                 0.875 &           0.478 &            7 &           -10.562 &             1 &               0.2180 &       \\
+%    4 &   hiphop &       0 &                 0.684 &           0.624 &            2 &            -7.414 &             0 &               0.3470 &       \\
+%    5 &   hiphop &       0 &                 0.762 &           0.649 &           11 &            -5.624 &             0 &               0.0527 &       \\
+%
+%    {} &  feature\_acousticness &  feature\_instrumentalness &  feature\_liveness &  feature\_valence &  feature\_tempo &  feature\_duration\_ms &  feature\_time\_signature \\
+%    \midrule
+%    0 &         0.03450 &                  0.000036 &            0.0736 &            0.405 &        157.975 &               194051 &                       4 \\
+%    1 &         0.17100 &                  0.000000 &            0.1490 &            0.550 &        135.997 &               215304 &                       4 \\
+%    2 &         0.01900 &                  0.000001 &            0.1390 &            0.395 &        132.202 &               204626 &                       4 \\
+%    3 &         0.00717 &                  0.000000 &            0.1470 &            0.409 &        128.990 &               200959 &                       4 \\
+%    4 &         0.23900 &                  0.000000 &            0.1120 &            0.708 &        146.925 &               156735 &                       4 \\
+%    5 &         0.58000 &                  0.000017 &            0.0971 &            0.501 &        145.090 &               239146 &                       4 \\
+%    \bottomrule
+    \end{tabular}
     \caption{Dataframe after Cleanup}
     \label{tbl:Dataframe after cleanup}
-%    \begin{tabular}{llrrrrrr}
+\end{table}
+
+%\begin{table}[H    
+%    \centering%    \begin{tabular}{llrrrrrr}
 %    \toprule
 %    {} & category &  target &  feature\_danceability &  feature\_energy &  feature\_key &  feature\_loudness & ...\\ 
 %    \midrule
@@ -106,18 +148,40 @@ The category to target integer mapping is shown in table \ref{tbl:Category to ta
 %      239146 &                       4 \\
 
 %    \end{tabular}
+%\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Categories mapped to Integer Targets}
+    \label{tbl:Categories mapped to Integer Targets}
+    \begin{tabular}{lr} 
+        \toprule
+        Category & Integer Target \\ [0.5ex]
+        \midrule
+        hiphop & 0 \\ [1ex]
+        rock & 1 \\ [1ex]
+        jazz & 2 \\ [1ex]
+        \bottomrule
+    \end{tabular}
 \end{table}
-\textbf{Hier Category/target mapping table}
 
-\label{tbl:Category to Target Integer mapping}
+Looking at the number of samples per category (table \ref{tbl:Number of Samples per Category after Cleanup}) reveals, that the dataset
+is very uneven, with more than half of the samples falling into the category \emph{rock}.
 
-%Looking at the number of samples per category (tabel \ref{tbl:Samples per category} reveals, that the dataset
-%is very uneven, with more than half of the samples being in the category \emph{rock}.
-
-From the numbers of samples displayed in table \ref{tbl:Samples per category} one can see that the dataset is 
-unequally distributed between all categories, with more than half of the samples belonging to \emph{rock}.
-
-\textbf{Hier samples per category}
+\begin{table}[H]
+    \centering
+    \caption{Number of Samples per Category after Cleanup}
+    \label{tbl:Number of Samples per Category after Cleanup}
+    \begin{tabular}{lr} 
+        \toprule
+        Category & Number of Samples \\ [0.5ex]
+        \midrule
+        hiphop & 2694 \\ [1ex]
+        rock & 7252 \\ [1ex]
+        jazz & 3431 \\ [1ex]
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 As explained in section \ref{sec:Mean Removal, Variance Scaling and Standardization} and \ref{sec:Dimension Reduction}
 methods like standardization and \ac{PCA} can have a positive impact on the models accuracy.
