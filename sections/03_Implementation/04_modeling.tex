@@ -60,7 +60,7 @@ This indicates, that a training score close to, but above 25 might be optimal. A
 a range between 50 and 200 is used for optimization.
 
 For \emph{max\_depth}, the cv score stays relatively flat between 2 and 13 (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
-The training score on the other hand increases rapidly from 0 to 7.5, where it reaches its maximum.
+The training score, on the other hand, increases rapidly from 0 to 7.5, where it reaches its maximum.
 Because of this, a range between 2 and 6 is used for hyperparameter tuning.
 
 \begin{figure}[H]
@@ -73,6 +73,8 @@ Because of this, a range between 2 and 6 is used for hyperparameter tuning.
     \caption{Validation Curves modulatng 3 hyperparameters}%
     \label{fig:Validation Curves modulating 3 hyperparameters}%
 \end{figure}
+
+\subsubsection{Hyperparameter Tuning and Fitting a Model}
 
 The parameter grid is given as a Python dictionary containing the parameter name as keys and a list of values for
 each key. All undefined hyperparameters are kept at default.

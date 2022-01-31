@@ -1,29 +1,29 @@
 \subsection{Decision Trees}
 
-Decision trees are one of the most widely used supervised machine learning algorithms either 
+Decision trees are one of the most widely used Supervised Machine Learning Algorithms either 
 as standalone solutions or in combination with enhancement approaches like boosting. 
 They allow for a very flexible construction and can be utilized for various machine learning problems
-such as classifcation and regression.
+such as classification and regression.
 
 Decision trees “predict an unknown value of a target variable by learning decision rules from 
 data features” to reconstruct the dependence between the features and the respective labels for 
-each sample. To perform classification or regression, decision trees rely on recursive 
+each sample. To perform classification or regression, Decision Trees rely on recursive 
 splitting of the dataset into multiple subgroups. As the number of iterations increases, the 
 subgroups become more and more homogeneous \cite[p.330]{James2021}. The ideal result is that each subgroup is fully 
 homogeneous and therefore only represents a single category (in case of classification). However, 
 this is often only a theoretical best condition, as multiple risks, such as overfitting, are 
-associated with the increasing depth of decision trees.
+associated with the increasing depth of Decision Trees.
 
 Trees consist out of four main components. A node is a discrete decision function that takes 
 samples as its input and splits them based on features into subgroups. The aim of each split, 
 as previously discussed, is to create a split that results in the overall most homogeneous 
 distribution for all subgroups \cite[p.6]{lewis2000introduction}. Nodes can be subclassified into three kinds. The top-node, 
 from which the classification starts, is called a root node. Nodes that are located at the 
-very end of a decision tree are referred to as leaves. Leaves do not split data any further and 
+very end of a Decision Tree are referred to as leaves. Leaves do not split data any further and 
 only mark the end of a decision tree. When reached, leaves categorize or predict a final output 
-value depending on the prediction task. Nodes in-between the root node and leaves are called 
+value depending on the prediction task. Nodes in between the root node and leaves are called 
 internal nodes. Like the root, internal nodes are responsible for the recursive splitting of 
-the data. Branches connect Nodes with another \cite[p.4]{lewis2000introduction}. For classical trees, information only flows from 
+the data. Branches connect nodes with each other \cite[p.4]{lewis2000introduction}. For classical trees, information only flows from 
 top to bottom of the tree.
 
 %In practice, there exist various Algorithms for computing Decision Trees with the most common ones 
@@ -35,11 +35,11 @@ top to bottom of the tree.
 %and dataset. This project uses the python library sklearn to implement a classification tree. 
 %Sklearn is based on the \ac{CART} algorithm \cite[10.10.6]{sklearn Decision Trees}.
 
-In practice, there exsist various implementations for computing decision trees. Each follows the same 
-principle of regressively finding perfect splits to seperate the data but different methods to find 
+In practice, various implementations for computing decision trees exist. Each follows the same 
+principle of regressively finding perfect splits to seperate the data, but uses different methods to find 
 the ideal splitting criteria, which strongly influences the structure of the tree, its accuracy and 
-performance. Thus each implementation has benefits and constraints which have to be taken into account
-when determining the model. This project uses the python library sklearn to implement a classification tree. 
+performance. Thus, each implementation has benefits and constraints which have to be taken into account
+when determining the model. This project uses the Python library sklearn to implement a classification tree. 
 Sklearn is based on the \ac{CART} algorithm \cite{scikit-decision_tree}.
 
 
@@ -49,9 +49,9 @@ Sklearn is based on the \ac{CART} algorithm \cite{scikit-decision_tree}.
 
 To better visualize the procedure of the decision tree algorithm, a simplified dataset is used, 
 on which the individual steps are explained. For this example, a classification problem is chosen. 
-The dataset consists out of actual features and labels from the project implementation phase. The 
+The dataset consists of actual features and labels from the project implementation phase. The 
 features are \emph{acousticness} and \emph{danceability}. Both features are numerical with a value range 
-in-between \(0\) and \(1\). The classification problem is binary with \emph{hiphop} and \emph{jazz} representing 
+in between \(0\) and \(1\). The classification problem is binary with \emph{hiphop} and \emph{jazz} representing 
 the classes \(k\) for which the samples of the dataset are classified. Mathematically, the dataset 
 is represented in the following form: \(x_{i}\) presents a set of explanatory features while \(y_{i}\) represents 
 the corresponding label for one data point of the input dataset \(N\) with a total number of \(n\) 
@@ -79,19 +79,19 @@ samples.
 
 \textbf{Recursive Tree Construction:} 
 
-The decision tree algorithms splits the dataset recursively into subsets. At the beginning, the whole dataset is 
-contained within the root node from which the division into subtrees start. Each node is mathematically described
+The decision tree algorithm splits the dataset recursively into subsets. At the beginning, the whole dataset is 
+contained within the root node from which the division into subtrees starts. Each node is mathematically described
 as \(Q_{m}\) and contains a subgroup \(N_{m}\) of the input dataset. Nodes split their respective groups of data 
 further or act as a final classifier in the form of a leaf. The split can be 
-binary or multiway. \ac{CART} only utilizes binary splits and divides the Node \(Q_{m}\) into two repective subgroups 
-labeled as \(Q^{left}_{m}\) and \(Q^{right}_{m}\) \cite{scikit-decision_tree}.
+binary or multiway. \ac{CART} only utilizes binary splits and divides the node \(Q_{m}\) into two repective subgroups 
+labeled \(Q^{left}_{m}\) and \(Q^{right}_{m}\) \cite{scikit-decision_tree}.
 
-The algorithm is greedy and thus determines for each split an optimal division of the samples according to 
-the impurity of both subgroups. The goal for every split is to divide the group of data into two subgroups which are 
-more homogeneous as the origin and maximize the overall homogenity. The division of the data is 
+The algorithm is greedy and thus determines an optimal division of the samples according to 
+the impurity of both subgroups for each split. The goal for every split is to divide the group of data into two subgroups, which are 
+more homogeneous than the origin and maximize the overall homogenity. The division of the data is 
 always performed using a feature, on the basis of which the samples can be divided either by a threshold for 
 nominal values or an is-equal-to query for categorical values. The split is mathematically described as the 
-following equation \ref{equ:dt_split}. It consists out of the the feature \(j\) and a criteria \(t_{m}\) \cite{scikit-decision_tree}.
+following equation \ref{equ:dt_split}. It consists of the the feature \(j\) and a criteria \(t_{m}\) \cite{scikit-decision_tree}.
 
 \begin{equation}
     \theta = (j, t_{m})
@@ -100,9 +100,9 @@ following equation \ref{equ:dt_split}. It consists out of the the feature \(j\) 
 
 \textbf{Splitting Criteria and Information Gain:}
 
-The optimal split is determined by selecting the feautre from which the most information can be gathered. There are multiple approaches 
+The optimal split is determined by selecting the feature from which the most information can be gathered. There are multiple approaches 
 for finding this split with the most common one being the information gain. Ideally the gain should be maximised. A simplification 
-for the information gain is presented in (\ref{equ:dt_gain}). To recieve information gain, \(G(Q_{m}, \theta)\) must be subtracted from 
+for the information gain is presented in (\ref{equ:dt_gain}). To receive information gain, \(G(Q_{m}, \theta)\) must be subtracted from 
 the entropy of the parent node \cite[p.613f]{tangirala2020evaluating}. The simplification is to find the minimum \(G(Q_{m}, \theta)\) as stated in (\ref{equ:dt_min_gain}). Both
 approaches lead to the same result \cite{scikit-decision_tree}. 
 
@@ -124,8 +124,8 @@ The impurity \(H\) for \ac{CART} is calculated by the gini index (\ref{equ:dt_gi
 does not belong to the category that represents the majority of the subgroup \cite[p.335]{James2021}. If both 
 categories of a subgroup are identical in size, the gini index reaches its maximum point at \(0,5\) (figure \ref{fig:coordinate_system_initial_dataset}). The 
 maximum of the gini index means the worst possible data constellation for a subgroup with maximum heterogeneity. 
-Gini index equal to \(0\) on the other hand represents the best possible result with the subgroup being fully 
-homogenous. \(p_{i}\) represents that probability that a sample belongs to the class \(j\) \cite[p.335]{James2021}.
+Gini index equal to \(0\), on the other hand, represents the best possible result with the subgroup being fully 
+homogenous. \(p_{i}\) represents the probability that a sample belongs to the class \(j\) \cite[p.335]{James2021}.
 
 \begin{equation}
     Gini = 1 - \sum ^k_{j = 1}(p_{j})^2
@@ -134,15 +134,15 @@ homogenous. \(p_{i}\) represents that probability that a sample belongs to the c
 
 \begin{figure}[H]
     \centering
-    \caption[]{Gini graph}
+    \caption[]{Gini Graph}
 	\label{fig:coordinate_system_initial_dataset}
     \includegraphics[width=0.5\textwidth]{coordinate_system_gini_index.jpeg}
 \end{figure}
 
 The optimal splits for the first iteration of the dataset look like the following. For numerical features the determination of 
-the optimal split is more complex as for categorical ones because the the calculation is not straight forward but must be computed
-for every value in the value range to find the best overall split for a single feaute. The example only shows the best splitting
-criteria is shown while a trial and error approach can be found in the appendix. 
+the optimal split is more complex as for categorical ones because the calculation is not straight forward but must be computed
+for every value in the value range to find the best overall split for a single feature. The example only shows the best splitting
+criteria while a trial and error approach can be found in the appendix. 
 
 Danceability: 
 \begin{equation*}
@@ -167,8 +167,8 @@ Acousticness:
 \end{equation*}
 
 The conclusion is that the feature \emph{danceability} creates a bettter initial prediction than \emph{acousticness} does. It is thus 
-determined to be the inital splitting criteria for the classification tree (figure \ref{fig:theory_first_split}). With the first iteration completed, the next iteration
-will start with each leaf as its input. The second iteration will split the nodes further if no stop criteria is met. 
+determined to be the inital splitting criterion for the classification tree (figure \ref{fig:theory_first_split}). With the first iteration completed, the next iteration
+will start with each leaf as its input. The second iteration will split the nodes further if no stop criterion is met. 
 
 \begin{figure}[H]
     \centering
@@ -181,13 +181,13 @@ will start with each leaf as its input. The second iteration will split the node
 
 \textbf{Stop Criteria:}
 
-The natural stop criterion is a completely homogeneous data-gorup for a node. If a node only contains one single 
+The natural stop criterion is a completely homogeneous data-group for a node. If a node only contains one single 
 class of samples, no further splitting is possible. This is the case for the right node of the example marked in blue. The samples are completely
-homogeneous and only consist out of the category \emph{hiphop}. The node therefore automatically becomes a leaf and represents the 
+homogeneous and only consist of the category \emph{hiphop}. The node therefore automatically becomes a leaf and represents the 
 category of samples. Other stop criteria can be predefined depending on own preference. The most relevant criterion is the 
-definition of a maximum depth of the decision tree. A maximum depth describes a maximum amount of recurrent iterations before 
-the algorithm automatically stops and threats the last nodes as leaves \cite[p.7]{lewis2000introduction}. Maximum depth belongs to a set of hyperparameters that
-will be discussed in X and the implementation in more detail chapter. 
+definition of a maximum depth of the decision tree. Maximum depth describes a maximum amount of recurrent iterations before 
+the algorithm automatically stops and treats the last nodes as leaves \cite[p.7]{lewis2000introduction}. Maximum depth belongs to a set of hyperparameters that
+will be discussed in section \ref{sec:Modeling}.
 
 \textbf{Completion of the example:}
 
@@ -223,22 +223,22 @@ takes place again.
 \end{aligned}
 \end{equation*}
 
-This time \emph{acousticness} leads to two fully homogeneous subgroups and thus marks the end of the classification tree as all samples are 
-classified correctly. The second split looks like the following with the total classification tree displayed in figure \ref{fig:dt_final_decision_tree}.
+This time \emph{acousticness} leads to two fully homogeneous subgroups and therefore marks the end of the classification tree as all samples are 
+classified correctly. The second split looks like the following with the total classification tree displayed in figure \ref{fig:theory_second_split}.
 
 \begin{figure}[H]
     \centering
     \subfloat[\centering Decision Tree]{{\includegraphics[width=6cm]{dt_second_split copy 2.svg.pdf} }}%
     \qquad
     \subfloat[\centering Classification Tree]{{\includegraphics[width=6cm]{coordinate_system_id_second_split.png} }}%
-    \caption{Theory: Decision Tree second Split}%
-    \label{fig:theory_first_split}%
+    \caption{Decision Tree second Split}%
+    \label{fig:theory_second_split}%
 \end{figure}
 
 
 \begin{figure}[H]
     \centering
-    \caption[]{Final classification tree}
+    \caption[]{Final Classification Tree}
 	\label{fig:dt_final_decision_tree}
     \includegraphics[width=0.58\textwidth]{dt_final_decision_tree.svg.pdf}
 \end{figure}
@@ -259,24 +259,24 @@ classified correctly. The second split looks like the following with the total c
 In conclusion, decision trees can be assessed as follows. Starting with the advantages,
 the main benefit is the overall simplicity of decision trees, both from a technical and 
 business point of view \cite[p.339]{James2021}. For researchers and developers, trees are easy to construct, require little
-to no data preparation, are almost univerally applicable with a possibility of validation. 
+to no data preparation, are almost universally applicable with the possibility of validation. 
 However, the simplicity for business should not be underestimated either. When comparing machine
 learning algorithms, the main comparison is often the accuracy of a model. The areas in which 
 decision trees stand out include visualization and comprehensibility. The decision tree algorithm 
-is a white box model that allows complete transparency and explainability \cite[10.10.]{sklearn Decision Trees}. 
+is a white box model that allows complete transparency and explainability \cite[10.10.]{scikit-decision_tree}. 
 
-The disadvantages of decision trees are again closely related to its simplicity. Overfitting and 
-the relative instability of decision trees are the main drawbacks and result in good momorization 
-but a comparatively weak generalization ability \cite[p.340]{James2021} \cite[10.10.]{sklearn Decision Trees}.
+The disadvantages of decision trees are again closely related to their simplicity. Overfitting and 
+the relative instability of decision trees are the main drawbacks and result in good memorization 
+but a comparatively weak generalization ability \cite[p.340]{James2021} \cite[10.10.]{scikit-decision_tree}.
 
 \subsection{Gradient Boosting}
 \label{sec:Gradient Boosting}
 
 
-The gradient boosting algorithm is derived from \ac{GBM}, which are a family of 
+The Gradient Boosting Algorithm is derived from \ac{GBM}, which are a family of 
 powerful machine learning algorithms with a certain procedure pattern for the creation of models. 
-In general, \ac{GBM}s are very flexible in their characteristics with the possibility of utilizing 
-multiple different machine learning algorithms as their foundation \cite{Natekin2013}.
+In general, \acp{GBM} are very flexible in their characteristics with the possibility of utilizing 
+multiple different Machine Learning algorithms as their foundation \cite{Natekin2013}.
 
 Boosting differs from classical approaches as it does not consist out of a single predictive 
 model but an ensemble approach. Ensemble algorithms contain multiple weak learners that form a 
@@ -292,16 +292,16 @@ Which is also true for other ensemble algorithms \cite[p.2]{Buhlmann2004Bagging}
 
 Boosting, on the other hand, follows a different principle and does not rely on independent 
 models with an aggregation function. Boosting fits new models sequentially and can thereby use 
-earlier acquired knowledge for further iterations. This allows GBMs to train specific areas of 
+earlier acquired knowledge for further iterations. This allows a GBM to train specific areas of 
 the dataset where it has previously performed poorly \cite[p.11]{Buhlmann2004Bagging} \cite[p.345f]{James2021}.  
 
 \subsubsection{Gradient Boosting Algorithm}
 \label{sec:Gradient Boosting Algorithm}
 
-The generic gradient boosting algorithm follows a sequence of three steps beginning with the initalization of
-of the dataset, over the sequential training and ending with a final output. At the beginning, an 
+The generic Gradient Boosting Algorithm follows a sequence of three steps beginning with the initialization of
+the dataset, to the sequential training and ending with a final output. At the beginning, an 
 additional initiation of the dataset and a loss function is necessary \cite{parr2022gb_explained_hrd}. The mathematical 
-representation of the dataset is like the one used for decision tees. A summary: \(x_{i}\) present the 
+representation of the dataset is like the one used for decision tees. A summary: \(x_{i}\) represent the 
 explanatory features while \(y_{i}\) represents the corresponding label for one data point of the input 
 dataset \(N\) with a total number of \(n\) samples. 
 
@@ -337,18 +337,18 @@ procedure.
 \end{equation}
 
 Additionally, a machine learning algorithm must be defined as a weak learner. For \ac{GBM}s there 
-are multiple leaners to choose from, again the choice is mostly depending on the prediction 
-task and available data \cite[3.2]{Natekin2013}. A classical approach is the use of decision trees, which was also 
-chosen as the weak learner for this project. Decision trees used for gradient boosting are 
-always regression trees, regardless of whether they are used for regression or classification 
-problems. The optimization parameters are almost identical as for standalone decision trees, 
+are multiple learners to choose from. Again the choice mostly depends on the prediction 
+task and available data \cite[3.2]{Natekin2013}. A classical approach is the use of Decision Trees, which was also 
+chosen as the weak learner for this project. Decision Trees used for Gradient Boosting are 
+always Regression Trees, regardless of whether they are used for regression or classification 
+problems. The optimization parameters are almost identical to the ones of standalone Decision Trees, 
 but the trees often look very different because they are specifically created as weak learners. 
-As a result, the decision trees often only consist out of very few layers with only 8-32 leaves.
+As a result, the Decision Trees often only consist of very few layers with only 8-32 leaves.
 
-\textbf{1. Initialization:}
+\textbf{Initialization:}
 
-To showcase the gradient boosting algorithm the same sample dataset is used as for decision trees. 
-It again consists out of eight samples with two features and two categories as target Labels. 
+To showcase the Gradient Boosting Algorithm the same sample dataset is used as for Decision Trees. 
+It again consists of eight samples with two features and two categories as target labels. 
 
 \begin{table}[H]
     \centering
@@ -374,7 +374,7 @@ The first step is to set an initial prediction for all samples of the dataset. T
 prediction is not unique for individual samples but a uniform value. The optimal initial 
 prediction can be calculated using the following equation (\ref{equ:gb_initial_prediciton}) \cite[p.361]{Hastie_2009}. For \(F_{0}(x)\), representing the 
 initial prediction, a minimum of \(\gamma \) is searched for. The right-hand side of the equation 
-only consists out of a sum for each sample \(i\) (of the total dataset \(N\)) of the known loss function 
+only consists of a sum for each sample \(i\) (of the total dataset \(N\)) of the known loss function 
 with the respective label \(y_{i}\) and \(\gamma \) as its input. To find the low point of the equation, 
 the derivate of the loss function is required. The final calculation of the overall \(log (odds)\) 
 that a song is classified as \emph{hiphop} is the \(\log_{e}\) of the sum of songs of the category \emph{hiphop}
@@ -397,15 +397,15 @@ as is equal to the \(x1\)-coordinate value of the low point of the \(log(odds)\)
     \includegraphics[width=0.5\textwidth]{TurningPoint-LossFunction.jpeg}
 \end{figure}
 
-\textbf{2. Sequential Processing:}
+\textbf{Sequential Processing:}
 
-With the completion of the initialization of the dataset the modelling can begin. The training is a sequential 
-process of constructing the regression trees with a total of \(M\) iterations. The first iteration 
+With the completion of the initialization of the dataset the modeling can begin. The training is a sequential 
+process of constructing regression trees with a total of \(M\) iterations. The first iteration 
 starts with \(m = 1\). The modelling consists out of four sub-steps which are numbered consecutively \cite[p.1198]{Friedman_2001}.
 
 First, the \(log(odds)\)-prediction must be converted back into a probability \(p\) with the help of a 
 logistic function as probability is easier to use for classification (\ref{equ:gb_prediction}). The result is 
-that all songs have the probability of \(0,63\) to belong to the category \emph{hiphop}. QUELLE
+that all songs have a \(63\%\) chance of belonging to the category \emph{hiphop}.
 
 \begin{equation}
     p = \frac{e^{\log_{e}(odds)}}{1 + e^{\log_{e}(odds)}} 
@@ -416,11 +416,11 @@ that all songs have the probability of \(0,63\) to belong to the category \emph{
     p = \frac{e^{\log_{e}(\frac{5}{3})}}{1 + e^{\log_{e}(\frac{5}{3})}} = 0,63
 \end{equation*}
 
-In the \textbf{first step} the \ac{PR}s \(r_{im}\) for each sample \(i\) of the dataset are created. The equation (\ref{equ:gb_redsiduals_theory}) 
+In the \textbf{first step} the \acp{PR} \(r_{im}\) for each sample \(i\) of the dataset are created. The equation (\ref{equ:gb_redsiduals_theory}) 
 for calculating the \ac{PR} consists out of known fragments. For every sample \(i\) a PR \(r_{im}\) 
 is calculated using the derivative of the \(log(odds)\)-prediction with the label \(y_{i}\) and the 
 prediction of the last iteration \(F = F_{m - 1}\) as its input \cite[p.361]{Hastie_2009}. Again, the equation can be 
-transformed into a very simple equation. For each sample the \ac{PR} can be calculated by only 
+simplified greatly. For each sample the \ac{PR} can be calculated by only 
 subtracting the previously calculated probability \(p\) from the observed label \(y\) \cite{parr2022gb_explained_hrd} \cite{parr2022gb_explained_gbd}. Ideally, an additional 
 column is created in which the PRs are temporarily stored (table \ref{tbl:theory_pseudo_residuals_1_iteration}). 
 
@@ -456,11 +456,11 @@ r_{1,1} = 1 - 0.625 = 0.375
             jazz &    j3 &      0 & 0.510826 &         0.624988 &           -0.624988 \\
         \bottomrule
         \end{tabular} 
-    \caption{Theory: Pseudo Residuals for first Iteration}%
+    \caption{Pseudo Residuals for first Iteration}%
     \label{tbl:theory_pseudo_residuals_1_iteration}%
   \end{table} 
 
-The \textbf{second step} constructs the regression trees out of the features of the samples with the corresponding 
+The \textbf{second step} constructs the a Regression Tree out of the features from the samples with the corresponding 
 PR as the label. For this example, only tree stumps are created to simplify the implementation. 
 The regression tree for the first iteration is shown in figure \ref{fig:gb_1_regression_tree}. After the completion of the 
 tree, terminal regions \(R_{jm}\) must be defined for every leaf. \(j\) starts with \(1\) and is increased for 
@@ -474,11 +474,11 @@ every leaf \cite[p.1195]{Friedman_2001}.
 \end{figure}
 
 In \textbf{step three}, following the completion of the regression tree, output values \(\gamma_{j, m}\) are calculated by using 
-the equation presented in (\ref{equ:gb_output_value_theory}). For each leaf in the tree \(\gamma_{j, m}\) is computed by finding 
-\(\gamma_{j, m}\) that minimizes the loss function (11) \cite[p.361]{Hastie_2009}. Like for the initialization step, the derivative has 
-to be created and must set equal to \(0\). And again, after a complicated transformation, a very simple 
+the equation presented in (\ref{equ:gb_output_value_theory}). For each leaf in the tree, \(\gamma_{j, m}\) is computed by finding 
+\(\gamma_{j, m}\) that minimizes the loss function (11) \cite[p.361]{Hastie_2009}. Like in the initialization step, the derivative has 
+to be created and set equal to \(0\). Again, after a complicated transformation, a very simple 
 equation remains (11). The \(\gamma_{j, m}\)  can be calculated using only the \ac{PR} and the most 
-recent predicted probabilities \(p\) for all samples in the leaf. 
+recently predicted probabilities \(p\) for all samples in the leaf. 
 
 \begin{equation}
     \begin{aligned}
@@ -489,8 +489,8 @@ recent predicted probabilities \(p\) for all samples in the leaf.
     \end{aligned}
 \end{equation}
 
-For \(R_{2,1}\), which contains track \emph{h1}, the calculation looks like the following. The output values of the complete 
-dataset are displayed in table \ref{tbl:theory_output_values_1_iteration}. 
+For \(R_{2,1}\), which contains track \emph{h1}, the calculation looks like the following. Output values of the complete 
+dataset are displayed in table 5.%\ref{tbl:theory_output_values_1_iteration}. 
 
 \begin{equation*}
 \gamma_{\;2,1} = \frac{0.375\;*\;4}{(\:0.625\;*\;(1\;-\;0.625))\;*\;4} = 1.6 
@@ -529,9 +529,9 @@ give better results but also requires much more iterations \cite[p.1206]{Friedma
     \label{equ:gb_new_prediction_theory}
 \end{equation}
 
-The prediction \(F_{1}(x)\) for \emph{h1} looks as follows while the complete dataset is again displayed in table \ref{tbl:theory_output_values_1_iteration} with also 
+The prediction \(F_{1}(x)\) for \emph{h1} is shown below while the complete dataset is again displayed in table \ref{tbl:theory_output_values_1_iteration} with also 
 the probabilites shown. As one can see, the probabilites for most samples got closer to the label. However, for track
-\emph{h5} the prediciton got worse. This is why multiple iterations are necessary to form a well-founded prediction.
+\emph{h5} the prediction got worse. This is why multiple iterations are necessary to form a well-founded prediction.
 
 \begin{equation*}
 F_{1}(x) = 0.51 + 0.6 * 1.6 = 1.47
@@ -575,14 +575,7 @@ It marks the end for this example.
         r_{1, 2} = 1 - 0.81 = 0.19
     \end{equation*}
     
-    \item New decision tree with terminal regions:
-
-    \begin{figure}[H]
-        \centering
-        \caption[]{Regression tree for second iteration}
-        \label{gb_2_regression_tree}
-        \includegraphics[width=0.5\textwidth]{gb_2_regression_tree.svg.pdf}
-    \end{figure}
+    \item New Decision Tree with terminal regions (figure \ref{fig:gb_2_regression_tree})
 
     \item New output value: 
 
@@ -604,15 +597,22 @@ It marks the end for this example.
 
 \end{itemize}
 
-The iterative modelling is repeated until \(M\) is reached. \(M\) marks the completion of the training of the gradient 
-boosting model. The \(F_{M}(x)\) is the final prediction for every sample. Lastly, the predicitions
-must again be transformed to probabilites like for the calculation of the \ac{PR}. For the final probabilities 
+\begin{figure}[H]
+    \centering
+    \caption[]{Regression Tree for second Iteration}
+    \label{fig:gb_2_regression_tree}
+    \includegraphics[width=0.5\textwidth]{gb_2_regression_tree.svg.pdf}
+\end{figure}
+
+The iterative modeling is repeated until \(M\) is reached. \(M\) marks the completion of training for the Gradient 
+Boosting model. \(F_{M}(x)\) is the final prediction for every sample. Lastly, the predictions
+must again be transformed to probabilites like for the calculation of the \ac{PR}. For the final probabilities, 
 thresholds are used to compute the category to which the samples belong \cite[p.1204]{Friedman_2001}. A typical threshold 
 for binary classification is \(0.5\) as it splits \(F_{M}(x)\) into two equal classes.
 
-\textbf{3. Output:}
+\textbf{Output:}
 
-Sample \emph{h1} has a final probability of \(0.93\) of belonging to the category \emph{hiphop}. \(0.93\) is by far greater than the 
+Sample \emph{h1} has a final probability \(0.93\) of belonging to the category \emph{hiphop}. \(0.93\) is by far greater than the 
 predefined threshold of \(0.5\) and thus \emph{h1} is classified as a track that belongs to the category \emph{hiphop}. Table \ref{tbl:theory_gb_final_output} shows
 that all samples are classified correctly but some less clear than others. A real-world implementation would consist 
 out of more iterative models with different regression trees and a different learning rate to enhance the 
@@ -634,26 +634,26 @@ classification potential. Also the dataset would be very different with more sam
             jazz &    j3 &         0.624988 & -0.449130 &         0.389579 & -0.918064 &                          0.285372 \\
         \bottomrule
         \end{tabular}           
-    \caption{Gradient boosting final output}%
+    \caption{Gradient boosting Final Output}%
     \label{tbl:theory_gb_final_output}%
   \end{table} 
 
 An unknown sample gets initialized by \(F_{0}(x)\) and is sequentially routed through every model. For each iteration the 
-Prediction is updated using the output value of the regression tree. Finally, the last probability is used to classify 
+prediction is updated using the output value of the regression tree. Finally, the last probability is used to classify 
 the sample using the predefined threshold. 
 
 \subsubsection{Evaluation of Gradient Boosting}
 
-Gradient boosting is a very powerful method as it can effectively capure complex dependencies for various machine 
+Gradient Boosting is a very powerful method as it can effectively capture complex dependencies for various machine 
 learning problems. \ac{GBM}s improve many existing algorithms, such as decision trees, because many problems associated 
 with single large models are (partially) solved by the iterative ensemble approach.
 
-The main benefit over Decision Trees is the stability of gradient boosting. While large trees always have to make tradeoffs 
-between detail and overcategorization, gradient boosting can gradually get to a deeper and deeper level of detail thanks to 
-small trees with overall better generalization. Furthermore the flexbility of gradient boosting and boosting in general is massive 
+The main benefit over Decision Trees is the stability of Gradient Boosting. While large trees always have to make tradeoffs 
+between detail and overcategorization, Gradient Boosting can successively get to deeper levels of detail thanks to 
+small trees with overall better generalization. Furthermore the flexbility of Gradient Boosting and boosting in general is massive 
 as it only represents the framework with many parameters to adapt the algorithm very specifically to the usecase \cite[7.2]{Natekin2013}
 
-The drawbacks of gradient boosting often arise in practice. Gradient boosting has a significantly higher memory consumption and 
-build time as the model must be constructed sequentially. Also the evalutation is more time consuming as the sample must be processed 
-by each model. From a business perspective gradient boosting also has its disadvantages. While the prediciton is better, it is much 
-more complex to evaluate the model and explain the results \cite[7.2]{Natekin2013} \cite[p.27]{Buhlmann2004Bagging}. 
+The drawbacks of Gradient Boosting often arise in practice. Gradient Boosting has a significantly higher memory consumption and 
+build time, because the model must be constructed sequentially. Also the evalutation is more time consuming as the sample must be processed 
+by each model. From a business perspective Gradient Boosting also has disadvantages. While the overall prediction is better, it is
+more complex to evaluate and explain \cite[7.2]{Natekin2013} \cite[p.27]{Buhlmann2004Bagging}. 

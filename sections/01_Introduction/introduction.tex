@@ -1,59 +1,59 @@
 \section{Introduction}
 
-Spotify is a music streaming service and has established itself as the leader in this
-market. Since its launch in 2006, the company has gained over 365 million users, of
+Spotify provides the world's leading streaming service.
+Since its launch in 2006, the company has gained over 365 million users, of
 which nearly 45 percent are subscribed to the chargeable premium service.
-The ability to listen to almost any song a user might want with a quick search and
-the click of a button is a great benefit streaming services have over regular music vendors
+The ability to listen to almost any song a user might want
+is a great benefit streaming services have over regular music vendors
 like iTunes. On the other hand, users might quickly get lost or feel overwhelmed by such
 a large collection to choose from.
-To guide users and help them find the music they want to listen to in a certain situations
+To guide users and help them find the music they want to listen to in a certain situation,
 Spotify uses a number of methods like premade playlists or categories for specific moods and
-genres. But the biggest part of the user experience might certainly be the personalized
+genres. The biggest benefit to the user experience might certainly be the personalized
 playlists, radios or artist and song recommendations.
-To be able to have such a robust recommendation system, Spotify needs to understand each users
-listening behaviour and have methods to predict, which music a user might also like depending
+To be able to have such a robust recommendation system, Spotify needs to understand each user's
+listening behaviour and have methods to predict, which music a user might enjoy depending
 on their past usage.
 Not just user data is important to gain this knowledge, but Spotify also needs to understand
-how to categorize music itself and find ways to tell, which songs are alike and how they
+how to categorize music itself and find ways to identify which songs are alike and how they
 relate to each other.
-Big Data is essential to achieve this goal. Machine learning is used 
+Data Science is essential to achieve this goal. Machine learning is used 
 to analyze the music in their catalogue and create characteristics about it.
-Spotify offers this data to the public, which is the basis for this project.
+Spotify offers this data to the public, which forms the foundation of the dataset.
 
 \subsection{Problem Definition and Goal}
 
-The paper is set in the context of Big Data Analytics and is supposed to explain and implement
-many concepts and processes found here.
-The basic goal of the project is to develop a machine learning model based on a dataset.
-During this process, general data mining stages, as layed out in the \ac{CRISP DM} standard,
+The paper is set in the context of Big Data Analytics and aims to explain and implement
+many of its concepts and processes.
+The basic goal of the project is to develop a machine learning model.
+During this process, general data mining stages, as layed out in the \ac{CRISP DM},
 must be theoretically explored, understood and practically implemented. This includes steps like data
-preparation, model creation, or evaluation. Creating a model with a high accuracy is only a secondary
+preparation, model creation and evaluation. Creating a model with a high accuracy is only a secondary
 concern in this project. Instead gaining a solid understanding of data mining concepts is paramount.
 
-To achieve this goal, Spotify song data is collected and an attempt is made to build a gradient boosting
-algorithm, which is able to classify songs into different genres based on audio features.
+To achieve this goal Spotify song data is collected and an attempt is made to build a Gradient Boosting
+Algorithm, which is able to classify songs into different genres to a reasonable accuracy based on preprocessed
+audio features from Spotify.
 
-\subsection{Structure and Methodology of the Assignment}
+\subsection{Structure and Methodology}
 
-The paper is divided into four main sections, starting with the introduction, containing the problem statement, goal and overall structure.
+The paper is divided into four main sections, starting with the introduction which contains the problem statement, goal and overall structure.
 
-The second section discusses fundamental concepts. This includes sorting this project into the larger context of Big Data,
+The second section discusses fundamental concepts. This includes embedding this project into the larger context of Big Data,
 explaining the algorithms used on a theoretical level and introducing further concepts which are used for data preparation and modeling.
 Additionally, the \ac{CRISP DM} model is explained, which is the basic structure that implementation is based on.
-Concluding the second section is an introduction to the use cases and funcionality of Web \acp{API} and a discussion of basic concepts
+The second section is concluded by an introduction to the use cases and funcionality of Web \acp{API} and a discussion of basic concepts
 in music theory.
 
 The third section begins with the data collection process and continues on with the practical implementation steps 
 of understanding the dataset's features and labels in the context of Spotify's analysis, preparing and analyzing the data for modeling, creating a
-gradient boosting classifier and finally evaluating the project results. This process is fundamentally based on the CRISP DM model.
+gradient boosting classifier and finally evaluating the project results.
 
 The paper concludes with a summary of the insights gained and embedding the project into a broader context.
 
 Facts presented as part of the paper's fundamental sections are derived from literature research using renowned book sources and
 scientific papers. Additionally online articles were used to round out the research.
-Most visualizations in this paper are made by hand using Python libraries such as seaborn and matplotlib.
-The general approach during implementation is derived from the CRISP DM model also explained in literature.
+Most visualizations in this paper are made by hand using Python libraries such as \emph{seaborn} and \emph{matplotlib}.
 For data collection and understanding Spotify's developer resources are used as a reference.
 Documentation from Python libraries such as scikit learn is used extensively during the preparation, modeling and evaluation parts
 of the project.
