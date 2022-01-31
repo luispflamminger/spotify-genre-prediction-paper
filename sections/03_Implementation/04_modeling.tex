@@ -4,15 +4,15 @@
 \subsubsection{The Classifier}
 
 For training the Gradient Boosting Algorithm, the \emph{GradientBoostingClassifier} class from 
-the scikit learn Python library is used. It is part of a group of classes offering different ensemble methods.
+the \emph{scikit} learn Python library is used. It is part of a group of classes offering different ensemble methods.
 As explained in section \ref{sec:Gradient Boosting}, ensemble methods combine the predictions of several
 weak learners to generate a more robust model and reduce overfitting issues.
-sklearn supports averaging methods like Bagging and Random Forests, which take the average of each learners prediction
-as their output. It also supports Boosting Methods like AdaBoost or Gradient Boosting, which
-build base estimators sequentially, improving the output each time.
-sklearn also provides a classifier and regressor model for each method.
+\emph{sklearn} supports averaging methods like Bagging and Random Forests, which take the average of each learners prediction
+as their output. It also supports Boosting methods like AdaBoost or Gradient Boosting, which
+build base estimators sequentially, improving the output for each iteration.
+\emph{sklearn} also provides a classifier and regressor model for each method.
 
-The Gradient Boosting Classifier supports binary and multi-class classification and uses
+The Gradient Boosting classifier supports binary and multi-class classification and uses
 20 hyperparameters to control the size of each regression tree, the number of trees,
 the learning rate and many more.
 As explaining and tuning all 20 hyperparameters of the classifier would be beyond the scope of this
@@ -23,7 +23,7 @@ paper, three important parameters are explained and optimized.
     
     As explained in section \ref{sec:Gradient Boosting Algorithm}, the learning rate is used to control how
     much each tree contributes to the result, by multiplying it with the output values of the previous 
-    tree. The default value here is $0.1$
+    tree. The default value here is $0.1$.
     \item \textbf{n\_estimators}
 
     The number of weak learners (here regression trees) to be used while boosting. The default is $100$.
@@ -36,10 +36,10 @@ paper, three important parameters are explained and optimized.
 \subsubsection{Validation Curves}
 
 During hyperparameter tuning, grid search is used to find the optimal value for each parameter.
-As this is very resource intensive, a sensible range of values to search in must be found beforehand.
-Validation curves can be used to see, how a model's score changes when modulating a single hyperparameter.
-Here, an important distinction between the training and cross-validation score has to be made.
-The training score is the accuracy the model achieves, when being scored on the same data it was trained on.
+As the computation is very resource intensive, a sensible range of values to search in must be found beforehand.
+Validation curves can be used to observe how a model's score changes when modulating a single hyperparameter.
+Here, an important distinction between the training and cross-validation score must be made.
+The training score is the accuracy the model achieves when being scored on the same data it was trained on.
 A very high training score could be a sign of overfitting.
 The cross-validation score (cv score) is the mean accuracy achieved during 5-fold cross validation and is a good measure
 of the actual performance of the model.
@@ -49,19 +49,19 @@ Figure \ref{fig:Validation Curves modulating 3 hyperparameters} shows the curves
 areas around the graph are the standard deviation, while the graph itself represents the mean score between 5 folds.
 
 Figure \ref{fig:Validation Curves modulating 3 hyperparameters}a shows the best cv score with a learning rate
-between 0 and 0.2, declining as it approaches one.
-The training score rises as the learning rate increases, which indicates, that the model becomes less generalizable and
+between $0$ and $0.2$, declining as it approaches one.
+The training score rises as the learning rate increases, which indicates that the model becomes less generalizable and
 more overfitted as the learning rate increases.
-Because of these results, only values between 0.01 and 0.25 are considered during hyperparameter tuning.
+Because of these results, only values between $0.01$ and $0.25$ are considered during hyperparameter tuning.
 
-The cv score stays relatively flat as the number of estimators goes beyond 25 (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
+The cv score stays relatively flat as the number of estimators goes beyond $25$ (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
 The training score increases slightly.
-This indicates, that a training score close to, but above 25 might be optimal. As the results are not very clear,
-a range between 50 and 200 is used for optimization.
+This indicates that a training score close to, but above 25 might be optimal. As the results are not very clear,
+a range between $50$ and $200$ is used for optimization.
 
-For \emph{max\_depth}, the cv score stays relatively flat between 2 and 13 (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
-The training score, on the other hand, increases rapidly from 0 to 7.5, where it reaches its maximum.
-Because of this, a range between 2 and 6 is used for hyperparameter tuning.
+For \emph{max\_depth}, the cv score stays relatively flat between $2$ and $13$ (figure \ref{fig:Validation Curves modulating 3 hyperparameters}).
+The training score, on the other hand, increases rapidly from $0$ to $7.5$, where it reaches its maximum.
+Because of this, a range between $2$ and $6$ is used for hyperparameter tuning.
 
 \begin{figure}[H]
     \centering
@@ -116,7 +116,7 @@ This is done in the following way:
     available training data, to create the final model.
 \end{enumerate}
 
-The complete standardized dataset is split in 80\% train and 20\% test data.
+The complete standardized dataset is split in $80$\% train and $20$\% test data.
 The samples are shuffled before splitting to ensure an even distribution of data.
 Then features and labels are seperated for input into the classifier.
 
@@ -135,21 +135,21 @@ Then hyperparameter tuning and estimator fitting is started using the training f
     search.fit(X_train, y_train)
 \end{lstlisting}
 
-The parameter grid above has 315 possible combinations. As each is fitted on five sets of folds,
-there are 1575 models fitted in total during this process.
+The parameter grid above has $315$ possible combinations. As each is fitted on five sets of folds,
+there are $1575$ models fitted in total during this process.
 
 The resulting model with the best cross-validation score used the following parameters:
 \begin{itemize}
-    \item learning\_rate: 0.1
-    \item n\_estimators: 100
-    \item max\_depth: 3
+    \item learning\_rate: $0.1$
+    \item n\_estimators: $100$
+    \item max\_depth: $3$
 \end{itemize} 
 
 Calculating the accuracy of the resulting model using the test set resulted in an accuracy score of $0.8591$.
 
-A weakpoint of the parameter grid used is, that the values for \emph{n\_estimators} are spread by increments of 25,
+A weakpoint of the parameter grid used is that the values for \emph{n\_estimators} are spread by increments of $25$,
 leaving possible room for improvement.
-To check, if the model could be improved, another parameter grid was used:
+To check whether the model could be improved another parameter grid was used:
 
 \begin{lstlisting}[language=Python]
     param_grid = {
@@ -163,8 +163,7 @@ This did not deliver a better result.
 
 Even though a broad spectrum of values was given in the search grid, the optimal values 
 are equal to the default parameters for the estimator set by \emph{sklearn}.
-This might suggest, that the developers set the default values using a similar dataset to the one used in this project.
+This might suggest that the developers set the default values using a similar dataset to the one used in this project.
 
-Although many combinations were evaluated, there is still a possibility, that this is a local 
-maximum and a set of hyperparameters that is far different from the ones tested here are actually
-optimal. 
+Although many combinations were evaluated, there is still a possibility, that the best result is still only a local 
+maximum and a set of hyperparameters, that is far different from the ones tested here, would result in a global maximum. 

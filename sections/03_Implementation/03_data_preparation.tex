@@ -7,7 +7,7 @@ Data preparation is done in Python using multiple libraries. The same libraries
 are also used in the modeling and evaluation stages of this project.
 \emph{pandas} is used for storing and manipulating data in dataframes.
 \emph{sklearn} is used for splitting data, creating validation curves,
-transforming data and training the gradient boosting model.
+transforming data and training the Gradient Boosting model.
 \emph{matplotlib} and \emph{seaborn} are used for data visualization and plotting.
 Additionaly \emph{numpy} is used for other operations on the data.
 
@@ -16,15 +16,15 @@ As with data collection, the complete code with documentation is attached in \re
 \subsubsection{Import and Cleaning}
 
 
-The CSV file is first imported and converted into a pandas dataframe.
+The CSV file is first imported and converted into a \emph{pandas} dataframe.
 
 \begin{lstlisting}[language=Python]
     df_import = pd.read_csv(os.path.join('..', 'data_collection', 'final_result.csv'))
 \end{lstlisting}
 
-Next, duplicates are removed. If there are two or more datapoints, which have the same value in their artist
-and name column, only the first one is kept and all subsequent entries are removed.
-This deduplication could also be done by using track ids. The drawback of this method is, that many artists
+Next, duplicates are removed. If there are two or more datapoints, which have the same value in their \emph{artist}
+and \emph{name} column, only the first one is kept and all subsequent entries are removed.
+This deduplication could also be done by using \emph{track ids}. The drawback of this method is, that many artists
 release their tracks multiple times, e.g. as a single and later in an album. These duplicates would not be
 caught using the id, as different releases have different id values. As the artist and title doesn't change, almost
 all duplicates are caught using artist and name.
@@ -40,8 +40,8 @@ Next, all genres that are not to be used for training the model are filtered out
     df_filtered = df_dedup[df_dedup['categories.id'].isin(genre_filter)]
 \end{lstlisting}
 
-Then columns that are not needed for training are removed, including category name, all playlist information and
-all track and album information. The category id is kept, as it will serve as the label.
+Then columns that are not required for training are removed, including category name, all playlist information and
+all track and album information. The \emph{category id} is kept, as it will serve as the label.
 The remaining columns are renamed, as the long JSON tree names are no longer needed.
 The field \emph{category.id} is renamed to \emph{category} and each audio feature is renamed for example 
 the danceability column is now called \emph{feature\_danceability}.
@@ -186,7 +186,7 @@ is very uneven, with more than half of the samples falling into the category \em
 As explained in section \ref{sec:Mean Removal, Variance Scaling and Standardization} and \ref{sec:Dimension Reduction}
 methods like standardization and \ac{PCA} can have a positive impact on the models accuracy.
 Before finding the best model using hyperparameter tuning, the best form of input data is evaluated by transforming
-the data in different ways and training a Gradient Boosting model using the default parameters specified in sklearn.
+the data in different ways and training a Gradient Boosting model using the default parameters specified in \emph{sklearn}.
 This way, the best form of input data can be found without the overhead of resource intensive grid search.
 
 To be able to easily train models using different forms of input data, a method \emph{eval\_prep} was created,
@@ -203,7 +203,7 @@ First, the regular dataframe is used as input data, resulting in an accuracy sco
 \subsubsection{Data Transformation}
 
 Next, mean removal, variance scaling and standardisation are attempted, by using the \emph{StandardScaler}
-class from sklearn to transform the data. The code for standardization is shown below.
+class from \emph{sklearn} to transform the data. The code for standardization is shown below.
 Mean removal and variance scaling use the same class with additional parameters.
 
 \begin{lstlisting}[language=Python]
@@ -229,12 +229,12 @@ This results in the following scores, beating the untransformed data in all case
 
 \subsubsection{Principal Component Analysis}
 
-Next \ac{PCA} is attempted using sklearns \emph{PCA} class. It is able to take any dataset and reduce
+Next, \ac{PCA} is attempted using \emph{sklearns} \emph{PCA} class. It is able to take any dataset and reduce
 its dimensionality to any number of dimensions. The dimensionality is reduced to all dimensions
 between 2 and 13 to see, which dimensionality results in the best score.
 \ac{PCA} was done both on the raw dataset and in combination with standardized data (both before and afterwards).
 
-\ac{PCA} does not yield good results with this dataset. The score for all of the combination is always worse
+\ac{PCA} does not yield good results with this dataset. The score for all of the combinations is always worse
 than using untransformed data. 
 The PCA score was best when keeping 13 dimensions, declining further when removing more dimensions.
 These are the scores using each combination with PCA and keeping 13 dimensions:
@@ -254,7 +254,7 @@ for each number of components.
     \includegraphics[width=0.6\textwidth]{dimensionality_PCA}
 \end{figure}
 
-As the results using \ac{PCA} do not improve the score, the code is not shown here.
+As the results using \ac{PCA} do not improve the score, the code is shown in the appendix.
 Testing data transformation and dimension reduction with this dataset and a default \emph{GradientBoostingClassifier}
 shows, that the model benefits slightly from standardized data, improving the overall score compared to the raw dataset
 by $0.19\%$. Therefore, standardized data is used going forward.
