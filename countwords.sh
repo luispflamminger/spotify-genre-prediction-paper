@@ -20,8 +20,7 @@ while read p; do
   echo "$p" | grep $BEGINNING >/dev/null && FOUNDBEGIN="y"
 done <thesis_main.txt
 
-echo
 echo "Anzahl der Wörter vom Kapitel Einleitung bis Anhang:"
 wc -w wordcounts.txt # zeilen, wörter, zeichen
 rm wordcounts.txt 2> /dev/null
-#rm thesis_main.txt 2> /dev/null
+rm thesis_main.txt 2> /dev/null
